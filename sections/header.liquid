@@ -29,7 +29,7 @@
     </div>
 
     <div class="actions__navigation">
-      <a href="{{ section.settings.billing_url }}">Facturación</a>
+      <a href="{{ section.settings.billing_url }}" class="billing-link__nav">Facturación</a>
       <a href="/pages/wishlist" aria-label="Favoritos">
         <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
       </a>
@@ -39,6 +39,9 @@
       <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Cuenta">
         <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
       </a>
+      <button class="hamburger__nav" aria-label="Menú" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
 
     <nav class="categories__navigation" aria-label="Navegación principal">
@@ -61,7 +64,54 @@
     </nav>
 
   </div>
+
+  <!-- Mobile nav drawer -->
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <ul>
+      {%- for link in linklists[section.settings.menu].links -%}
+        {%- if link.links.size > 0 -%}
+          <li class="mobile-nav__item has-children">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            <ul class="mobile-nav__sub">
+              {%- for child_link in link.links -%}
+                <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- else -%}
+          <li class="mobile-nav__item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
 </header>
+
+<script>
+(function() {
+  var btn = document.querySelector('.hamburger__nav');
+  var nav = document.getElementById('mobile-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('is-open');
+    btn.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open);
+    nav.setAttribute('aria-hidden', !open);
+  });
+
+  // Expansión de barra de búsqueda en móvil
+  var searchInput = document.getElementById('search-input');
+  var searchWrapper = searchInput ? searchInput.closest('.input-wrapper__search') : null;
+  var navInner = document.querySelector('.nav-inner');
+  if (searchInput && searchWrapper && navInner) {
+    searchInput.addEventListener('focus', function() {
+      navInner.classList.add('search-expanded');
+    });
+    searchInput.addEventListener('blur', function() {
+      navInner.classList.remove('search-expanded');
+    });
+  }
+})();
+</script>
 
 {% schema %}
 {

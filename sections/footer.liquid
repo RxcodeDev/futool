@@ -126,6 +126,13 @@
 
   <!-- Right column: catalog PDFs -->
   <div class="content__footer --catalog-layout">
+
+    <!-- Copia del botón solo visible en móvil -->
+    <a href="{{ section.settings.catalog_url | default: '#' }}" class="catalog-banner__footer catalog-banner--mobile-only">
+      <span>AQUÍ DESCARGA LOS</span>
+      <span><span>NUEVOS</span> CATÁLOGOS</span>
+    </a>
+
     <div class="item__catalog-footer">
       <a
         href="{% if section.settings.catalog_1_file != blank %}{{ section.settings.catalog_1_file }}{% else %}{{ 'maquinaria.pdf' | asset_url }}{% endif %}"
@@ -178,6 +185,15 @@
   </div>
 
 </footer>
+
+<script>
+(function() {
+  if (window.innerWidth <= 640) {
+    var btn = document.querySelector('.catalog-banner__footer:not(.catalog-banner--mobile-only)');
+    if (btn) btn.style.display = 'none';
+  }
+})();
+</script>
 
 {% schema %}
 {

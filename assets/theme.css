@@ -956,6 +956,12 @@
     .search__navigation {
         flex: 1;
         min-width: 0;
+        transition: flex 0.25s ease;
+    }
+
+    /* Expansión de búsqueda hasta el hamburger */
+    .nav-inner.search-expanded .actions__navigation > *:not(.hamburger__nav) {
+        display: none;
     }
 
     .img__search { padding: 0.35rem 0.65rem; }
@@ -1129,7 +1135,6 @@
         border-radius: 2rem;
         margin-top: 1.5rem;
         align-self: flex-start;
-        display: inline-flex;
     }
 
     .pays-method__footer {
