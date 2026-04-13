@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {%- if template == 'index' -%}
+      {{ shop.name }}
+    {%- else -%}
+      {{ page_title }} | {{ shop.name }}
+    {%- endif -%}
+  </title>
+  <meta name="description" content="{{ page_description | escape }}">
+  {{ content_for_header }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="app">
+
+  {%- render 'svg-icons' -%}
+
+  {%- section 'header' -%}
+
+  <main class="page">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+
+</body>
+</html>

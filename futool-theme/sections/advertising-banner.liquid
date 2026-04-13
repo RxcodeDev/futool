@@ -1,0 +1,46 @@
+<section class="advertising">
+  {%- if section.settings.image != blank -%}
+    {%- if section.settings.link != blank -%}
+      <a href="{{ section.settings.link }}">
+        <img
+          src="{{ section.settings.image | image_url: width: 1920 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="advertising__img"
+          loading="lazy"
+        >
+      </a>
+    {%- else -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        class="advertising__img"
+        loading="lazy"
+      >
+    {%- endif -%}
+  {%- else -%}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg advertising__img' }}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Banner Publicitario",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen del banner"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Enlace (opcional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Publicitario"
+    }
+  ]
+}
+{% endschema %}

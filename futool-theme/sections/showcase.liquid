@@ -1,0 +1,42 @@
+{%- assign showcase_collection = collections[section.settings.collection] -%}
+
+<div class="showcase">
+  <div class="products__carrusel-app">
+    {%- if showcase_collection != blank and showcase_collection.products_count > 0 -%}
+      {%- for product in showcase_collection.products limit: section.settings.products_limit -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..5) -%}
+        {%- render 'product-card', product: nil, placeholder_index: i -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Vitrina de Productos",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección a mostrar"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Número de productos",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vitrina de Productos"
+    }
+  ]
+}
+{% endschema %}

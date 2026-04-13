@@ -1,0 +1,59 @@
+{%- assign featured_collection = collections[section.settings.collection] -%}
+
+<div class="recommended">
+  <h1 class="recommended-title">{{ section.settings.title }}</h1>
+
+  <!-- Primera fila -->
+  <div class="products__carrusel-app">
+    {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+      {%- for product in featured_collection.products limit: 5 -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..5) -%}
+        {%- render 'product-card', product: nil, placeholder_index: i -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  <!-- Segunda fila -->
+  <div class="products__carrusel-app">
+    {%- if featured_collection != blank and featured_collection.products_count > 5 -%}
+      {%- for product in featured_collection.products limit: 5 offset: 5 -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    {%- elsif featured_collection != blank and featured_collection.products_count > 0 -%}
+      {%- for product in featured_collection.products limit: 5 -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..5) -%}
+        {%- render 'product-card', product: nil, placeholder_index: i -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Productos Recomendados",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de sección",
+      "default": "Recomendados"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección a mostrar"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Productos Recomendados"
+    }
+  ]
+}
+{% endschema %}

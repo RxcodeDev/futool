@@ -1,0 +1,88 @@
+<header class="navigation">
+  <div class="nav-inner">
+
+    <div class="search__navigation">
+      <a href="{{ routes.root_url }}" class="logo-link">
+        {%- if section.settings.logo != blank -%}
+          <img
+            class="img__search"
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            alt="{{ shop.name }}"
+          >
+        {%- else -%}
+          <img class="img__search" src="{{ 'logoHorizontal.png' | asset_url }}" alt="{{ shop.name }}">
+        {%- endif -%}
+      </a>
+      <form action="{{ routes.search_url }}" method="get" class="input-wrapper__search" role="search">
+        <input
+          type="text"
+          name="q"
+          id="search-input"
+          placeholder="Buscar producto..."
+          value="{{ search.terms | escape }}"
+          autocomplete="off"
+        >
+        <button type="submit" class="btn-search__navigation" aria-label="Buscar">
+          <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="actions__navigation">
+      <a href="{{ section.settings.billing_url }}">Facturación</a>
+      <a href="/pages/wishlist" aria-label="Favoritos">
+        <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
+      </a>
+      <a href="{{ routes.cart_url }}" aria-label="Carrito">
+        <svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg>
+      </a>
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Cuenta">
+        <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
+      </a>
+    </div>
+
+    <nav class="categories__navigation" aria-label="Navegación principal">
+      <ul>
+        {%- for link in linklists[section.settings.menu].links -%}
+          {%- if link.links.size > 0 -%}
+            <li class="has-dropdown">
+              <a href="{{ link.url }}">{{ link.title | upcase }}</a>
+              <ul class="dropdown__nav">
+                {%- for child_link in link.links -%}
+                  <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </li>
+          {%- else -%}
+            <li><a href="{{ link.url }}">{{ link.title | upcase }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo horizontal"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú de navegación",
+      "default": "main-menu"
+    },
+    {
+      "type": "url",
+      "id": "billing_url",
+      "label": "URL de Facturación"
+    }
+  ]
+}
+{% endschema %}

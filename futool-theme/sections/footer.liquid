@@ -1,0 +1,375 @@
+<footer class="footer">
+
+  <!-- Left column: info + social/payments -->
+  <div class="content__footer">
+
+    <div class="info__content-footer">
+
+      <!-- Brand & contact -->
+      <div class="brand-col__footer">
+        {%- if section.settings.logo_vertical != blank -%}
+          <img
+            src="{{ section.settings.logo_vertical | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            class="logo__footer"
+          >
+        {%- else -%}
+          <img src="{{ 'logoVertical.png' | asset_url }}" alt="{{ shop.name }}" class="logo__footer">
+        {%- endif -%}
+
+        {%- if section.settings.phone_1 != blank or section.settings.phone_2 != blank -%}
+          <div class="contact-group__footer">
+            <p class="contact-label__footer">Teléfono.</p>
+            {%- if section.settings.phone_1 != blank -%}<p>{{ section.settings.phone_1 }}</p>{%- endif -%}
+            {%- if section.settings.phone_2 != blank -%}<p>{{ section.settings.phone_2 }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.whatsapp_1 != blank or section.settings.whatsapp_2 != blank or section.settings.whatsapp_3 != blank -%}
+          <div class="contact-group__footer">
+            <p class="contact-label__footer">WhatsApp.</p>
+            {%- if section.settings.whatsapp_1 != blank -%}<p>{{ section.settings.whatsapp_1 }}</p>{%- endif -%}
+            {%- if section.settings.whatsapp_2 != blank -%}<p>{{ section.settings.whatsapp_2 }}</p>{%- endif -%}
+            {%- if section.settings.whatsapp_3 != blank -%}<p>{{ section.settings.whatsapp_3 }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info links -->
+      <div class="links-col__footer">
+        <p class="col-title__footer">INFORMACIÓN</p>
+        {%- if linklists[section.settings.info_menu].links.size > 0 -%}
+          {%- for link in linklists[section.settings.info_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#">Política de ventas</a>
+          <a href="#">Política de cookies</a>
+          <a href="#">Aviso de privacidad</a>
+          <a href="#">Proceso de compra</a>
+          <a href="#">Preguntas frecuentes</a>
+        {%- endif -%}
+
+        <p class="col-title__footer">FORMAS DE PAGO</p>
+        {%- if linklists[section.settings.payment_menu].links.size > 0 -%}
+          {%- for link in linklists[section.settings.payment_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#">Los pagos serán procesados mediante la pasarela de Openpay.</a>
+          <a href="#">Los pagos serán procesados mediante la pasarela de Mercado pago.</a>
+        {%- endif -%}
+
+        <p class="col-title__footer">FACTURACIÓN</p>
+        {%- if linklists[section.settings.billing_menu].links.size > 0 -%}
+          {%- for link in linklists[section.settings.billing_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="#">La facturación se realizará conforme a las políticas establecidas.</a>
+        {%- endif -%}
+      </div>
+
+      <!-- Customer attention -->
+      <div class="attention-col__footer">
+        <p class="col-title__footer">Atención al cliente</p>
+        {%- if section.settings.attention_hours != blank -%}
+          <p>{{ section.settings.attention_hours }}</p>
+        {%- endif -%}
+        {%- if section.settings.attention_saturday != blank -%}
+          <p>{{ section.settings.attention_saturday }}</p>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <p>{{ section.settings.email }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Catalog download anchor banner -->
+    <a href="{{ section.settings.catalog_url | default: '#' }}" class="catalog-banner__footer">
+      <span>AQUÍ DESCARGA LOS</span>
+      <span><span>NUEVOS</span> CATÁLOGOS</span>
+    </a>
+
+    <!-- Social & Payment methods -->
+    <div class="pays-method__footer">
+      <div class="social__footer">
+        <a href="{{ section.settings.whatsapp_link | default: '#' }}" aria-label="WhatsApp"{% if section.settings.whatsapp_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          <svg class="social-icon__footer" aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
+        </a>
+        <a href="{{ section.settings.facebook_link | default: '#' }}" aria-label="Facebook"{% if section.settings.facebook_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          <svg class="social-icon__footer" aria-hidden="true"><use href="#icon-facebook"></use></svg>
+        </a>
+        <a href="{{ section.settings.instagram_link | default: '#' }}" aria-label="Instagram"{% if section.settings.instagram_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          <svg class="social-icon__footer" aria-hidden="true"><use href="#icon-instagram"></use></svg>
+        </a>
+        <a href="{{ section.settings.tiktok_link | default: '#' }}" aria-label="TikTok"{% if section.settings.tiktok_link != blank %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          <svg class="social-icon__footer" aria-hidden="true"><use href="#icon-tiktok"></use></svg>
+        </a>
+      </div>
+      <div class="payments__footer">
+        {%- if section.settings.show_visa -%}
+          <svg class="payment-icon__footer" role="img" aria-label="VISA"><use href="#icon-pay-visa"></use></svg>
+        {%- endif -%}
+        {%- if section.settings.show_mastercard -%}
+          <svg class="payment-icon__footer" role="img" aria-label="MasterCard"><use href="#icon-pay-mastercard"></use></svg>
+        {%- endif -%}
+        {%- if section.settings.show_amex -%}
+          <svg class="payment-icon__footer" role="img" aria-label="American Express"><use href="#icon-pay-amex"></use></svg>
+        {%- endif -%}
+        {%- if section.settings.show_oxxo -%}
+          <svg class="payment-icon__footer" role="img" aria-label="OXXO Pay"><use href="#icon-pay-oxxo"></use></svg>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Right column: catalog PDFs -->
+  <div class="content__footer --catalog-layout">
+    <div class="item__catalog-footer">
+      <a
+        href="{% if section.settings.catalog_1_file != blank %}{{ section.settings.catalog_1_file }}{% else %}{{ 'maquinaria.pdf' | asset_url }}{% endif %}"
+        download="{{ section.settings.catalog_1_download_name | default: 'Catalogo-Maquinaria-2026.pdf' }}"
+      >
+        {%- if section.settings.catalog_1_image != blank -%}
+          <img
+            src="{{ section.settings.catalog_1_image | image_url: width: 400 }}"
+            alt="{{ section.settings.catalog_1_image.alt | default: 'Catálogo Maquinaria 2026' | escape }}"
+            class="catalog-img__footer"
+            loading="lazy"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'maquinaria.jpg' | asset_url }}"
+            alt="Catálogo Maquinaria 2026"
+            class="catalog-img__footer"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </a>
+    </div>
+    <div class="item__catalog-footer">
+      <a
+        href="{% if section.settings.catalog_2_file != blank %}{{ section.settings.catalog_2_file }}{% else %}{{ 'refacciones.pdf' | asset_url }}{% endif %}"
+        download="{{ section.settings.catalog_2_download_name | default: 'Catalogo-Refacciones-2026.pdf' }}"
+      >
+        {%- if section.settings.catalog_2_image != blank -%}
+          <img
+            src="{{ section.settings.catalog_2_image | image_url: width: 400 }}"
+            alt="{{ section.settings.catalog_2_image.alt | default: 'Catálogo Refacciones 2026' | escape }}"
+            class="catalog-img__footer"
+            loading="lazy"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'refacciones.jpg' | asset_url }}"
+            alt="Catálogo Refacciones 2026"
+            class="catalog-img__footer"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+
+  <!-- Copyright bar -->
+  <div class="bottom__footer">
+    <p>{{ section.settings.copyright_text }}</p>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marca"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_vertical",
+      "label": "Logo vertical"
+    },
+    {
+      "type": "header",
+      "content": "Contacto"
+    },
+    {
+      "type": "text",
+      "id": "phone_1",
+      "label": "Teléfono 1",
+      "default": "55 5535 4854"
+    },
+    {
+      "type": "text",
+      "id": "phone_2",
+      "label": "Teléfono 2",
+      "default": "55 5535 4854"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_1",
+      "label": "WhatsApp 1",
+      "default": "55 3124 8376"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_2",
+      "label": "WhatsApp 2",
+      "default": "55 2786 7639"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_3",
+      "label": "WhatsApp 3",
+      "default": "55 5412 9563"
+    },
+    {
+      "type": "header",
+      "content": "Menús del footer"
+    },
+    {
+      "type": "link_list",
+      "id": "info_menu",
+      "label": "Menú Información"
+    },
+    {
+      "type": "link_list",
+      "id": "payment_menu",
+      "label": "Menú Formas de Pago"
+    },
+    {
+      "type": "link_list",
+      "id": "billing_menu",
+      "label": "Menú Facturación"
+    },
+    {
+      "type": "header",
+      "content": "Atención al cliente"
+    },
+    {
+      "type": "text",
+      "id": "attention_hours",
+      "label": "Horario entre semana",
+      "default": "Lunes a viernes 9:30 a 5:30"
+    },
+    {
+      "type": "text",
+      "id": "attention_saturday",
+      "label": "Horario sábado",
+      "default": "Sábados 9:30 a 12:30"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email de ventas",
+      "default": "Ventas@futoolmexico.com"
+    },
+    {
+      "type": "header",
+      "content": "Redes sociales"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_link",
+      "label": "Enlace WhatsApp"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Enlace Facebook"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Enlace Instagram"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_link",
+      "label": "Enlace TikTok"
+    },
+    {
+      "type": "header",
+      "content": "Métodos de pago"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_visa",
+      "label": "Mostrar VISA",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mastercard",
+      "label": "Mostrar MasterCard",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_amex",
+      "label": "Mostrar AMEX",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_oxxo",
+      "label": "Mostrar OXXO",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Catálogos"
+    },
+    {
+      "type": "url",
+      "id": "catalog_url",
+      "label": "Enlace del botón 'Descarga catálogos'"
+    },
+    {
+      "type": "image_picker",
+      "id": "catalog_1_image",
+      "label": "Portada catálogo 1"
+    },
+    {
+      "type": "url",
+      "id": "catalog_1_file",
+      "label": "URL del archivo PDF catálogo 1"
+    },
+    {
+      "type": "text",
+      "id": "catalog_1_download_name",
+      "label": "Nombre al descargar catálogo 1",
+      "default": "Catalogo-Maquinaria-2026.pdf"
+    },
+    {
+      "type": "image_picker",
+      "id": "catalog_2_image",
+      "label": "Portada catálogo 2"
+    },
+    {
+      "type": "url",
+      "id": "catalog_2_file",
+      "label": "URL del archivo PDF catálogo 2"
+    },
+    {
+      "type": "text",
+      "id": "catalog_2_download_name",
+      "label": "Nombre al descargar catálogo 2",
+      "default": "Catalogo-Refacciones-2026.pdf"
+    },
+    {
+      "type": "header",
+      "content": "Pie de página"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Texto de copyright",
+      "default": "@2026 Futool Internacional. Todos los derechos reservados"
+    }
+  ]
+}
+{% endschema %}

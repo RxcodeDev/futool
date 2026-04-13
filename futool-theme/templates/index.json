@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "cat1": { "type": "category_card", "settings": { "title": "DESBROZADORAS" } },
+        "cat2": { "type": "category_card", "settings": { "title": "REFACCIONES" } },
+        "cat3": { "type": "category_card", "settings": { "title": "PODADORAS" } },
+        "cat4": { "type": "category_card", "settings": { "title": "MOTOSIERRAS" } },
+        "cat5": { "type": "category_card", "settings": { "title": "ASPERSORES" } },
+        "cat6": { "type": "category_card", "settings": { "title": "MOTOBOMBAS" } }
+      },
+      "block_order": ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"],
+      "settings": {}
+    },
+    "recommended": {
+      "type": "recommended-products",
+      "settings": {
+        "title": "Recomendados"
+      }
+    },
+    "advertising": {
+      "type": "advertising-banner",
+      "settings": {}
+    },
+    "offers": {
+      "type": "offers-grid",
+      "blocks": {
+        "o1": { "type": "offer_image", "settings": {} },
+        "o2": { "type": "offer_image", "settings": {} },
+        "o3": { "type": "offer_image", "settings": {} },
+        "o4": { "type": "offer_image", "settings": {} },
+        "o5": { "type": "offer_image", "settings": {} }
+      },
+      "block_order": ["o1", "o2", "o3", "o4", "o5"],
+      "settings": {}
+    },
+    "mercadolibre": {
+      "type": "mercadolibre-banner",
+      "settings": {}
+    },
+    "showcase": {
+      "type": "showcase",
+      "settings": {
+        "products_limit": 5
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit_item", "settings": { "text": "Gracias por tu confianza",                           "icon": "icon-shield-check" } },
+        "b2": { "type": "benefit_item", "settings": { "text": "Entregas dentro de toda la República Mexicana",      "icon": "icon-truck" } },
+        "b3": { "type": "benefit_item", "settings": { "text": "Entregas presenciales en Metro Ferrería de la CDMX", "icon": "icon-building" } },
+        "b4": { "type": "benefit_item", "settings": { "text": "Distribuye nuestras Marcas",                         "icon": "icon-handshake" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "recommended",
+    "advertising",
+    "offers",
+    "mercadolibre",
+    "showcase",
+    "benefits"
+  ]
+}

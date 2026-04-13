@@ -1,0 +1,20 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Buscar producto..."
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Carrito de compras",
+      "empty": "Tu carrito está vacío.",
+      "add": "Agregar al carrito"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Agregar al carrito",
+      "sold_out": "Agotado"
+    }
+  }
+}

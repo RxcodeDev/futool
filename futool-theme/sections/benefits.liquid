@@ -1,0 +1,53 @@
+<section class="benefits">
+  {%- for block in section.blocks -%}
+    <div class="item__benefits" {{ block.shopify_attributes }}>
+      <p class="txt-benefits">{{ block.settings.text }}</p>
+      <span class="icon-benefits">
+        <svg class="icon" aria-hidden="true"><use href="#{{ block.settings.icon }}"></use></svg>
+      </span>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Beneficios",
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Descripción del beneficio"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícono",
+          "options": [
+            { "value": "icon-shield-check", "label": "Escudo con check" },
+            { "value": "icon-truck",         "label": "Camión / Envío" },
+            { "value": "icon-building",      "label": "Ubicación / Edificio" },
+            { "value": "icon-handshake",     "label": "Apretón de manos" }
+          ],
+          "default": "icon-shield-check"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beneficios",
+      "blocks": [
+        { "type": "benefit_item", "settings": { "text": "Gracias por tu confianza",                           "icon": "icon-shield-check" } },
+        { "type": "benefit_item", "settings": { "text": "Entregas dentro de toda la República Mexicana",      "icon": "icon-truck" } },
+        { "type": "benefit_item", "settings": { "text": "Entregas presenciales en Metro Ferrería de la CDMX", "icon": "icon-building" } },
+        { "type": "benefit_item", "settings": { "text": "Distribuye nuestras Marcas",                         "icon": "icon-handshake" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
