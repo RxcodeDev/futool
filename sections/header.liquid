@@ -1,3 +1,21 @@
+{%- comment -%} Resolve first matching collection URL for nav parents {%- endcomment -%}
+{%- assign nav_maquinaria_url = '/collections' -%}
+{%- for _col in collections -%}
+  {%- assign _col_lower = _col.title | downcase -%}
+  {%- if _col_lower contains 'maquinaria' -%}
+    {%- assign nav_maquinaria_url = _col.url -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign nav_refacciones_url = '/collections' -%}
+{%- for _col in collections -%}
+  {%- assign _col_lower = _col.title | downcase -%}
+  {%- if _col_lower contains 'refaccion' -%}
+    {%- assign nav_refacciones_url = _col.url -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <header class="navigation">
   <div class="nav-inner">
 
@@ -14,6 +32,7 @@
         {%- endif -%}
       </a>
       <form action="{{ routes.search_url }}" method="get" class="input-wrapper__search" role="search">
+        <input type="hidden" name="type" value="product">
         <input
           type="text"
           name="q"
@@ -48,7 +67,7 @@
     <nav class="categories__navigation" aria-label="Navegación principal">
       <ul>
         <li class="has-dropdown">
-          <a href="/collections">MAQUINARIAS</a>
+          <a href="{{ nav_maquinaria_url }}">MAQUINARIAS</a>
           <ul class="dropdown__nav">
             {%- for col in collections -%}
               {%- assign col_title_lower = col.title | downcase -%}
@@ -59,7 +78,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="/collections">REFACCIONES</a>
+          <a href="{{ nav_refacciones_url }}">REFACCIONES</a>
           <ul class="dropdown__nav">
             {%- for col in collections -%}
               {%- assign col_title_lower = col.title | downcase -%}
@@ -81,7 +100,7 @@
   <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
     <ul>
       <li class="mobile-nav__item has-children">
-        <a href="/collections">Maquinarias</a>
+        <a href="{{ nav_maquinaria_url }}">Maquinarias</a>
         <ul class="mobile-nav__sub">
           {%- for col in collections -%}
             {%- assign col_title_lower = col.title | downcase -%}
@@ -92,7 +111,7 @@
         </ul>
       </li>
       <li class="mobile-nav__item has-children">
-        <a href="/collections">Refacciones</a>
+        <a href="{{ nav_refacciones_url }}">Refacciones</a>
         <ul class="mobile-nav__sub">
           {%- for col in collections -%}
             {%- assign col_title_lower = col.title | downcase -%}
