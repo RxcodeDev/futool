@@ -156,7 +156,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+    width: max-content;
     background-color: var(--navy-900);
     list-style: none;
     padding: 0.25rem 0;

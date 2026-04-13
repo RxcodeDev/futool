@@ -26,5 +26,18 @@
 
   {%- section 'footer' -%}
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.products__carrusel-app').forEach(function (row) {
+        var cards = Array.from(row.children);
+        for (var i = cards.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          row.appendChild(cards[j]);
+          var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
