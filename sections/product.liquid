@@ -114,7 +114,13 @@
   var mainImg = document.getElementById('product-main-image');
   document.querySelectorAll('.thumb-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt; }
+      if (!mainImg) return;
+      mainImg.classList.add('is-fading');
+      setTimeout(function () {
+        mainImg.src = btn.dataset.src;
+        mainImg.alt = btn.dataset.alt;
+        mainImg.classList.remove('is-fading');
+      }, 180);
       document.querySelectorAll('.thumb-btn').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
     });
