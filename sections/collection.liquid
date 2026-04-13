@@ -1,0 +1,225 @@
+{%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+{%- assign current_tags = current_tags | default: '' -%}
+
+{%- paginate collection.products by 24 -%}
+
+<div class="collection-page">
+
+  <!-- Encabezado -->
+  <div class="collection-header">
+    <div class="collection-header-left">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="collection-desc">{{ collection.description }}</p>
+      {%- endif -%}
+      <span class="collection-count">{{ collection.products_count }} productos</span>
+    </div>
+
+    <!-- Ordenar -->
+    <div class="collection-sort">
+      <label for="sort-select" class="sort-label">Ordenar por:</label>
+      <select id="sort-select" class="sort-select" onchange="window.location.href=this.value">
+        {%- assign sort_options = 'manual,Destacados|best-selling,Más vendidos|title-ascending,A–Z|title-descending,Z–A|price-ascending,Precio: menor a mayor|price-descending,Precio: mayor a menor|created-descending,Más recientes' | split: '|' -%}
+        {%- for opt in sort_options -%}
+          {%- assign parts = opt | split: ',' -%}
+          {%- assign opt_val = parts[0] -%}
+          {%- assign opt_label = parts[1] -%}
+          {%- assign opt_url = collection.url | append: '?sort_by=' | append: opt_val -%}
+          {%- if current_tags != blank -%}
+            {%- assign opt_url = opt_url | append: '&tags=' | append: current_tags -%}
+          {%- endif -%}
+          <option value="{{ opt_url }}"{% if sort_by == opt_val %} selected{% endif %}>{{ opt_label }}</option>
+        {%- endfor -%}
+      </select>
+    </div>
+  </div>
+
+  <div class="collection-layout">
+
+    <!-- Sidebar de filtros -->
+    <aside class="collection-sidebar">
+
+      <!-- Filtro: Disponibilidad -->
+      <div class="filter-group">
+        <button class="filter-group-toggle" aria-expanded="true">
+          Disponibilidad <span class="filter-arrow">▾</span>
+        </button>
+        <div class="filter-group-body">
+          <label class="filter-check">
+            <input type="checkbox" id="filter-instock" {% if request.path contains 'available=true' %}checked{% endif %}>
+            En stock
+          </label>
+        </div>
+      </div>
+
+      <!-- Filtro: Precio -->
+      <div class="filter-group">
+        <button class="filter-group-toggle" aria-expanded="true">
+          Precio <span class="filter-arrow">▾</span>
+        </button>
+        <div class="filter-group-body">
+          <div class="price-range-inputs">
+            <div class="price-field">
+              <label>Min $</label>
+              <input type="number" id="price-min" placeholder="0" min="0" class="price-input">
+            </div>
+            <span class="price-sep">–</span>
+            <div class="price-field">
+              <label>Max $</label>
+              <input type="number" id="price-max" placeholder="Sin límite" min="0" class="price-input">
+            </div>
+          </div>
+          <button class="btn-apply-price" id="btn-apply-price">Aplicar</button>
+        </div>
+      </div>
+
+      <!-- Filtro: Etiquetas -->
+      {%- if collection.all_tags.size > 0 -%}
+        <div class="filter-group">
+          <button class="filter-group-toggle" aria-expanded="true">
+            Etiquetas <span class="filter-arrow">▾</span>
+          </button>
+          <div class="filter-group-body filter-tags-body">
+            {%- for tag in collection.all_tags -%}
+              {%- if current_tags contains tag -%}
+                <a href="{{ collection.url | append: '?sort_by=' | append: sort_by }}" class="filter-tag active">{{ tag }}</a>
+              {%- else -%}
+                {%- assign tag_url = collection.url | append: '/' | append: tag | append: '?sort_by=' | append: sort_by -%}
+                <a href="{{ tag_url }}" class="filter-tag">{{ tag }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Limpiar filtros -->
+      <a href="{{ collection.url }}" class="btn-clear-filters">Limpiar filtros</a>
+
+    </aside>
+
+    <!-- Grid de productos -->
+    <div class="collection-main">
+
+      <button class="btn-sidebar-mobile" id="sidebar-mobile-toggle" aria-expanded="false">⚙ Filtros</button>
+
+      {%- if collection.products.size > 0 -%}
+        <div class="collection-grid" id="collection-grid">
+          {%- for product in collection.products -%}
+            {%- render 'product-card', product: product -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="collection-empty">
+          <p>No se encontraron productos con estos filtros.</p>
+          <a href="{{ collection.url }}" class="btn-cart-shop">Ver todos los productos</a>
+        </div>
+      {%- endif -%}
+
+      <!-- Paginación -->
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Paginación">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="page-btn page-prev">← Anterior</a>
+          {%- else -%}
+            <span class="page-btn page-prev disabled">← Anterior</span>
+          {%- endif -%}
+
+          <div class="page-numbers">
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="page-num">{{ part.title }}</a>
+              {%- elsif part.title == paginate.current_page -%}
+                <span class="page-num current">{{ part.title }}</span>
+              {%- else -%}
+                <span class="page-num ellipsis">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="page-btn page-next">Siguiente →</a>
+          {%- else -%}
+            <span class="page-btn page-next disabled">Siguiente →</span>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* ── Collapse/expand filtros ── */
+  document.querySelectorAll('.filter-group-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var body = btn.nextElementSibling;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !open);
+      body.style.display = open ? 'none' : '';
+      btn.querySelector('.filter-arrow').textContent = open ? '▸' : '▾';
+    });
+  });
+
+  /* ── Filtro: en stock (client-side) ── */
+  var inStockCheck = document.getElementById('filter-instock');
+  if (inStockCheck) {
+    inStockCheck.addEventListener('change', function () {
+      var cards = document.querySelectorAll('.product__card-app');
+      cards.forEach(function (card) {
+        var btn = card.querySelector('.btn__card-app');
+        var soldOut = btn && btn.disabled;
+        card.style.display = (inStockCheck.checked && soldOut) ? 'none' : '';
+      });
+    });
+  }
+
+  /* ── Filtro: precio (client-side) ── */
+  document.getElementById('btn-apply-price').addEventListener('click', function () {
+    var minVal = parseFloat(document.getElementById('price-min').value) || 0;
+    var maxVal = parseFloat(document.getElementById('price-max').value) || Infinity;
+    var cards = document.querySelectorAll('.product__card-app');
+    cards.forEach(function (card) {
+      var priceEl = card.querySelector('.price__card-app');
+      if (!priceEl) { card.style.display = ''; return; }
+      var raw = priceEl.textContent.replace(/[^0-9.]/g, '');
+      var price = parseFloat(raw) || 0;
+      card.style.display = (price >= minVal && price <= maxVal) ? '' : 'none';
+    });
+  });
+
+  /* Restaurar precio al borrar inputs */
+  ['price-min','price-max'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      if (!this.value) {
+        var min = parseFloat(document.getElementById('price-min').value) || 0;
+        var max = parseFloat(document.getElementById('price-max').value) || Infinity;
+        if (min === 0 && max === Infinity) {
+          document.querySelectorAll('.product__card-app').forEach(function (c) { c.style.display = ''; });
+        }
+      }
+    });
+  });
+
+  /* ── Sidebar toggle móvil ── */
+  var mobileToggle = document.getElementById('sidebar-mobile-toggle');
+  var sidebar = document.querySelector('.collection-sidebar');
+  if (mobileToggle && sidebar) {
+    mobileToggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', sidebar.classList.contains('open'));
+      mobileToggle.textContent = sidebar.classList.contains('open') ? '✕ Cerrar filtros' : '⚙ Filtros';
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Colección",
+  "settings": [],
+  "presets": [{ "name": "Colección" }]
+}
+{% endschema %}
+
+{%- endpaginate -%}
