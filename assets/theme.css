@@ -1701,11 +1701,113 @@
 .btn-wishlist-product.in-wishlist { border-color: #e53e3e; color: #e53e3e; }
 .btn-wishlist-product .icon { width: 20px; height: 20px; }
 .product-description {
-    padding-top: 1rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
     border-top: 1px solid var(--gray-200);
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--gray-900);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCT TABS + SPECS + FAQ
+   ═══════════════════════════════════════════════════════════════ */
+.product-lower {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+}
+.product-tabs {
+    border-top: 2px solid var(--gray-200);
+}
+.product-tabs__nav {
+    display: flex;
+    border-bottom: 2px solid var(--gray-200);
+    margin-bottom: 2rem;
+}
+.product-tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+.product-tab-btn:hover { color: var(--navy-600); }
+.product-tab-btn.is-active {
+    color: var(--green-600);
+    border-bottom-color: var(--green-600);
+}
+.product-tab-panel { display: none; }
+.product-tab-panel.is-active { display: block; }
+/* Specs table */
+.product-specs {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    max-width: 680px;
+}
+.product-specs tr { border-bottom: 1px solid var(--gray-200); }
+.product-specs th {
+    width: 180px;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--navy-900);
+    background: #f5f6f8;
+    white-space: nowrap;
+}
+.product-specs td {
+    padding: 0.8rem 1rem;
+    color: var(--gray-900);
+}
+/* FAQ */
+.product-faq { display: flex; flex-direction: column; gap: 0.5rem; max-width: 780px; }
+.faq-item {
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.faq-question {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--navy-900);
+    font-size: 0.95rem;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question::after { content: '+'; font-size: 1.2rem; color: var(--gray-500); transition: transform 0.2s; }
+.faq-item[open] .faq-question::after { content: '−'; }
+.faq-answer { padding: 0 1.25rem 1rem; font-size: 0.9rem; line-height: 1.7; color: var(--gray-900); }
+
+/* ═══════════════════════════════════════════════════════════════
+   RELATED PRODUCTS
+   ═══════════════════════════════════════════════════════════════ */
+.product-related {
+    background: var(--gray-200, #f0f2f5);
+    padding: 3rem 0 4rem;
+}
+.product-related__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.product-related__title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--navy-900);
+    margin-bottom: 1.5rem;
 }
 
 /* ═══════════════════════════════════════════════════════════════

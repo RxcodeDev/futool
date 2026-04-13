@@ -95,14 +95,88 @@
       </div>
     </form>
 
-    {%- if product.description != blank -%}
-      <div class="product-description">
-        {{ product.description }}
-      </div>
-    {%- endif -%}
   </div>
 
 </div>
+
+<!-- ═══ Pestañas: Descripción / Preguntas frecuentes ═══ -->
+<div class="product-lower">
+  <div class="product-tabs">
+    <nav class="product-tabs__nav" role="tablist">
+      <button class="product-tab-btn is-active" role="tab" aria-selected="true" data-tab="tab-desc">DESCRIPCIÓN</button>
+      {%- if section.blocks.size > 0 -%}
+        <button class="product-tab-btn" role="tab" aria-selected="false" data-tab="tab-faq">PREGUNTAS FRECUENTES</button>
+      {%- endif -%}
+    </nav>
+
+    <div class="product-tab-panel is-active" id="tab-desc" role="tabpanel">
+      <table class="product-specs">
+        <tbody>
+          {%- if product.vendor != blank -%}
+            <tr><th>MARCA</th><td>{{ product.vendor }}</td></tr>
+          {%- endif -%}
+          {%- if product.type != blank -%}
+            <tr><th>CATEGORÍA</th><td>{{ product.type }}</td></tr>
+          {%- endif -%}
+          {%- if product.metafields.custom.dimensiones != blank -%}
+            <tr><th>DIMENSIONES</th><td>{{ product.metafields.custom.dimensiones }}</td></tr>
+          {%- endif -%}
+          {%- if product.metafields.custom.capacidad != blank -%}
+            <tr><th>CAPACIDAD</th><td>{{ product.metafields.custom.capacidad }}</td></tr>
+          {%- endif -%}
+          {%- if product.metafields.custom.velocidad != blank -%}
+            <tr><th>VELOCIDAD</th><td>{{ product.metafields.custom.velocidad }}</td></tr>
+          {%- endif -%}
+          {%- if product.metafields.custom.potencia != blank -%}
+            <tr><th>POTENCIA</th><td>{{ product.metafields.custom.potencia }}</td></tr>
+          {%- endif -%}
+          {%- if product.metafields.custom.peso != blank -%}
+            <tr><th>PESO</th><td>{{ product.metafields.custom.peso }}</td></tr>
+          {%- endif -%}
+        </tbody>
+      </table>
+      {%- if product.description != blank -%}
+        <div class="product-description">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="product-tab-panel" id="tab-faq" role="tabpanel" hidden>
+        <div class="product-faq">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'faq_item' -%}
+              <details class="faq-item" {{ block.shopify_attributes }}>
+                <summary class="faq-question">{{ block.settings.question }}</summary>
+                <div class="faq-answer">{{ block.settings.answer }}</div>
+              </details>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<!-- ═══ Productos relacionados ═══ -->
+{%- assign _related_col = product.collections.first -%}
+{%- if _related_col != blank -%}
+  <section class="product-related">
+    <div class="product-related__inner">
+      <h2 class="product-related__title">PRODUCTOS RECOMENDADOS</h2>
+      <div class="products__carrusel-app">
+        {%- assign _shown = 0 -%}
+        {%- for _p in _related_col.products -%}
+          {%- unless _p.id == product.id -%}
+            {%- if _shown < 5 -%}
+              {%- render 'product-card', product: _p -%}
+              {%- assign _shown = _shown | plus: 1 -%}
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
 
 <script type="application/json" id="product-variants-json">
   {{ product.variants | json }}
@@ -235,6 +309,25 @@
       localStorage.setItem('futool_wishlist', JSON.stringify(list));
     });
   }
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.product-tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.dataset.tab;
+      document.querySelectorAll('.product-tab-btn').forEach(function (b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.product-tab-panel').forEach(function (p) {
+        p.classList.remove('is-active');
+        p.hidden = true;
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = document.getElementById(targetId);
+      if (panel) { panel.classList.add('is-active'); panel.hidden = false; }
+    });
+  });
 })();
 </script>
 
@@ -242,6 +335,16 @@
 {
   "name": "Página de Producto",
   "settings": [],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pregunta frecuente",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuál es la garantía?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Nuestros productos cuentan con garantía del fabricante.</p>" }
+      ]
+    }
+  ],
   "presets": [{ "name": "Página de Producto" }]
 }
 {% endschema %}
