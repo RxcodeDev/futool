@@ -438,6 +438,10 @@
     font-weight: 700;
     line-height: 1.35;
     margin-bottom: 0.2rem;
+    text-decoration: none;
+}
+.img__container__card-app a {
+    text-decoration: none;
 }
 
 .card-app-description {
