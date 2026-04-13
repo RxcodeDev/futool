@@ -26,6 +26,31 @@
 
   {%- section 'footer' -%}
 
+  <!-- ── Cart Drawer ── -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" aria-hidden="true"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Carrito">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">
+        <svg class="icon" aria-hidden="true" width="22" height="22"><use href="#icon-cart3"></use></svg>
+        Mi Carrito
+      </h2>
+      <button id="cart-drawer-close" class="cart-drawer__close" aria-label="Cerrar carrito">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="cart-drawer-body" class="cart-drawer__body">
+      <p class="cart-drawer__empty">Tu carrito está vacío.</p>
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total-row">
+        <span>Total</span>
+        <span id="cart-drawer-total" class="cart-drawer__total-price">$0.00 MXN</span>
+      </div>
+      <a href="{{ routes.cart_url }}" class="cart-drawer__btn cart-drawer__btn--outline">Ver carrito</a>
+      <a href="{{ routes.checkout_url }}" class="cart-drawer__btn cart-drawer__btn--primary">Proceder al pago →</a>
+    </div>
+  </aside>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -53,6 +78,96 @@
       refreshCartBadge();
       window._refreshCartBadge = refreshCartBadge;
 
+      /* ── Cart Drawer ── */
+      var drawer = document.getElementById('cart-drawer');
+      var overlay = document.getElementById('cart-drawer-overlay');
+      var drawerBody = document.getElementById('cart-drawer-body');
+      var drawerTotal = document.getElementById('cart-drawer-total');
+
+      function formatMoney(cents) {
+        return '$' + (cents / 100).toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ' MXN';
+      }
+
+      function renderDrawerItems(cart) {
+        if (!cart.items || cart.items.length === 0) {
+          drawerBody.innerHTML = '<p class="cart-drawer__empty">Tu carrito está vacío.</p>';
+          drawerTotal.textContent = '$0.00 MXN';
+          return;
+        }
+        var html = '<ul class="cart-drawer__list">';
+        cart.items.forEach(function (item) {
+          html += '<li class="cart-drawer__item" data-key="' + item.key + '">' +
+            '<a href="' + item.url + '" class="cart-drawer__item-img-wrap">' +
+              '<img src="' + item.image + '" alt="' + item.title.replace(/"/g, '&quot;') + '" class="cart-drawer__item-img" width="72" height="72" loading="lazy">' +
+            '</a>' +
+            '<div class="cart-drawer__item-info">' +
+              '<a href="' + item.url + '" class="cart-drawer__item-title">' + item.product_title + '</a>' +
+              (item.variant_title ? '<p class="cart-drawer__item-variant">' + item.variant_title + '</p>' : '') +
+              '<div class="cart-drawer__item-row">' +
+                '<div class="cart-drawer__qty">' +
+                  '<button class="cart-drawer__qty-btn" data-action="decrease" data-key="' + item.key + '" data-qty="' + (item.quantity - 1) + '" aria-label="Reducir cantidad">−</button>' +
+                  '<span class="cart-drawer__qty-val">' + item.quantity + '</span>' +
+                  '<button class="cart-drawer__qty-btn" data-action="increase" data-key="' + item.key + '" data-qty="' + (item.quantity + 1) + '" aria-label="Aumentar cantidad">+</button>' +
+                '</div>' +
+                '<span class="cart-drawer__item-price">' + formatMoney(item.final_line_price) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<button class="cart-drawer__item-remove" data-key="' + item.key + '" data-qty="0" aria-label="Eliminar producto">' +
+              '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+            '</button>' +
+          '</li>';
+        });
+        html += '</ul>';
+        drawerBody.innerHTML = html;
+        drawerTotal.textContent = formatMoney(cart.total_price);
+
+        /* qty / remove buttons inside drawer */
+        drawerBody.querySelectorAll('[data-qty]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.dataset.key;
+            var qty = parseInt(btn.dataset.qty, 10);
+            fetch('/cart/change.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: key, quantity: qty })
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (updatedCart) {
+              renderDrawerItems(updatedCart);
+              refreshCartBadge();
+            });
+          });
+        });
+      }
+
+      function openCartDrawer() {
+        fetch('/cart.js')
+          .then(function (r) { return r.json(); })
+          .then(function (cart) {
+            renderDrawerItems(cart);
+            drawer.classList.add('is-open');
+            drawer.setAttribute('aria-hidden', 'false');
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('drawer-open');
+          });
+      }
+      window._openCartDrawer = openCartDrawer;
+
+      function closeCartDrawer() {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('drawer-open');
+      }
+
+      document.getElementById('cart-drawer-close').addEventListener('click', closeCartDrawer);
+      overlay.addEventListener('click', closeCartDrawer);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeCartDrawer();
+      });
+
       /* ── AJAX Add to Cart (product cards) ── */
       document.querySelectorAll('.product__card-app form').forEach(function (form) {
         form.addEventListener('submit', function (e) {
@@ -72,6 +187,7 @@
             btn.innerHTML = '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
             setTimeout(function () { btn.innerHTML = origHtml; btn.disabled = false; }, 1500);
             refreshCartBadge();
+            openCartDrawer();
           })
           .catch(function () { btn.disabled = false; btn.innerHTML = origHtml; });
         });
