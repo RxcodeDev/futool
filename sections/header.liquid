@@ -31,20 +31,27 @@
           <img class="img__search" src="{{ 'logoHorizontal.png' | asset_url }}" alt="{{ shop.name }}">
         {%- endif -%}
       </a>
-      <form action="{{ routes.search_url }}" method="get" class="input-wrapper__search" role="search">
-        <input type="hidden" name="type" value="product">
-        <input
-          type="text"
-          name="q"
-          id="search-input"
-          placeholder="Buscar producto..."
-          value="{{ search.terms | escape }}"
-          autocomplete="off"
-        >
-        <button type="submit" class="btn-search__navigation" aria-label="Buscar">
-          <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
-        </button>
-      </form>
+      <div class="search-wrap__nav" id="search-wrap">
+        <form action="{{ routes.search_url }}" method="get" class="input-wrapper__search" role="search" autocomplete="off">
+          <input type="hidden" name="type" value="product">
+          <input
+            type="text"
+            name="q"
+            id="search-input"
+            placeholder="Buscar producto..."
+            value="{{ search.terms | escape }}"
+            autocomplete="off"
+            aria-label="Buscar producto"
+            aria-autocomplete="list"
+            aria-controls="search-preview"
+            aria-expanded="false"
+          >
+          <button type="submit" class="btn-search__navigation" aria-label="Buscar">
+            <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+          </button>
+        </form>
+        <div id="search-preview" class="search-preview" role="listbox" aria-label="Sugerencias" hidden></div>
+      </div>
     </div>
 
     <div class="actions__navigation">
