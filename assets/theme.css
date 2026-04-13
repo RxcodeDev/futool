@@ -2245,6 +2245,56 @@ body.drawer-open {
 .sp-empty strong { color: var(--navy-900); }
 
 /* ═══════════════════════════════════════════════════════════════
+   FLOATING BUTTONS (WhatsApp + Phone)
+   ═══════════════════════════════════════════════════════════════ */
+.float-btns {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 800;
+}
+.float-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+    transition: transform 0.18s, box-shadow 0.18s;
+    text-decoration: none;
+    color: #fff;
+}
+.float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.30);
+}
+.float-btn .icon {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+    stroke: none;
+}
+.float-btn svg {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+}
+.float-btn--whatsapp {
+    background: #25D366;
+}
+.float-btn--phone {
+    background: var(--navy-900);
+}
+@media (max-width: 600px) {
+    .float-btns { bottom: 1rem; right: 1rem; }
+    .float-btn { width: 46px; height: 46px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    SEARCH RESULTS PAGE
    ═══════════════════════════════════════════════════════════════ */
 .search-page {
