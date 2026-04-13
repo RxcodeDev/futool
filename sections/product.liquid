@@ -164,16 +164,20 @@
   <section class="product-related">
     <div class="product-related__inner">
       <h2 class="product-related__title">PRODUCTOS RELACIONADOS</h2>
-      <div class="products__carrusel-app">
-        {%- assign _shown = 0 -%}
-        {%- for _p in _related_col.products -%}
-          {%- unless _p.id == product.id -%}
-            {%- if _shown < 5 -%}
-              {%- render 'product-card', product: _p -%}
-              {%- assign _shown = _shown | plus: 1 -%}
-            {%- endif -%}
-          {%- endunless -%}
-        {%- endfor -%}
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-btn--prev" id="related-prev" aria-label="Anterior">&#8249;</button>
+        <div class="products__carrusel-app" id="related-carousel">
+          {%- assign _shown = 0 -%}
+          {%- for _p in _related_col.products -%}
+            {%- unless _p.id == product.id -%}
+              {%- if _shown < 10 -%}
+                {%- render 'product-card', product: _p -%}
+                {%- assign _shown = _shown | plus: 1 -%}
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+        <button class="carousel-btn carousel-btn--next" id="related-next" aria-label="Siguiente">&#8250;</button>
       </div>
     </div>
   </section>
@@ -309,6 +313,22 @@
       else { list.splice(idx, 1); wishBtn.classList.remove('in-wishlist'); }
       localStorage.setItem('futool_wishlist', JSON.stringify(list));
     });
+  }
+
+  /* ── Carrusel relacionados ── */
+  var relTrack = document.getElementById('related-carousel');
+  var relPrev = document.getElementById('related-prev');
+  var relNext = document.getElementById('related-next');
+  if (relTrack && relNext) {
+    var scrollAmt = 255;
+    relNext.addEventListener('click', function () { relTrack.scrollBy({ left: scrollAmt, behavior: 'smooth' }); });
+    if (relPrev) relPrev.addEventListener('click', function () { relTrack.scrollBy({ left: -scrollAmt, behavior: 'smooth' }); });
+    function updateRelBtns() {
+      if (relPrev) relPrev.style.display = relTrack.scrollLeft > 10 ? 'flex' : 'none';
+      if (relNext) relNext.style.display = relTrack.scrollLeft + relTrack.clientWidth < relTrack.scrollWidth - 10 ? 'flex' : 'none';
+    }
+    relTrack.addEventListener('scroll', updateRelBtns, { passive: true });
+    updateRelBtns();
   }
 
   /* ── Tabs ── */

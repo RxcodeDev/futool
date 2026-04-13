@@ -1809,6 +1809,37 @@
     color: var(--navy-900);
     margin-bottom: 1.5rem;
 }
+/* Carousel wrapper con botones */
+.carousel-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.carousel-wrap .products__carrusel-app {
+    flex: 1;
+    min-width: 0;
+}
+.carousel-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--navy-600);
+    color: var(--white);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    transition: background 0.15s, transform 0.15s;
+    z-index: 2;
+}
+.carousel-btn:hover { background: var(--navy-500); transform: scale(1.08); }
+.carousel-btn--prev { margin-right: 0.5rem; }
+.carousel-btn--next { margin-left: 0.5rem; }
 
 /* ═══════════════════════════════════════════════════════════════
    CART PAGE
