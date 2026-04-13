@@ -48,7 +48,9 @@
           <span id="cart-total-price">{{ cart.total_price | money }}</span>
         </div>
         <p class="cart-tax-note">Impuestos y envío se calculan al finalizar la compra.</p>
-        <a href="{{ routes.checkout_url }}" class="btn-checkout">Proceder al pago →</a>
+        <form action="/cart" method="post">
+          <button type="submit" name="checkout" class="btn-checkout">Proceder al pago →</button>
+        </form>
         <a href="/collections" class="btn-cart-shop-sm">Seguir comprando</a>
       </div>
     </div>

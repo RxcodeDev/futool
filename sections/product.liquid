@@ -194,19 +194,24 @@
         quantity: parseInt(qtyInput.value, 10)
       })
     })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      if (data.status === 422) throw new Error(data.description);
+    .then(function (r) {
+      return r.json().then(function (data) {
+        if (!r.ok) throw new Error(data.description || 'No se pudo agregar al carrito');
+        return data;
+      });
+    })
       addBtn.disabled = false;
       addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
       setTimeout(function () {
         addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito';
       }, 2000);
       if (window._refreshCartBadge) window._refreshCartBadge();
+      if (window._openCartDrawer) window._openCartDrawer();
     })
-    .catch(function () {
+    .catch(function (err) {
       addBtn.disabled = false;
       addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito';
+      if (err && err.message) alert(err.message);
     });
   });
 
