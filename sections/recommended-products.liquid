@@ -1,4 +1,5 @@
 {%- assign featured_collection = collections[section.settings.collection] -%}
+{%- if featured_collection == blank -%}{%- assign featured_collection = collections.all -%}{%- endif -%}
 
 <div class="recommended">
   <h1 class="recommended-title">{{ section.settings.title }}</h1>
