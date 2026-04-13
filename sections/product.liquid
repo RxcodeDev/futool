@@ -95,6 +95,10 @@
       </div>
     </form>
 
+    {%- if product.description != blank -%}
+      <div class="product-description">{{ product.description }}</div>
+    {%- endif -%}
+
   </div>
 
 </div>
@@ -135,9 +139,6 @@
           {%- endif -%}
         </tbody>
       </table>
-      {%- if product.description != blank -%}
-        <div class="product-description">{{ product.description }}</div>
-      {%- endif -%}
     </div>
 
     {%- if section.blocks.size > 0 -%}
