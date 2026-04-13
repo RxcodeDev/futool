@@ -317,18 +317,22 @@
 
   /* ── Carrusel relacionados ── */
   var relTrack = document.getElementById('related-carousel');
-  var relPrev = document.getElementById('related-prev');
-  var relNext = document.getElementById('related-next');
+  var relPrev  = document.getElementById('related-prev');
+  var relNext  = document.getElementById('related-next');
   if (relTrack && relNext) {
     var scrollAmt = 255;
     relNext.addEventListener('click', function () { relTrack.scrollBy({ left: scrollAmt, behavior: 'smooth' }); });
     if (relPrev) relPrev.addEventListener('click', function () { relTrack.scrollBy({ left: -scrollAmt, behavior: 'smooth' }); });
     function updateRelBtns() {
-      if (relPrev) relPrev.style.display = relTrack.scrollLeft > 10 ? 'flex' : 'none';
-      if (relNext) relNext.style.display = relTrack.scrollLeft + relTrack.clientWidth < relTrack.scrollWidth - 10 ? 'flex' : 'none';
+      var atStart = relTrack.scrollLeft < 10;
+      var atEnd   = relTrack.scrollLeft + relTrack.clientWidth >= relTrack.scrollWidth - 10;
+      if (relPrev) { relPrev.style.opacity = atStart ? '0.35' : '1'; relPrev.style.pointerEvents = atStart ? 'none' : 'auto'; }
+      relNext.style.opacity = atEnd ? '0.35' : '1';
+      relNext.style.pointerEvents = atEnd ? 'none' : 'auto';
     }
     relTrack.addEventListener('scroll', updateRelBtns, { passive: true });
-    updateRelBtns();
+    /* Esperar a que se pinten las cards antes de evaluar */
+    setTimeout(updateRelBtns, 300);
   }
 
   /* ── Tabs ── */

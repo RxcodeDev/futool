@@ -1794,18 +1794,18 @@
    RELATED PRODUCTS
    ═══════════════════════════════════════════════════════════════ */
 .product-related {
-    background: var(--gray-200, #f0f2f5);
-    padding: 3rem 0 4rem;
+    background: #f0f2f5;
+    padding: 2.5rem 4rem;
 }
 .product-related__inner {
-    max-width: 1280px;
+    max-width: calc(5 * 230px + 4 * 1.25rem + 1.5rem + 100px);
     margin: 0 auto;
-    padding: 0 2rem;
 }
 .product-related__title {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--navy-900);
     margin-bottom: 1.5rem;
 }
@@ -1818,6 +1818,8 @@
 .carousel-wrap .products__carrusel-app {
     flex: 1;
     min-width: 0;
+    max-width: none;
+    margin-inline: 0;
 }
 .carousel-btn {
     flex-shrink: 0;
