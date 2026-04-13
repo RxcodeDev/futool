@@ -33,8 +33,9 @@
       <a href="/pages/wishlist" aria-label="Favoritos">
         <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
       </a>
-      <a href="{{ routes.cart_url }}" aria-label="Carrito">
+      <a href="{{ routes.cart_url }}" aria-label="Carrito" class="cart-link__nav">
         <svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg>
+        <span id="cart-count-badge" style="display:none">0</span>
       </a>
       <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Cuenta">
         <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>

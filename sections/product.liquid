@@ -1,0 +1,236 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="product-page">
+
+  <!-- Galería -->
+  <div class="product-gallery">
+    <figure class="product-main-figure">
+      {%- if product.featured_image -%}
+        <img
+          id="product-main-image"
+          src="{{ current_variant.image | default: product.featured_image | image_url: width: 900 }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          loading="eager"
+          class="product-main-image"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-main-image' }}
+      {%- endif -%}
+    </figure>
+
+    {%- if product.images.size > 1 -%}
+      <div class="product-thumbs">
+        {%- for image in product.images -%}
+          <button
+            class="thumb-btn{% if forloop.first %} active{% endif %}"
+            data-src="{{ image | image_url: width: 900 }}"
+            data-alt="{{ image.alt | default: product.title | escape }}"
+            aria-label="Ver imagen {{ forloop.index }}"
+          >
+            <img src="{{ image | image_url: width: 130 }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Info -->
+  <div class="product-info">
+    {%- if product.vendor != blank -%}
+      <p class="product-vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h1 class="product-title">{{ product.title }}</h1>
+
+    <div class="product-price-wrap" id="product-price-wrap">
+      {%- if current_variant.compare_at_price > current_variant.price -%}
+        {%- assign disc_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price | round -%}
+        <span class="product-badge">-{{ disc_pct }}%</span>
+        <span class="product-price">{{ current_variant.price | money }}</span>
+        <span class="product-compare-price">{{ current_variant.compare_at_price | money }}</span>
+      {%- else -%}
+        <span class="product-price">{{ current_variant.price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if product.variants.size > 1 -%}
+      <div class="product-variants">
+        {%- for option in product.options_with_values -%}
+          <div class="variant-group">
+            <p class="variant-label">{{ option.name }}: <strong>{{ option.selected_value }}</strong></p>
+            <div class="variant-values">
+              {%- for value in option.values -%}
+                <button
+                  class="variant-btn{% if option.selected_value == value %} selected{% endif %}"
+                  data-option-index="{{ forloop.parentloop.index0 }}"
+                  data-value="{{ value | escape }}"
+                >{{ value }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <form id="product-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="product-variant-id" value="{{ current_variant.id }}">
+      <div class="product-actions-row">
+        <div class="qty-control">
+          <button type="button" class="qty-btn" id="qty-minus" aria-label="Quitar uno">−</button>
+          <input type="number" name="quantity" id="qty-input" value="1" min="1" class="qty-input" aria-label="Cantidad">
+          <button type="button" class="qty-btn" id="qty-plus" aria-label="Agregar uno">+</button>
+        </div>
+        <button
+          type="submit"
+          class="btn-add-product"
+          id="add-to-cart-btn"
+          {%- unless current_variant.available %} disabled{%- endunless -%}
+        >
+          <svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg>
+          {%- if current_variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
+        </button>
+        <button type="button" class="btn-wishlist-product" id="wishlist-product-btn" data-product-handle="{{ product.handle }}" aria-label="Agregar a favoritos">
+          <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
+        </button>
+      </div>
+    </form>
+
+    {%- if product.description != blank -%}
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+    {%- endif -%}
+  </div>
+
+</div>
+
+<script type="application/json" id="product-variants-json">
+  {{ product.variants | json }}
+</script>
+
+<script>
+(function () {
+  /* ── Thumbnails ── */
+  var mainImg = document.getElementById('product-main-image');
+  document.querySelectorAll('.thumb-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt; }
+      document.querySelectorAll('.thumb-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+
+  /* ── Variants ── */
+  var variantsData = JSON.parse(document.getElementById('product-variants-json').textContent);
+  var selectedOptions = {};
+  document.querySelectorAll('.variant-btn.selected').forEach(function (btn) {
+    selectedOptions[btn.dataset.optionIndex] = btn.dataset.value;
+  });
+
+  function findVariant() {
+    var opts = Object.keys(selectedOptions).sort().map(function (k) { return selectedOptions[k]; });
+    return variantsData.find(function (v) {
+      return v.options.every(function (o, i) { return o === opts[i]; });
+    });
+  }
+
+  function updateVariant(variant) {
+    if (!variant) return;
+    document.getElementById('product-variant-id').value = variant.id;
+    var addBtn = document.getElementById('add-to-cart-btn');
+    if (variant.available) {
+      addBtn.disabled = false;
+      addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito';
+    } else {
+      addBtn.disabled = true;
+      addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agotado';
+    }
+    var priceWrap = document.getElementById('product-price-wrap');
+    if (priceWrap) {
+      var fmt = function (cents) { return (cents / 100).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }); };
+      var html = '<span class="product-price">' + fmt(variant.price) + '</span>';
+      if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+        var disc = Math.round((variant.compare_at_price - variant.price) * 100 / variant.compare_at_price);
+        html = '<span class="product-badge">-' + disc + '%</span>' + html + '<span class="product-compare-price">' + fmt(variant.compare_at_price) + '</span>';
+      }
+      priceWrap.innerHTML = html;
+    }
+    if (variant.featured_image && mainImg) { mainImg.src = variant.featured_image.src; }
+  }
+
+  document.querySelectorAll('.variant-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var idx = btn.dataset.optionIndex;
+      document.querySelectorAll('.variant-btn[data-option-index="' + idx + '"]').forEach(function (b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      selectedOptions[idx] = btn.dataset.value;
+      var strong = btn.closest('.variant-group').querySelector('.variant-label strong');
+      if (strong) strong.textContent = btn.dataset.value;
+      updateVariant(findVariant());
+    });
+  });
+
+  /* ── Quantity ── */
+  var qtyInput = document.getElementById('qty-input');
+  document.getElementById('qty-minus').addEventListener('click', function () {
+    var v = parseInt(qtyInput.value, 10);
+    if (v > 1) qtyInput.value = v - 1;
+  });
+  document.getElementById('qty-plus').addEventListener('click', function () {
+    qtyInput.value = parseInt(qtyInput.value, 10) + 1;
+  });
+
+  /* ── AJAX Add to Cart ── */
+  document.getElementById('product-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var addBtn = document.getElementById('add-to-cart-btn');
+    addBtn.disabled = true;
+    addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregando...';
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: parseInt(document.getElementById('product-variant-id').value, 10),
+        quantity: parseInt(qtyInput.value, 10)
+      })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.status === 422) throw new Error(data.description);
+      addBtn.disabled = false;
+      addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
+      setTimeout(function () {
+        addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito';
+      }, 2000);
+      if (window._refreshCartBadge) window._refreshCartBadge();
+    })
+    .catch(function () {
+      addBtn.disabled = false;
+      addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito';
+    });
+  });
+
+  /* ── Wishlist ── */
+  var wishBtn = document.getElementById('wishlist-product-btn');
+  if (wishBtn) {
+    var handle = wishBtn.dataset.productHandle;
+    var wl = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+    if (wl.includes(handle)) wishBtn.classList.add('in-wishlist');
+    wishBtn.addEventListener('click', function () {
+      var list = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+      var idx = list.indexOf(handle);
+      if (idx === -1) { list.push(handle); wishBtn.classList.add('in-wishlist'); }
+      else { list.splice(idx, 1); wishBtn.classList.remove('in-wishlist'); }
+      localStorage.setItem('futool_wishlist', JSON.stringify(list));
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Página de Producto",
+  "settings": [],
+  "presets": [{ "name": "Página de Producto" }]
+}
+{% endschema %}

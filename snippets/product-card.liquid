@@ -15,6 +15,9 @@
     {%- if has_discount -%}
       <span class="discount__card-app">-{{ discount_pct }}%</span>
     {%- endif -%}
+    <button class="btn-wishlist-card" data-product-handle="{{ product.handle }}" aria-label="Agregar a favoritos">
+      <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
+    </button>
     <figure class="img__container__card-app">
       <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
         {%- if product.featured_image != blank -%}

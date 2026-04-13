@@ -1,0 +1,127 @@
+<div class="wishlist-page">
+  <h1 class="wishlist-title">Mis Favoritos</h1>
+  <div id="wishlist-grid" class="wishlist-grid">
+    <p class="wishlist-loading">Cargando favoritos...</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var grid = document.getElementById('wishlist-grid');
+  var handles = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+
+  if (handles.length === 0) {
+    grid.innerHTML =
+      '<div class="wishlist-empty">' +
+        '<svg class="icon wishlist-empty-icon" aria-hidden="true"><use href="#icon-heart"></use></svg>' +
+        '<p>No tienes productos en favoritos aún.</p>' +
+        '<a href="/collections" class="btn-cart-shop">Explorar productos</a>' +
+      '</div>';
+    return;
+  }
+
+  Promise.all(handles.map(function (handle) {
+    return fetch('/products/' + handle + '.js')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+  })).then(function (products) {
+    products = products.filter(Boolean);
+    grid.innerHTML = '';
+
+    if (products.length === 0) {
+      grid.innerHTML =
+        '<div class="wishlist-empty">' +
+          '<p>No se encontraron productos.</p>' +
+          '<a href="/collections" class="btn-cart-shop">Explorar productos</a>' +
+        '</div>';
+      return;
+    }
+
+    grid.className = 'products__carrusel-app wishlist-grid';
+
+    products.forEach(function (p) {
+      var v = p.variants[0];
+      var price = (v.price / 100).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+      var discBadge = '';
+      var origPriceHtml = '';
+
+      if (v.compare_at_price && v.compare_at_price > v.price) {
+        var disc = Math.round((v.compare_at_price - v.price) * 100 / v.compare_at_price);
+        discBadge = '<span class="discount__card-app">-' + disc + '%</span>';
+        origPriceHtml = '<span class="original-price__card-app">' +
+          (v.compare_at_price / 100).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }) + '</span>';
+      }
+
+      var imgHtml = p.featured_image
+        ? '<img src="' + p.featured_image + '" alt="' + p.title.replace(/"/g, '\'') + '" class="img__card-app" loading="lazy">'
+        : '';
+      var desc = (p.body_html || '').replace(/<[^>]+>/g, '').substring(0, 70);
+
+      var card = document.createElement('div');
+      card.className = 'product__card-app';
+      card.innerHTML =
+        discBadge +
+        '<button class="btn-wishlist-card in-wishlist btn-wishlist-remove" data-handle="' + p.handle + '" aria-label="Quitar de favoritos">' +
+          '<svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>' +
+        '</button>' +
+        '<figure class="img__container__card-app">' +
+          '<a href="/products/' + p.handle + '" tabindex="-1" aria-hidden="true">' + imgHtml + '</a>' +
+          '<a href="/products/' + p.handle + '"><h4 class="card-app-title">' + p.title + '</h4></a>' +
+          '<p class="card-app-description">' + desc + '</p>' +
+          '<span class="price__card-app">' + price + ' ' + origPriceHtml + '</span>' +
+        '</figure>' +
+        '<form action="/cart/add" method="post" enctype="multipart/form-data">' +
+          '<input type="hidden" name="id" value="' + v.id + '">' +
+          '<button type="submit" class="btn__card-app">' +
+            '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregar al carrito' +
+          '</button>' +
+        '</form>';
+
+      grid.appendChild(card);
+    });
+
+    /* Quitar de favoritos */
+    grid.querySelectorAll('.btn-wishlist-remove').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var h = btn.dataset.handle;
+        var wl = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+        localStorage.setItem('futool_wishlist', JSON.stringify(wl.filter(function (x) { return x !== h; })));
+        btn.closest('.product__card-app').remove();
+        if (grid.querySelectorAll('.product__card-app').length === 0) {
+          grid.className = 'wishlist-grid';
+          grid.innerHTML =
+            '<div class="wishlist-empty">' +
+              '<svg class="icon wishlist-empty-icon" aria-hidden="true"><use href="#icon-heart"></use></svg>' +
+              '<p>No tienes productos en favoritos.</p>' +
+              '<a href="/collections" class="btn-cart-shop">Explorar productos</a>' +
+            '</div>';
+        }
+      });
+    });
+
+    /* AJAX Add to Cart desde wishlist */
+    grid.querySelectorAll('form').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('.btn__card-app');
+        var orig = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregando...';
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: parseInt(form.querySelector('[name="id"]').value, 10), quantity: 1 })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function () {
+          btn.disabled = false;
+          btn.innerHTML = '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
+          setTimeout(function () { btn.innerHTML = orig; btn.disabled = false; }, 1500);
+          if (window._refreshCartBadge) window._refreshCartBadge();
+        })
+        .catch(function () { btn.disabled = false; btn.innerHTML = orig; });
+      });
+    });
+  });
+})();
+</script>

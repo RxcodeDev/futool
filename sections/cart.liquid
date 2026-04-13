@@ -1,0 +1,123 @@
+<div class="cart-page">
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty">
+      <svg class="icon cart-empty-icon" aria-hidden="true"><use href="#icon-cart3"></use></svg>
+      <p>Tu carrito está vacío.</p>
+      <a href="/collections" class="btn-cart-shop">Explorar productos</a>
+    </div>
+  {%- else -%}
+    <div class="cart-header">
+      <h1 class="cart-title">Carrito de compras</h1>
+      <span class="cart-count-text">{{ cart.item_count }} {{ cart.item_count | pluralize: 'artículo', 'artículos' }}</span>
+    </div>
+
+    <div class="cart-layout">
+      <div class="cart-items" id="cart-items-list">
+        {%- for item in cart.items -%}
+          <div class="cart-item" data-item-key="{{ item.key }}">
+            <a href="{{ item.url }}" class="cart-item-img-link">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.image.alt | escape }}" class="cart-item-img" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg cart-item-img' }}
+              {%- endif -%}
+            </a>
+            <div class="cart-item-info">
+              <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="cart-item-variant">{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <p class="cart-item-unit-price">{{ item.price | money }} c/u</p>
+            </div>
+            <div class="cart-item-right">
+              <div class="qty-control cart-qty-control">
+                <button type="button" class="qty-btn" data-action="minus" data-key="{{ item.key }}">−</button>
+                <input type="number" value="{{ item.quantity }}" min="0" class="qty-input cart-qty-input" data-key="{{ item.key }}" aria-label="Cantidad">
+                <button type="button" class="qty-btn" data-action="plus" data-key="{{ item.key }}">+</button>
+              </div>
+              <p class="cart-item-line-price" data-key="{{ item.key }}">{{ item.final_line_price | money }}</p>
+              <button type="button" class="cart-item-remove" data-key="{{ item.key }}" aria-label="Eliminar">✕</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-summary">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cart-total-price">{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-tax-note">Impuestos y envío se calculan al finalizar la compra.</p>
+        <a href="{{ routes.checkout_url }}" class="btn-checkout">Proceder al pago →</a>
+        <a href="/collections" class="btn-cart-shop-sm">Seguir comprando</a>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+(function () {
+  var fmtMXN = function (cents) {
+    return (cents / 100).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+  };
+
+  function changeQty(key, quantity) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: quantity })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (cart) {
+      if (quantity === 0) {
+        var row = document.querySelector('[data-item-key="' + key + '"]');
+        if (row) row.remove();
+      }
+      var totalEl = document.getElementById('cart-total-price');
+      if (totalEl) totalEl.textContent = fmtMXN(cart.total_price);
+      var lineEl = document.querySelector('.cart-item-line-price[data-key="' + key + '"]');
+      if (lineEl && quantity > 0) {
+        var item = cart.items.find(function (i) { return i.key === key; });
+        if (item) lineEl.textContent = fmtMXN(item.final_line_price);
+      }
+      var badge = document.getElementById('cart-count-badge');
+      if (badge) {
+        badge.textContent = cart.item_count;
+        badge.style.display = cart.item_count > 0 ? 'flex' : 'none';
+      }
+      if (cart.item_count === 0) location.reload();
+    });
+  }
+
+  document.querySelectorAll('.qty-btn[data-key]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.dataset.key;
+      var input = document.querySelector('.cart-qty-input[data-key="' + key + '"]');
+      var qty = parseInt(input.value, 10);
+      qty = btn.dataset.action === 'minus' ? Math.max(0, qty - 1) : qty + 1;
+      input.value = qty;
+      changeQty(key, qty);
+    });
+  });
+
+  document.querySelectorAll('.cart-qty-input').forEach(function (input) {
+    input.addEventListener('change', function () {
+      var qty = Math.max(0, parseInt(input.value, 10) || 0);
+      input.value = qty;
+      changeQty(input.dataset.key, qty);
+    });
+  });
+
+  document.querySelectorAll('.cart-item-remove').forEach(function (btn) {
+    btn.addEventListener('click', function () { changeQty(btn.dataset.key, 0); });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "settings": [],
+  "presets": [{ "name": "Carrito" }]
+}
+{% endschema %}

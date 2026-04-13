@@ -28,6 +28,8 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+      /* ── Shuffle carousels ── */
       document.querySelectorAll('.products__carrusel-app').forEach(function (row) {
         var cards = Array.from(row.children);
         for (var i = cards.length - 1; i > 0; i--) {
@@ -36,6 +38,60 @@
           var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
         }
       });
+
+      /* ── Cart badge ── */
+      function refreshCartBadge() {
+        fetch('/cart.js')
+          .then(function (r) { return r.json(); })
+          .then(function (cart) {
+            var badge = document.getElementById('cart-count-badge');
+            if (!badge) return;
+            badge.textContent = cart.item_count;
+            badge.style.display = cart.item_count > 0 ? 'flex' : 'none';
+          });
+      }
+      refreshCartBadge();
+      window._refreshCartBadge = refreshCartBadge;
+
+      /* ── AJAX Add to Cart (product cards) ── */
+      document.querySelectorAll('.product__card-app form').forEach(function (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var btn = form.querySelector('.btn__card-app');
+          var origHtml = btn.innerHTML;
+          btn.disabled = true;
+          btn.innerHTML = '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> Agregando...';
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: parseInt(form.querySelector('[name="id"]').value, 10), quantity: 1 })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function () {
+            btn.disabled = false;
+            btn.innerHTML = '<svg class="icon shopping-icon__card-app" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
+            setTimeout(function () { btn.innerHTML = origHtml; btn.disabled = false; }, 1500);
+            refreshCartBadge();
+          })
+          .catch(function () { btn.disabled = false; btn.innerHTML = origHtml; });
+        });
+      });
+
+      /* ── Wishlist toggle (product cards) ── */
+      document.querySelectorAll('.btn-wishlist-card').forEach(function (btn) {
+        var handle = btn.dataset.productHandle;
+        var wl = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+        if (wl.includes(handle)) btn.classList.add('in-wishlist');
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var list = JSON.parse(localStorage.getItem('futool_wishlist') || '[]');
+          var idx = list.indexOf(handle);
+          if (idx === -1) { list.push(handle); btn.classList.add('in-wishlist'); }
+          else { list.splice(idx, 1); btn.classList.remove('in-wishlist'); }
+          localStorage.setItem('futool_wishlist', JSON.stringify(list));
+        });
+      });
+
     });
   </script>
 
