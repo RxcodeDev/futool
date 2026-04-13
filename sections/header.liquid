@@ -46,20 +46,31 @@
 
     <nav class="categories__navigation" aria-label="Navegación principal">
       <ul>
-        {%- for link in linklists[section.settings.menu].links -%}
-          {%- if link.links.size > 0 -%}
-            <li class="has-dropdown">
-              <a href="{{ link.url }}">{{ link.title | upcase }}</a>
-              <ul class="dropdown__nav">
-                {%- for child_link in link.links -%}
-                  <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
-                {%- endfor -%}
-              </ul>
-            </li>
-          {%- else -%}
-            <li><a href="{{ link.url }}">{{ link.title | upcase }}</a></li>
-          {%- endif -%}
-        {%- endfor -%}
+        <li class="has-dropdown">
+          <a href="/collections">MAQUINARIAS</a>
+          <ul class="dropdown__nav">
+            {%- for col in collections -%}
+              {%- assign col_title_lower = col.title | downcase -%}
+              {%- if col_title_lower contains 'maquinaria' -%}
+                <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="/collections">REFACCIONES</a>
+          <ul class="dropdown__nav">
+            {%- for col in collections -%}
+              {%- assign col_title_lower = col.title | downcase -%}
+              {%- if col_title_lower contains 'refaccion' -%}
+                <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </li>
+        <li><a href="/pages/nuestras-marcas">NUESTRAS MARCAS</a></li>
+        <li><a href="/pages/preguntas-y-respuestas">PREGUNTAS Y RESPUESTAS</a></li>
+        <li><a href="/pages/distribuidores">DISTRIBUIDORES</a></li>
       </ul>
     </nav>
 
@@ -68,20 +79,31 @@
   <!-- Mobile nav drawer -->
   <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
     <ul>
-      {%- for link in linklists[section.settings.menu].links -%}
-        {%- if link.links.size > 0 -%}
-          <li class="mobile-nav__item has-children">
-            <a href="{{ link.url }}">{{ link.title }}</a>
-            <ul class="mobile-nav__sub">
-              {%- for child_link in link.links -%}
-                <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
-              {%- endfor -%}
-            </ul>
-          </li>
-        {%- else -%}
-          <li class="mobile-nav__item"><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {%- endif -%}
-      {%- endfor -%}
+      <li class="mobile-nav__item has-children">
+        <a href="/collections">Maquinarias</a>
+        <ul class="mobile-nav__sub">
+          {%- for col in collections -%}
+            {%- assign col_title_lower = col.title | downcase -%}
+            {%- if col_title_lower contains 'maquinaria' -%}
+              <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </li>
+      <li class="mobile-nav__item has-children">
+        <a href="/collections">Refacciones</a>
+        <ul class="mobile-nav__sub">
+          {%- for col in collections -%}
+            {%- assign col_title_lower = col.title | downcase -%}
+            {%- if col_title_lower contains 'refaccion' -%}
+              <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </li>
+      <li class="mobile-nav__item"><a href="/pages/nuestras-marcas">Nuestras Marcas</a></li>
+      <li class="mobile-nav__item"><a href="/pages/preguntas-y-respuestas">Preguntas y Respuestas</a></li>
+      <li class="mobile-nav__item"><a href="/pages/distribuidores">Distribuidores</a></li>
     </ul>
   </nav>
 </header>
