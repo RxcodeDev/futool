@@ -28,10 +28,12 @@
 
   <!-- ── Botones flotantes ── -->
   {%- assign _header = sections['header'] -%}
+  {%- assign _float_wa = _header.settings.float_whatsapp | default: '5215536327311' -%}
+  {%- assign _float_ph = _header.settings.float_phone | default: '5536327311' -%}
   <div class="float-btns" aria-label="Contacto rápido">
-    {%- if _header.settings.float_whatsapp != blank -%}
+    {%- if _float_wa != blank -%}
       <a
-        href="https://wa.me/{{ _header.settings.float_whatsapp | remove: '+' | remove: ' ' | remove: '-' }}"
+        href="https://wa.me/{{ _float_wa | remove: '+' | remove: ' ' | remove: '-' }}"
         class="float-btn float-btn--whatsapp"
         target="_blank"
         rel="noopener noreferrer"
@@ -40,9 +42,9 @@
         <svg class="icon" aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
       </a>
     {%- endif -%}
-    {%- if _header.settings.float_phone != blank -%}
+    {%- if _float_ph != blank -%}
       <a
-        href="tel:{{ _header.settings.float_phone | remove: ' ' }}"
+        href="tel:{{ _float_ph | remove: ' ' }}"
         class="float-btn float-btn--phone"
         aria-label="Llamar por teléfono"
       >
