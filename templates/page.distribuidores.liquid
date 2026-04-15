@@ -97,10 +97,7 @@
         <h2 class="dist-form-card__title">Solicita ser distribuidor</h2>
         <p class="dist-form-card__sub">Completa el formulario y un ejecutivo se pondrá en contacto contigo</p>
 
-        {%- comment -%}formulario siempre visible aqui{%- endcomment -%}
-          <form action="/contact#dist-form" method="post" id="dist-form" class="dist-form">
-            <input type="hidden" name="form_type" value="contact">
-            <input type="hidden" name="utf8" value="✓">
+        {%- form 'contact', id: 'dist-form', class: 'dist-form' -%}
             <input type="hidden" name="contact[tags]" value="solicitud-distribuidor">
             <input type="hidden" name="contact[subject]" value="Solicitud de distribuidor">
 
@@ -151,7 +148,7 @@
               Enviar solicitud
               <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-          </form>
+        {%- endform -%}
       </div>
     </div>
 

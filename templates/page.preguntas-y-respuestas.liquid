@@ -114,55 +114,29 @@
         <h2 class="faq-form-card__title">¿No encontraste tu respuesta?</h2>
         <p class="faq-form-card__sub">Envíanos tu pregunta y te respondemos a la brevedad</p>
 
-        {%- comment -%}formulario siempre visible aqui{%- endcomment -%}
-          <form action="/contact#faq-form" method="post" id="faq-form" class="faq-form">
-            <input type="hidden" name="form_type" value="contact">
-            <input type="hidden" name="utf8" value="✓">
+        {%- form 'contact', id: 'faq-form', class: 'faq-form' -%}
             <input type="hidden" name="contact[tags]" value="pregunta-pagina-faq">
 
             <div class="faq-form__field">
               <label for="faq-name" class="faq-form__label">Nombre <span class="faq-form__req">*</span></label>
-              <input
-                type="text"
-                id="faq-name"
-                name="contact[name]"
-                class="faq-form__input"
-                placeholder="Tu nombre"
-                required
-                autocomplete="name"
-              >
+              <input type="text" id="faq-name" name="contact[name]" class="faq-form__input" placeholder="Tu nombre" required autocomplete="name">
             </div>
 
             <div class="faq-form__field">
               <label for="faq-email" class="faq-form__label">Correo electrónico <span class="faq-form__req">*</span></label>
-              <input
-                type="email"
-                id="faq-email"
-                name="contact[email]"
-                class="faq-form__input"
-                placeholder="correo@ejemplo.com"
-                required
-                autocomplete="email"
-              >
+              <input type="email" id="faq-email" name="contact[email]" class="faq-form__input" placeholder="correo@ejemplo.com" required autocomplete="email">
             </div>
 
             <div class="faq-form__field">
               <label for="faq-question" class="faq-form__label">Tu pregunta <span class="faq-form__req">*</span></label>
-              <textarea
-                id="faq-question"
-                name="contact[body]"
-                class="faq-form__textarea"
-                placeholder="Escribe aquí tu pregunta..."
-                rows="5"
-                required
-              ></textarea>
+              <textarea id="faq-question" name="contact[body]" class="faq-form__textarea" placeholder="Escribe aquí tu pregunta..." rows="5" required></textarea>
             </div>
 
             <button type="submit" class="faq-form__btn">
               Enviar pregunta
               <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-          </form>
+        {%- endform -%}
       </div>
     </div>
 
