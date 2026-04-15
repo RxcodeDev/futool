@@ -1,0 +1,164 @@
+<div class="faq-page">
+
+  <div class="faq-page__header">
+    <h1 class="faq-page__title">{{ page.title }}</h1>
+    <p class="faq-page__sub">Encuentra respuestas a las preguntas más frecuentes o envíanos la tuya</p>
+  </div>
+
+  <div class="faq-page__layout">
+
+    <!-- Columna izquierda: FAQs -->
+    <div class="faq-page__left">
+      <h2 class="faq-section-title">Preguntas frecuentes</h2>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿En qué zonas hacen entregas?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Realizamos envíos a toda la República Mexicana a través de paquetería certificada. Los tiempos de entrega varían de 3 a 7 días hábiles dependiendo de la zona.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Cómo puedo rastrear mi pedido?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Una vez enviado tu pedido recibirás un correo con el número de guía y la paquetería asignada. Puedes rastrear tu envío directamente en el sitio de la paquetería.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Qué formas de pago aceptan?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Aceptamos pagos con tarjeta de crédito y débito (Visa, Mastercard, Amex), transferencia bancaria, depósito en OXXO y a través de Mercado Pago.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Ofrecen garantía en sus productos?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Sí, todos nuestros productos cuentan con garantía del fabricante. El periodo varía según la marca y el tipo de producto. Puedes consultar la garantía específica en la ficha de cada artículo.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Puedo hacer devoluciones?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Aceptamos devoluciones dentro de los 30 días naturales posteriores a la recepción del producto, siempre que se encuentre en su empaque original y sin uso. Contáctanos para iniciar el proceso.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Venden refacciones para todas las marcas?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Contamos con refacciones para la mayoría de las marcas que distribuimos. Si no encuentras la pieza que necesitas en nuestra tienda, contáctanos y la buscamos para ti.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Ofrecen servicio técnico o mantenimiento?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Contamos con técnicos certificados en nuestros centros de servicio. Puedes llevar tu equipo directamente o contactarnos para coordinar la revisión.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>¿Hacen factura electrónica?</span>
+            <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-answer">
+            <p>Sí, emitimos facturas electrónicas (CFDI). Para solicitarla, utiliza el enlace de facturación disponible en el encabezado de la tienda o contáctanos con los datos fiscales.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- Columna derecha: Formulario -->
+    <div class="faq-page__right">
+      <div class="faq-form-card">
+        <h2 class="faq-form-card__title">¿No encontraste tu respuesta?</h2>
+        <p class="faq-form-card__sub">Envíanos tu pregunta y te respondemos a la brevedad</p>
+
+        {%- if contact.posted_successfully? -%}
+          <div class="faq-form-success">
+            <svg class="icon" viewBox="0 0 24 24" width="28" height="28"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p>¡Tu pregunta fue enviada! Te responderemos pronto.</p>
+          </div>
+        {%- else -%}
+          <form action="/contact#faq-form" method="post" id="faq-form" class="faq-form">
+            <input type="hidden" name="form_type" value="contact">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="contact[tags]" value="pregunta-pagina-faq">
+
+            <div class="faq-form__field">
+              <label for="faq-name" class="faq-form__label">Nombre <span class="faq-form__req">*</span></label>
+              <input
+                type="text"
+                id="faq-name"
+                name="contact[name]"
+                class="faq-form__input"
+                placeholder="Tu nombre"
+                required
+                autocomplete="name"
+              >
+            </div>
+
+            <div class="faq-form__field">
+              <label for="faq-email" class="faq-form__label">Correo electrónico <span class="faq-form__req">*</span></label>
+              <input
+                type="email"
+                id="faq-email"
+                name="contact[email]"
+                class="faq-form__input"
+                placeholder="correo@ejemplo.com"
+                required
+                autocomplete="email"
+              >
+            </div>
+
+            <div class="faq-form__field">
+              <label for="faq-question" class="faq-form__label">Tu pregunta <span class="faq-form__req">*</span></label>
+              <textarea
+                id="faq-question"
+                name="contact[body]"
+                class="faq-form__textarea"
+                placeholder="Escribe aquí tu pregunta..."
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="faq-form__btn">
+              Enviar pregunta
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
