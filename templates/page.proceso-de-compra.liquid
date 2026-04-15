@@ -1,23 +1,40 @@
-<div class="proceso-page">
+<!-- DESKTOP: imagen completa -->
+<div class="proceso-img-desktop">
+  <img
+    src="{{ 'proceso-compra.jpeg' | asset_url }}"
+    alt="Proceso de Compra"
+  >
+</div>
+
+<!-- MOBILE: diseño de pasos -->
+<div class="proceso-page proceso-mobile-only">
   <h1 class="proceso-title">PROCESO DE COMPRA</h1>
 
-  <div class="proceso-steps">
+  <div class="proceso-steps-mobile">
 
-    <div class="proceso-step">
+    <div class="proceso-step-mobile">
       <div class="proceso-icon-wrap">
-        <img src="{{ 'proceso-compra.jpeg' | asset_url }}" alt="" class="proceso-icon-img proceso-icon-img--1" aria-hidden="true">
+        <svg viewBox="0 0 90 90" fill="none">
+          <rect x="12" y="38" width="56" height="34" rx="3" fill="#4fc3c8"/>
+          <rect x="26" y="52" width="28" height="20" rx="2" fill="#fff" opacity=".9"/>
+          <polygon points="8,40 40,16 72,40" fill="#e8524a"/>
+          <rect x="2" y="38" width="76" height="7" rx="2" fill="#e8524a"/>
+          <rect x="30" y="55" width="20" height="17" rx="2" fill="#3a8fb5"/>
+          <rect x="14" y="46" width="14" height="10" rx="2" fill="#b3eaf2"/>
+          <rect x="52" y="46" width="14" height="10" rx="2" fill="#b3eaf2"/>
+          <!-- base/sombra -->
+          <rect x="10" y="72" width="60" height="6" rx="2" fill="#b0b8c8"/>
+        </svg>
       </div>
-      <h3 class="proceso-step-title">Ingresa a la Tienda</h3>
-      <p class="proceso-step-desc">Ingresa a la tienda con los datos de tu cuenta o crea una cuenta de usuario.</p>
+      <div class="proceso-step-text">
+        <h3 class="proceso-step-title">Ingresa a la Tienda</h3>
+        <p class="proceso-step-desc">Ingresa a la tienda con los datos de tu cuenta o crea una cuenta de usuario.</p>
+      </div>
     </div>
 
-    <div class="proceso-connector" aria-hidden="true">
-      <svg viewBox="0 0 60 20" fill="none"><path d="M0,10 Q30,0 60,10" stroke="#b0b8d1" stroke-width="2" stroke-dasharray="5 4"/></svg>
-    </div>
-
-    <div class="proceso-step">
+    <div class="proceso-step-mobile">
       <div class="proceso-icon-wrap">
-        <svg viewBox="0 0 90 90" fill="none" class="proceso-svg-icon">
+        <svg viewBox="0 0 90 90" fill="none">
           <rect x="16" y="42" width="58" height="40" rx="4" fill="#e8a84a"/>
           <polygon points="16,42 45,28 74,42" fill="#c8842a"/>
           <rect x="16" y="42" width="58" height="9" fill="#c8842a"/>
@@ -27,17 +44,15 @@
           <polyline points="34,30 38,34 46,26" stroke="#6ab04c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <h3 class="proceso-step-title">Realiza tu Pedido</h3>
-      <p class="proceso-step-desc">Elige los productos que deseas adquirir, agrégalos a tu carrito y crea tu pedido de compra.</p>
+      <div class="proceso-step-text">
+        <h3 class="proceso-step-title">Realiza tu Pedido</h3>
+        <p class="proceso-step-desc">Elige los productos que deseas adquirir, agrégalos a tu carrito y crea tu pedido de compra.</p>
+      </div>
     </div>
 
-    <div class="proceso-connector" aria-hidden="true">
-      <svg viewBox="0 0 60 20" fill="none"><path d="M0,10 Q30,20 60,10" stroke="#b0b8d1" stroke-width="2" stroke-dasharray="5 4"/></svg>
-    </div>
-
-    <div class="proceso-step">
+    <div class="proceso-step-mobile">
       <div class="proceso-icon-wrap">
-        <svg viewBox="0 0 90 90" fill="none" class="proceso-svg-icon">
+        <svg viewBox="0 0 90 90" fill="none">
           <rect x="14" y="48" width="58" height="36" rx="4" fill="#e8a84a"/>
           <polygon points="14,48 45,34 76,48" fill="#c8842a" opacity=".8"/>
           <polygon points="14,48 30,40 30,48" fill="#f0c060"/>
@@ -50,17 +65,15 @@
           <polygon points="37,18 43,28 49,18" fill="#6ab04c"/>
         </svg>
       </div>
-      <h3 class="proceso-step-title">Elige Método de Envío</h3>
-      <p class="proceso-step-desc">Elige el método de envío de tu preferencia, se hacen envíos a todo México.</p>
+      <div class="proceso-step-text">
+        <h3 class="proceso-step-title">Elige Método de Envío</h3>
+        <p class="proceso-step-desc">Elige el método de envío de tu preferencia, se hacen envíos a todo México.</p>
+      </div>
     </div>
 
-    <div class="proceso-connector" aria-hidden="true">
-      <svg viewBox="0 0 60 20" fill="none"><path d="M0,10 Q30,0 60,10" stroke="#b0b8d1" stroke-width="2" stroke-dasharray="5 4"/></svg>
-    </div>
-
-    <div class="proceso-step">
+    <div class="proceso-step-mobile">
       <div class="proceso-icon-wrap">
-        <svg viewBox="0 0 90 90" fill="none" class="proceso-svg-icon">
+        <svg viewBox="0 0 90 90" fill="none">
           <rect x="12" y="44" width="52" height="38" rx="4" fill="#e8a84a"/>
           <polygon points="12,44 38,30 64,44" fill="#c8842a"/>
           <rect x="12" y="44" width="52" height="9" fill="#c8842a"/>
@@ -69,8 +82,10 @@
           <polyline points="53,58 60,65 72,50" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <h3 class="proceso-step-title">Sigue tu Paquete</h3>
-      <p class="proceso-step-desc">Te proporcionamos número de guía para el rastreo de tu paquete o puedes contactar con nuestros agentes.</p>
+      <div class="proceso-step-text">
+        <h3 class="proceso-step-title">Sigue tu Paquete</h3>
+        <p class="proceso-step-desc">Te proporcionamos número de guía para el rastreo de tu paquete o puedes contactar con nuestros agentes.</p>
+      </div>
     </div>
 
   </div>

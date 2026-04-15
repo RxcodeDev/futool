@@ -2014,93 +2014,68 @@
 /* ═══════════════════════════════════════════════════════════════
    PROCESO DE COMPRA
    ═══════════════════════════════════════════════════════════════ */
+.proceso-img-desktop {
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+}
+.proceso-img-desktop img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.proceso-mobile-only { display: none; }
+
 .proceso-page {
-    max-width: 1100px;
+    max-width: 480px;
     margin: 0 auto;
-    padding: 3rem 1.5rem 4rem;
-    text-align: center;
+    padding: 2rem 1.25rem 3rem;
 }
 .proceso-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: var(--navy-900);
-    letter-spacing: .08em;
-    margin-bottom: 2.5rem;
+    letter-spacing: .06em;
+    margin-bottom: 1.75rem;
+    text-align: center;
 }
-.proceso-steps {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0;
-}
-.proceso-step {
+.proceso-steps-mobile {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: .75rem;
-    flex: 1;
-    max-width: 200px;
-    padding: 0 .5rem;
+    gap: 0;
 }
-.proceso-icon-wrap {
-    width: 100px;
-    height: 100px;
+.proceso-step-mobile {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid #eee;
 }
-.proceso-svg-icon {
-    width: 100%;
-    height: 100%;
-}
-.proceso-icon-img--1 {
-    display: none; /* la imagen completa no se usa por paso individual */
-}
-.proceso-connector {
+.proceso-step-mobile:last-child { border-bottom: none; }
+.proceso-icon-wrap {
     flex-shrink: 0;
-    width: 48px;
-    margin-top: 38px;
-    opacity: .7;
+    width: 72px;
+    height: 72px;
 }
-.proceso-connector svg { width: 100%; }
+.proceso-icon-wrap svg { width: 100%; height: 100%; }
+.proceso-step-text { flex: 1; }
 .proceso-step-title {
-    font-size: .9rem;
+    font-size: .95rem;
     font-weight: 700;
     color: #3a35a8;
-    margin: 0;
+    margin: 0 0 .3rem;
 }
 .proceso-step-desc {
-    font-size: .78rem;
+    font-size: .82rem;
     color: #555;
     line-height: 1.5;
     margin: 0;
 }
+
 @media (max-width: 700px) {
-    .proceso-steps {
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-    }
-    .proceso-step {
-        flex-direction: row;
-        max-width: 100%;
-        width: 100%;
-        text-align: left;
-        gap: 1rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid #eee;
-    }
-    .proceso-step:last-child { border-bottom: none; }
-    .proceso-icon-wrap {
-        flex-shrink: 0;
-        width: 72px;
-        height: 72px;
-    }
-    .proceso-step > div:last-of-type { flex: 1; }
-    .proceso-connector { display: none; }
-    .proceso-step-title { font-size: 1rem; }
-    .proceso-step-desc { font-size: .85rem; }
+    .proceso-img-desktop { display: none; }
+    .proceso-mobile-only { display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
