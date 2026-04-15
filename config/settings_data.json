@@ -1,3 +1,25 @@
 {
-  "current": {}
+  "current": {
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "phone_1": "55 5567 2138",
+          "phone_2": "55 5535 4854",
+          "whatsapp_1": "55 3124 8376",
+          "whatsapp_2": "55 2786 7639",
+          "facebook_link": "https://www.facebook.com/futool",
+          "instagram_link": "https://www.instagram.com/futool_mexico/",
+          "tiktok_link": "https://www.tiktok.com/@futoolinternaciona"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "float_whatsapp": "525527867639",
+          "float_phone": "5555672138"
+        }
+      }
+    }
+  }
 }
