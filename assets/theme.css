@@ -1082,6 +1082,45 @@
         margin: 0 0.5rem 0.75rem;
     }
 
+    /* ── Carrusel de productos relacionados en móvil: scroll horizontal ── */
+    .product-related {
+        padding: 1.5rem 0;
+    }
+    .product-related__inner {
+        padding: 0 0.75rem;
+    }
+    .product-related__title {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        padding: 0 0.25rem;
+    }
+    .carousel-wrap {
+        align-items: stretch;
+    }
+    .carousel-btn {
+        display: none;
+    }
+    .carousel-wrap .products__carrusel-app {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: visible;
+        grid-template-columns: unset;
+        gap: 0.75rem;
+        padding-inline: 0.25rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+        max-width: 100%;
+    }
+    .carousel-wrap .products__carrusel-app::-webkit-scrollbar { display: none; }
+    .carousel-wrap .products__carrusel-app .product__card-app {
+        flex: 0 0 170px;
+        width: 170px;
+    }
+    .carousel-wrap .products__carrusel-app .img__card-app {
+        height: 130px;
+    }
+
     /* ── Advertising ── */
     .advertising {
         height: 40vw;
