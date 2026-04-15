@@ -63,9 +63,7 @@
         "cat5",
         "cat6"
       ],
-      "settings": {
-        "hero_image": "shopify://shop_images/slider-1-nb-1200x340.webp"
-      }
+      "settings": {}
     },
     "recommended": {
       "type": "recommended-products",
