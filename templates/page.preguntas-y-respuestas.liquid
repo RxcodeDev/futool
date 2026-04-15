@@ -1,3 +1,15 @@
+{%- if contact.posted_successfully? -%}
+<div class="form-confirm">
+  <div class="form-confirm__box">
+    <div class="form-confirm__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    </div>
+    <h1 class="form-confirm__title">¡Pregunta enviada!</h1>
+    <p class="form-confirm__msg">Recibimos tu pregunta y te responderemos al correo que nos proporcionaste a la brevedad posible.</p>
+    <a href="{{ page.url }}" class="form-confirm__btn">Ver más preguntas</a>
+  </div>
+</div>
+{%- else -%}
 <div class="faq-page">
 
   <div class="faq-page__header">
@@ -102,12 +114,7 @@
         <h2 class="faq-form-card__title">¿No encontraste tu respuesta?</h2>
         <p class="faq-form-card__sub">Envíanos tu pregunta y te respondemos a la brevedad</p>
 
-        {%- if contact.posted_successfully? -%}
-          <div class="faq-form-success">
-            <svg class="icon" viewBox="0 0 24 24" width="28" height="28"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p>¡Tu pregunta fue enviada! Te responderemos pronto.</p>
-          </div>
-        {%- else -%}
+        {%- comment -%}formulario siempre visible aqui{%- endcomment -%}
           <form action="/contact#faq-form" method="post" id="faq-form" class="faq-form">
             <input type="hidden" name="form_type" value="contact">
             <input type="hidden" name="utf8" value="✓">
@@ -156,9 +163,9 @@
               <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </form>
-        {%- endif -%}
       </div>
     </div>
 
   </div>
 </div>
+{%- endif -%}

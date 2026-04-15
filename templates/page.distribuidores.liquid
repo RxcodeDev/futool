@@ -1,3 +1,15 @@
+{%- if contact.posted_successfully? -%}
+<div class="form-confirm">
+  <div class="form-confirm__box">
+    <div class="form-confirm__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    </div>
+    <h1 class="form-confirm__title">¡Solicitud enviada!</h1>
+    <p class="form-confirm__msg">Recibimos tu solicitud para ser distribuidor Futool. Un ejecutivo se pondrá en contacto contigo en un plazo de <strong>24 a 48 horas hábiles</strong>.</p>
+    <a href="/" class="form-confirm__btn">Volver al inicio</a>
+  </div>
+</div>
+{%- else -%}
 <div class="dist-page">
 
   <div class="dist-page__header">
@@ -85,13 +97,7 @@
         <h2 class="dist-form-card__title">Solicita ser distribuidor</h2>
         <p class="dist-form-card__sub">Completa el formulario y un ejecutivo se pondrá en contacto contigo</p>
 
-        {%- if contact.posted_successfully? -%}
-          <div class="dist-form-success">
-            <svg class="icon" viewBox="0 0 24 24" width="36" height="36"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p>¡Solicitud enviada con éxito!</p>
-            <span>Nos comunicaremos contigo en un plazo de 24 a 48 horas hábiles.</span>
-          </div>
-        {%- else -%}
+        {%- comment -%}formulario siempre visible aqui{%- endcomment -%}
           <form action="/contact#dist-form" method="post" id="dist-form" class="dist-form">
             <input type="hidden" name="form_type" value="contact">
             <input type="hidden" name="utf8" value="✓">
@@ -146,9 +152,9 @@
               <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </form>
-        {%- endif -%}
       </div>
     </div>
 
   </div>
 </div>
+{%- endif -%}
