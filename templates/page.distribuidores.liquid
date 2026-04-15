@@ -1,0 +1,154 @@
+<div class="dist-page">
+
+  <div class="dist-page__header">
+    <h1 class="dist-page__title">{{ page.title }}</h1>
+    <p class="dist-page__sub">Únete a nuestra red de distribuidores autorizados en toda la República</p>
+  </div>
+
+  <div class="dist-page__layout">
+
+    <!-- Columna izquierda: beneficios -->
+    <div class="dist-page__left">
+
+      <div class="dist-benefits">
+        <h2 class="dist-section-title">¿Por qué ser distribuidor Futool?</h2>
+        <div class="dist-benefit-list">
+
+          <div class="dist-benefit-item">
+            <div class="dist-benefit-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="dist-benefit-title">Precios preferenciales</h3>
+              <p class="dist-benefit-desc">Accede a descuentos exclusivos en toda nuestra línea de productos para maximizar tu margen de ganancia.</p>
+            </div>
+          </div>
+
+          <div class="dist-benefit-item">
+            <div class="dist-benefit-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.5" cy="18.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18.5" cy="18.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <div>
+              <h3 class="dist-benefit-title">Entrega directa</h3>
+              <p class="dist-benefit-desc">Envíos rápidos y seguros a tu almacén con seguimiento en tiempo real de cada pedido.</p>
+            </div>
+          </div>
+
+          <div class="dist-benefit-item">
+            <div class="dist-benefit-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3 class="dist-benefit-title">Soporte dedicado</h3>
+              <p class="dist-benefit-desc">Un ejecutivo de ventas asignado para atender tus pedidos, resolver dudas y apoyarte en tu negocio.</p>
+            </div>
+          </div>
+
+          <div class="dist-benefit-item">
+            <div class="dist-benefit-icon">
+              <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 21h8M12 17v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3 class="dist-benefit-title">Material de marketing</h3>
+              <p class="dist-benefit-desc">Acceso a catálogos, fichas técnicas, imágenes y materiales promocionales en alta resolución.</p>
+            </div>
+          </div>
+
+          <div class="dist-benefit-item">
+            <div class="dist-benefit-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3 class="dist-benefit-title">Marcas certificadas</h3>
+              <p class="dist-benefit-desc">Distribuye las mejores marcas del mercado con respaldo de garantía y servicio técnico autorizado.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dist-requirements">
+        <h2 class="dist-section-title">Requisitos</h2>
+        <ul class="dist-req-list">
+          <li>Contar con un local comercial o punto de venta establecido</li>
+          <li>RFC activo y documentación fiscal en regla</li>
+          <li>Pedido mínimo inicial según categoría de producto</li>
+          <li>Compromiso de no vender por debajo del precio sugerido</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div class="dist-page__right">
+      <div class="dist-form-card">
+        <h2 class="dist-form-card__title">Solicita ser distribuidor</h2>
+        <p class="dist-form-card__sub">Completa el formulario y un ejecutivo se pondrá en contacto contigo</p>
+
+        {%- if contact.posted_successfully? -%}
+          <div class="dist-form-success">
+            <svg class="icon" viewBox="0 0 24 24" width="36" height="36"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p>¡Solicitud enviada con éxito!</p>
+            <span>Nos comunicaremos contigo en un plazo de 24 a 48 horas hábiles.</span>
+          </div>
+        {%- else -%}
+          <form action="/contact#dist-form" method="post" id="dist-form" class="dist-form">
+            <input type="hidden" name="form_type" value="contact">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="contact[tags]" value="solicitud-distribuidor">
+            <input type="hidden" name="contact[subject]" value="Solicitud de distribuidor">
+
+            <div class="dist-form__row">
+              <div class="dist-form__field">
+                <label for="dist-name" class="dist-form__label">Nombre completo <span class="dist-form__req">*</span></label>
+                <input type="text" id="dist-name" name="contact[name]" class="dist-form__input" placeholder="Tu nombre" required autocomplete="name">
+              </div>
+              <div class="dist-form__field">
+                <label for="dist-company" class="dist-form__label">Empresa / Negocio <span class="dist-form__req">*</span></label>
+                <input type="text" id="dist-company" name="contact[company]" class="dist-form__input" placeholder="Nombre de tu empresa" required>
+              </div>
+            </div>
+
+            <div class="dist-form__row">
+              <div class="dist-form__field">
+                <label for="dist-email" class="dist-form__label">Correo electrónico <span class="dist-form__req">*</span></label>
+                <input type="email" id="dist-email" name="contact[email]" class="dist-form__input" placeholder="correo@ejemplo.com" required autocomplete="email">
+              </div>
+              <div class="dist-form__field">
+                <label for="dist-phone" class="dist-form__label">Teléfono <span class="dist-form__req">*</span></label>
+                <input type="tel" id="dist-phone" name="contact[phone]" class="dist-form__input" placeholder="55 1234 5678" required autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="dist-form__field">
+              <label for="dist-state" class="dist-form__label">Estado / Ciudad <span class="dist-form__req">*</span></label>
+              <input type="text" id="dist-state" name="contact[state]" class="dist-form__input" placeholder="Ej. Ciudad de México, Guadalajara..." required>
+            </div>
+
+            <div class="dist-form__field">
+              <label for="dist-category" class="dist-form__label">Categoría de interés</label>
+              <select id="dist-category" name="contact[category]" class="dist-form__select">
+                <option value="">Selecciona una opción</option>
+                <option value="maquinaria">Maquinaria agrícola</option>
+                <option value="refacciones">Refacciones y accesorios</option>
+                <option value="herramienta">Herramienta eléctrica</option>
+                <option value="todo">Todas las categorías</option>
+              </select>
+            </div>
+
+            <div class="dist-form__field">
+              <label for="dist-message" class="dist-form__label">Cuéntanos sobre tu negocio</label>
+              <textarea id="dist-message" name="contact[body]" class="dist-form__textarea" placeholder="Describe brevemente tu negocio, ubicación del local, experiencia en el sector..." rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="dist-form__btn">
+              Enviar solicitud
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
