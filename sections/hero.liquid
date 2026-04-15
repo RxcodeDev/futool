@@ -1,19 +1,56 @@
+{%- assign slide_blocks = section.blocks | where: 'type', 'hero_slide' -%}
+{%- assign category_blocks = section.blocks | where: 'type', 'category_card' -%}
+
 <div class="hero">
-  <div class="banner__hero">
-    {%- if section.settings.hero_image != blank -%}
-      <img
-        src="{{ section.settings.hero_image | image_url: width: 1920 }}"
-        alt="{{ section.settings.hero_image.alt | escape }}"
-        loading="eager"
-        fetchpriority="high"
-      >
+  <div class="hero-slider" id="hero-slider">
+
+    {%- if slide_blocks.size > 0 -%}
+      {%- for block in slide_blocks -%}
+        <div class="hero-slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="hero-slide__link">{%- endif -%}
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1920 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              {%- if forloop.first %}loading="eager" fetchpriority="high"{%- else %}loading="lazy"{%- endif %}
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+        </div>
+      {%- endfor -%}
     {%- else -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      <div class="hero-slide is-active">
+        {%- if section.settings.hero_image != blank -%}
+          <img
+            src="{{ section.settings.hero_image | image_url: width: 1920 }}"
+            alt="{{ section.settings.hero_image.alt | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
     {%- endif -%}
+
+    {%- if slide_blocks.size > 1 -%}
+      <div class="hero-slider__dots" id="hero-dots">
+        {%- for block in slide_blocks -%}
+          <button
+            class="hero-dot{% if forloop.first %} is-active{% endif %}"
+            data-index="{{ forloop.index0 }}"
+            aria-label="Diapositiva {{ forloop.index }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
   </div>
 
   <div class="categories__hero">
-    {%- for block in section.blocks -%}
+    {%- for block in category_blocks -%}
       <a
         class="card__categories"
         href="{{ block.settings.link | default: '#' }}"
@@ -39,6 +76,40 @@
   </div>
 </div>
 
+<script>
+(function () {
+  var slider = document.getElementById('hero-slider');
+  if (!slider) return;
+  var slides = slider.querySelectorAll('.hero-slide');
+  if (slides.length <= 1) return;
+  var dots = slider.querySelectorAll('.hero-dot');
+  var current = 0;
+  var timer;
+
+  function goTo(index) {
+    slides[current].classList.remove('is-active');
+    if (dots[current]) dots[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    if (dots[current]) dots[current].classList.add('is-active');
+  }
+
+  function startTimer() {
+    timer = setInterval(function () { goTo(current + 1); }, 5000);
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      clearInterval(timer);
+      goTo(parseInt(dot.dataset.index, 10));
+      startTimer();
+    });
+  });
+
+  startTimer();
+})();
+</script>
+
 {% schema %}
 {
   "name": "Hero Banner",
@@ -50,6 +121,22 @@
     }
   ],
   "blocks": [
+    {
+      "type": "hero_slide",
+      "name": "Slide del banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen del slide"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace (opcional)"
+        }
+      ]
+    },
     {
       "type": "category_card",
       "name": "Tarjeta de categoría",
@@ -73,7 +160,7 @@
       ]
     }
   ],
-  "max_blocks": 6,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Hero Banner",
