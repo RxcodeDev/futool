@@ -1,64 +1,89 @@
 <div class="brands-page">
-  <div class="brands-header">
-    <h1 class="brands-title">{{ page.title }}</h1>
-    <p class="brands-subtitle">Trabajamos con las mejores marcas del mercado</p>
+
+  <div class="brands-hero">
+    <h1 class="brands-hero__title">Nuestras Marcas</h1>
+    <p class="brands-hero__sub">Distribuimos las marcas líderes en maquinaria y herramienta para el campo y la industria</p>
   </div>
 
   <div class="brands-grid">
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-stihl.png' | asset_url }}" alt="Stihl" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">STIHL</span>
+    <div class="brand-card" style="--brand-color: #FF6A00;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-stihl.png' | asset_url }}" alt="Stihl" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">STIHL</span>
+        <p class="brand-desc">Motosierras, desbrozadoras y productos de potencia para profesionales</p>
+        <span class="brand-tag" style="background:rgba(255,106,0,0.12);color:#FF6A00;">Maquinaria</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-honda.png' | asset_url }}" alt="Honda" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">HONDA</span>
+    <div class="brand-card" style="--brand-color: #CC0000;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-honda.png' | asset_url }}" alt="Honda" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">HONDA</span>
+        <p class="brand-desc">Motores y maquinaria agrícola reconocida mundialmente por su durabilidad</p>
+        <span class="brand-tag" style="background:rgba(204,0,0,0.10);color:#CC0000;">Motores</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-husqvarna.png' | asset_url }}" alt="Husqvarna" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">HUSQVARNA</span>
+    <div class="brand-card" style="--brand-color: #FF7900;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-husqvarna.png' | asset_url }}" alt="Husqvarna" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">HUSQVARNA</span>
+        <p class="brand-desc">Equipos forestales y de jardín de alto rendimiento para uso intensivo</p>
+        <span class="brand-tag" style="background:rgba(255,121,0,0.12);color:#FF7900;">Forestal</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-makita.png' | asset_url }}" alt="Makita" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">MAKITA</span>
+    <div class="brand-card" style="--brand-color: #007A7C;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-makita.png' | asset_url }}" alt="Makita" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">MAKITA</span>
+        <p class="brand-desc">Herramienta eléctrica y a batería para construcción y mantenimiento</p>
+        <span class="brand-tag" style="background:rgba(0,122,124,0.10);color:#007A7C;">Herramienta</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-briggs.png' | asset_url }}" alt="Briggs & Stratton" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">BRIGGS &amp; STRATTON</span>
+    <div class="brand-card" style="--brand-color: #D52B1E;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-briggs.png' | asset_url }}" alt="Briggs & Stratton" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">BRIGGS &amp; STRATTON</span>
+        <p class="brand-desc">Motores de pequeña cilindrada para podadoras y equipos de jardín</p>
+        <span class="brand-tag" style="background:rgba(213,43,30,0.10);color:#D52B1E;">Motores</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-echo.png' | asset_url }}" alt="Echo" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">ECHO</span>
+    <div class="brand-card" style="--brand-color: #F15A22;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-echo.png' | asset_url }}" alt="Echo" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">ECHO</span>
+        <p class="brand-desc">Equipos de jardinería profesional: sopladores, cortadoras y más</p>
+        <span class="brand-tag" style="background:rgba(241,90,34,0.12);color:#F15A22;">Jardinería</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-kawasaki.png' | asset_url }}" alt="Kawasaki" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">KAWASAKI</span>
+    <div class="brand-card" style="--brand-color: #009F3C;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-kawasaki.png' | asset_url }}" alt="Kawasaki" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">KAWASAKI</span>
+        <p class="brand-desc">Motores robustos para maquinaria comercial y aplicaciones exigentes</p>
+        <span class="brand-tag" style="background:rgba(0,159,60,0.10);color:#009F3C;">Motores</span>
       </div>
     </div>
 
-    <div class="brand-card">
-      <div class="brand-logo-wrap">
-        <img src="{{ 'brand-oregon.png' | asset_url }}" alt="Oregon" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span class="brand-fallback">OREGON</span>
+    <div class="brand-card" style="--brand-color: #4A7C59;">
+      <div class="brand-card__accent"></div>
+      <div class="brand-card__body">
+        <img src="{{ 'brand-oregon.png' | asset_url }}" alt="Oregon" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="brand-name" style="display:none;">OREGON</span>
+        <p class="brand-desc">Cadenas, barras y accesorios de corte para motosierra</p>
+        <span class="brand-tag" style="background:rgba(74,124,89,0.12);color:#4A7C59;">Accesorios</span>
       </div>
     </div>
 
