@@ -2256,8 +2256,21 @@
 }
 @media (max-width: 640px) {
     .product-page, .cart-page, .wishlist-page { padding: 1rem 1rem 3rem; }
-    .cart-item { grid-template-columns: 70px 1fr; }
-    .cart-item-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+    .cart-item {
+        grid-template-columns: 80px 1fr;
+        grid-template-areas:
+            "img info"
+            "img price";
+        align-items: start;
+    }
+    .cart-item-img-link { grid-area: img; }
+    .cart-item-img { width: 80px; height: 80px; }
+    .cart-item-info { grid-area: info; }
+    .cart-item-line-price {
+        grid-area: price;
+        text-align: right;
+        margin-top: .25rem;
+    }
     .btn-add-product { min-width: 0; flex: 1; }
     .product-actions-row { gap: 0.5rem; }
 }
