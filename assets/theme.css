@@ -2028,55 +2028,79 @@
     margin-bottom: 2.5rem;
 }
 .proceso-steps {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    align-items: start;
-}
-.proceso-line {
-    position: absolute;
-    top: 52px;
-    left: 6%;
-    width: 88%;
-    height: 80px;
-    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
 }
 .proceso-step {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: .75rem;
+    flex: 1;
+    max-width: 200px;
     padding: 0 .5rem;
-    position: relative;
 }
-.proceso-icon {
-    width: 110px;
-    height: 110px;
-    flex-shrink: 0;
+.proceso-icon-wrap {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.proceso-icon svg {
+.proceso-svg-icon {
     width: 100%;
     height: 100%;
 }
+.proceso-icon-img--1 {
+    display: none; /* la imagen completa no se usa por paso individual */
+}
+.proceso-connector {
+    flex-shrink: 0;
+    width: 48px;
+    margin-top: 38px;
+    opacity: .7;
+}
+.proceso-connector svg { width: 100%; }
 .proceso-step-title {
-    font-size: .95rem;
+    font-size: .9rem;
     font-weight: 700;
     color: #3a35a8;
     margin: 0;
 }
 .proceso-step-desc {
-    font-size: .82rem;
+    font-size: .78rem;
     color: #555;
     line-height: 1.5;
     margin: 0;
 }
 @media (max-width: 700px) {
-    .proceso-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
-    .proceso-line { display: none; }
-}
-@media (max-width: 420px) {
-    .proceso-steps { grid-template-columns: 1fr; }
+    .proceso-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    .proceso-step {
+        flex-direction: row;
+        max-width: 100%;
+        width: 100%;
+        text-align: left;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+    }
+    .proceso-step:last-child { border-bottom: none; }
+    .proceso-icon-wrap {
+        flex-shrink: 0;
+        width: 72px;
+        height: 72px;
+    }
+    .proceso-step > div:last-of-type { flex: 1; }
+    .proceso-connector { display: none; }
+    .proceso-step-title { font-size: 1rem; }
+    .proceso-step-desc { font-size: .85rem; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
