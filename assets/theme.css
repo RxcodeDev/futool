@@ -1104,19 +1104,22 @@
         overflow-x: auto;
         overflow-y: visible;
         grid-template-columns: unset;
-        gap: 0.75rem;
-        padding-inline: 0.25rem;
-        padding-bottom: 0.5rem;
+        gap: 1rem;
+        padding-inline: 1rem;
+        padding-bottom: 0.75rem;
         scrollbar-width: none;
         max-width: 100%;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
     .carousel-wrap .products__carrusel-app::-webkit-scrollbar { display: none; }
     .carousel-wrap .products__carrusel-app .product__card-app {
-        flex: 0 0 170px;
-        width: 170px;
+        flex: 0 0 calc(100% - 2rem);
+        width: calc(100% - 2rem);
+        scroll-snap-align: center;
     }
     .carousel-wrap .products__carrusel-app .img__card-app {
-        height: 130px;
+        height: 200px;
     }
 
     /* ── Advertising ── */
