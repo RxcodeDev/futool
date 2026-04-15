@@ -1097,9 +1097,7 @@
     .carousel-wrap {
         align-items: stretch;
     }
-    .carousel-btn {
-        display: none;
-    }
+    .carousel-btn { display: none !important; }
     .carousel-wrap .products__carrusel-app {
         display: flex;
         flex-direction: row;

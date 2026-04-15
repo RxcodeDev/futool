@@ -321,6 +321,7 @@
         return data;
       });
     })
+    .then(function () {
       addBtn.disabled = false;
       addBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg> ¡Agregado!';
       setTimeout(function () {
