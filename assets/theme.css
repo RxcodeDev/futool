@@ -2012,6 +2012,74 @@
 .wishlist-loading { color: var(--gray-500); padding: 2rem; }
 
 /* ═══════════════════════════════════════════════════════════════
+   PROCESO DE COMPRA
+   ═══════════════════════════════════════════════════════════════ */
+.proceso-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    text-align: center;
+}
+.proceso-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy-900);
+    letter-spacing: .08em;
+    margin-bottom: 2.5rem;
+}
+.proceso-steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    align-items: start;
+}
+.proceso-line {
+    position: absolute;
+    top: 52px;
+    left: 6%;
+    width: 88%;
+    height: 80px;
+    pointer-events: none;
+}
+.proceso-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    padding: 0 .5rem;
+    position: relative;
+}
+.proceso-icon {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+}
+.proceso-icon svg {
+    width: 100%;
+    height: 100%;
+}
+.proceso-step-title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: #3a35a8;
+    margin: 0;
+}
+.proceso-step-desc {
+    font-size: .82rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
+@media (max-width: 700px) {
+    .proceso-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
+    .proceso-line { display: none; }
+}
+@media (max-width: 420px) {
+    .proceso-steps { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — PRODUCT & CART
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 860px) {

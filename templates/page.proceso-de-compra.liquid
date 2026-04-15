@@ -1,9 +1,105 @@
-<div class="page-content">
-  <div class="page-inner">
-    <img
-      src="{{ 'proceso-de-compra.png' | asset_url }}"
-      alt="Proceso de Compra"
-      style="width:100%; max-width:960px; display:block; margin:0 auto;"
-    >
+<div class="proceso-page">
+
+  <h1 class="proceso-title">PROCESO DE COMPRA</h1>
+
+  <div class="proceso-steps">
+
+    <!-- línea de puntos SVG entre pasos -->
+    <svg class="proceso-line" viewBox="0 0 900 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M112,20 C200,20 180,65 337,50 C450,38 430,65 562,50 C680,38 660,65 788,50"
+            stroke="#b0b8d1" stroke-width="2.5" stroke-dasharray="8 7" fill="none"/>
+      <circle cx="112" cy="20" r="6" fill="#5b4fcf"/>
+      <circle cx="788" cy="50" r="6" fill="#b0b8d1"/>
+    </svg>
+
+    <div class="proceso-step">
+      <div class="proceso-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- tienda -->
+          <rect x="12" y="38" width="56" height="34" rx="3" fill="#4fc3c8"/>
+          <rect x="26" y="52" width="28" height="20" rx="2" fill="#fff" opacity=".9"/>
+          <polygon points="8,40 40,16 72,40" fill="#e8524a"/>
+          <rect x="2" y="38" width="76" height="7" rx="2" fill="#e8524a"/>
+          <!-- rayas toldo -->
+          <line x1="14" y1="38" x2="20" y2="24" stroke="#fff" stroke-width="3" opacity=".5"/>
+          <line x1="30" y1="38" x2="34" y2="22" stroke="#fff" stroke-width="3" opacity=".5"/>
+          <line x1="46" y1="38" x2="46" y2="22" stroke="#fff" stroke-width="3" opacity=".5"/>
+          <line x1="62" y1="38" x2="58" y2="24" stroke="#fff" stroke-width="3" opacity=".5"/>
+          <!-- puerta -->
+          <rect x="30" y="55" width="20" height="17" rx="2" fill="#3a8fb5"/>
+          <!-- ventana -->
+          <rect x="14" y="46" width="14" height="10" rx="2" fill="#b3eaf2"/>
+          <rect x="52" y="46" width="14" height="10" rx="2" fill="#b3eaf2"/>
+        </svg>
+      </div>
+      <h3 class="proceso-step-title">Ingresa a la Tienda</h3>
+      <p class="proceso-step-desc">Ingresa a la tienda con los datos de tu cuenta o crea una cuenta de usuario.</p>
+    </div>
+
+    <div class="proceso-step">
+      <div class="proceso-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- caja -->
+          <rect x="14" y="38" width="52" height="36" rx="3" fill="#e8a84a"/>
+          <polygon points="14,38 40,26 66,38" fill="#c8842a"/>
+          <rect x="14" y="38" width="52" height="8" fill="#c8842a"/>
+          <!-- lista en clipboard -->
+          <rect x="28" y="8" width="24" height="30" rx="3" fill="#f5f0e8"/>
+          <rect x="34" y="5" width="12" height="7" rx="2" fill="#c8a06a"/>
+          <!-- checks -->
+          <polyline points="31,18 34,21 40,15" stroke="#6ab04c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="31,24 34,27 40,21" stroke="#6ab04c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="31" y1="30" x2="46" y2="30" stroke="#ccc" stroke-width="2"/>
+          <!-- flechas caja -->
+          <polyline points="26,52 40,46 54,52" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+          <polyline points="26,60 40,54 54,60" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+        </svg>
+      </div>
+      <h3 class="proceso-step-title">Realiza tu Pedido</h3>
+      <p class="proceso-step-desc">Elige los productos que deseas adquirir, agrégalos a tu carrito y crea tu pedido de compra.</p>
+    </div>
+
+    <div class="proceso-step">
+      <div class="proceso-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- caja abierta -->
+          <rect x="14" y="42" width="52" height="32" rx="3" fill="#e8a84a"/>
+          <polygon points="14,42 40,30 66,42" fill="#c8842a" opacity=".7"/>
+          <!-- tapa izq -->
+          <polygon points="14,42 28,36 28,42" fill="#f0c060"/>
+          <!-- tapa der -->
+          <polygon points="66,42 52,36 52,42" fill="#f0c060"/>
+          <!-- documento saliendo -->
+          <rect x="27" y="18" width="26" height="34" rx="2" fill="#dce8f0"/>
+          <line x1="33" y1="26" x2="47" y2="26" stroke="#a0b8cc" stroke-width="2"/>
+          <line x1="33" y1="31" x2="47" y2="31" stroke="#a0b8cc" stroke-width="2"/>
+          <line x1="33" y1="36" x2="43" y2="36" stroke="#a0b8cc" stroke-width="2"/>
+          <!-- flecha verde bajando -->
+          <polyline points="40,10 40,18" stroke="#6ab04c" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="34,16 40,24 46,16" fill="#6ab04c"/>
+        </svg>
+      </div>
+      <h3 class="proceso-step-title">Elige Método de Envío</h3>
+      <p class="proceso-step-desc">Elige el método de envío de tu preferencia, se hacen envíos a todo México.</p>
+    </div>
+
+    <div class="proceso-step">
+      <div class="proceso-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- caja -->
+          <rect x="10" y="38" width="52" height="34" rx="3" fill="#e8a84a"/>
+          <polygon points="10,38 36,26 62,38" fill="#c8842a"/>
+          <rect x="10" y="38" width="52" height="8" fill="#c8842a"/>
+          <!-- sello cinta -->
+          <rect x="30" y="26" width="12" height="22" fill="#f0c060"/>
+          <!-- círculo check azul -->
+          <circle cx="56" cy="52" r="16" fill="#3ab5d4"/>
+          <polyline points="48,52 54,58 64,46" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="proceso-step-title">Sigue tu Paquete</h3>
+      <p class="proceso-step-desc">Te proporcionamos número de guía para el rastreo de tu paquete o puedes contactar con nuestros agentes.</p>
+    </div>
+
   </div>
 </div>
