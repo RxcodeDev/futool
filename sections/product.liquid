@@ -42,6 +42,22 @@
 
     <h1 class="product-title">{{ product.title }}</h1>
 
+    {%- if current_variant.sku != blank -%}
+      <p class="product-sku">SKU: {{ current_variant.sku }}</p>
+    {%- endif -%}
+
+    {%- if product.metafields.reviews.rating.value != blank -%}
+      <div class="product-rating">
+        <span class="product-rating__number">{{ product.metafields.reviews.rating.value }}</span>
+        <span class="product-rating__stars">
+          {%- assign rating_value = product.metafields.reviews.rating.value | plus: 0 -%}
+          {%- for i in (1..5) -%}
+            {%- if i <= rating_value -%}★{%- else -%}☆{%- endif -%}
+          {%- endfor -%}
+        </span>
+      </div>
+    {%- endif -%}
+
     <div class="product-price-wrap" id="product-price-wrap">
       {%- if current_variant.compare_at_price > current_variant.price -%}
         {%- assign disc_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price | round -%}
@@ -74,12 +90,7 @@
 
     <form id="product-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
       <input type="hidden" name="id" id="product-variant-id" value="{{ current_variant.id }}">
-      <div class="product-actions-row">
-        <div class="qty-control">
-          <button type="button" class="qty-btn" id="qty-minus" aria-label="Quitar uno">−</button>
-          <input type="number" name="quantity" id="qty-input" value="1" min="1" class="qty-input" aria-label="Cantidad">
-          <button type="button" class="qty-btn" id="qty-plus" aria-label="Agregar uno">+</button>
-        </div>
+      <div class="product-buttons-row">
         <button
           type="submit"
           class="btn-add-product"
@@ -89,14 +100,23 @@
           <svg class="icon" aria-hidden="true"><use href="#icon-cart3"></use></svg>
           {%- if current_variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
         </button>
+        <a href="/checkout" class="btn-buy-now" id="buy-now-btn">Comprar ahora</a>
+      </div>
+      <div class="product-secondary-actions">
         <button type="button" class="btn-wishlist-product" id="wishlist-product-btn" data-product-handle="{{ product.handle }}" aria-label="Agregar a favoritos">
           <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
+        </button>
+        <button type="button" class="btn-share-product" id="share-product-btn" aria-label="Compartir">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         </button>
       </div>
     </form>
 
     {%- if product.description != blank -%}
-      <div class="product-description">{{ product.description }}</div>
+      <div class="product-description-box">
+        <h3 class="product-description-box__title">Acerca de este artículo</h3>
+        <div class="product-description-box__content">{{ product.description }}</div>
+      </div>
     {%- endif -%}
 
   </div>
@@ -163,7 +183,7 @@
 {%- if _related_col != blank -%}
   <section class="product-related">
     <div class="product-related__inner">
-      <h2 class="product-related__title">PRODUCTOS RELACIONADOS</h2>
+      <h2 class="product-related__title">PRODUCTOS RECOMENDADOS</h2>
       <div class="carousel-wrap">
         <button class="carousel-btn carousel-btn--prev" id="related-prev" aria-label="Anterior">&#8249;</button>
         <div class="products__carrusel-app" id="related-carousel">
@@ -256,14 +276,30 @@
   });
 
   /* ── Quantity ── */
-  var qtyInput = document.getElementById('qty-input');
-  document.getElementById('qty-minus').addEventListener('click', function () {
-    var v = parseInt(qtyInput.value, 10);
-    if (v > 1) qtyInput.value = v - 1;
-  });
-  document.getElementById('qty-plus').addEventListener('click', function () {
-    qtyInput.value = parseInt(qtyInput.value, 10) + 1;
-  });
+  var qtyInput = { value: '1' };
+
+  /* ── Buy Now ── */
+  var buyNowBtn = document.getElementById('buy-now-btn');
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var variantId = document.getElementById('product-variant-id').value;
+      window.location.href = '/cart/' + variantId + ':1';
+    });
+  }
+
+  /* ── Share ── */
+  var shareBtn = document.getElementById('share-product-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function () {
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Enlace copiado');
+      }
+    });
+  }
 
   /* ── AJAX Add to Cart ── */
   document.getElementById('product-form').addEventListener('submit', function (e) {
