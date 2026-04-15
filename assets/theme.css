@@ -2522,54 +2522,35 @@ body.drawer-open {
 .brands-page {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 2rem 4rem;
-    min-height: calc(100dvh - 12rem);
+    padding: 2.5rem 2rem 3rem;
+    min-height: calc(100dvh - var(--header-h, 130px));
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
-.brands-hero {
-    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-600) 100%);
-    padding: 3.5rem 2rem;
+.brands-page__header {
     text-align: center;
-    margin: 0 -2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
 }
-.brands-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.brands-hero__title {
-    font-size: 2.2rem;
+.brands-page__title {
+    font-size: 1.9rem;
     font-weight: 800;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-    position: relative;
+    color: var(--navy-900);
+    display: inline-block;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--green-500);
+    margin-bottom: 0.6rem;
 }
-.brands-hero__title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--green-500);
-    margin: 0.75rem auto 0;
-    border-radius: 2px;
-}
-.brands-hero__sub {
+.brands-page__sub {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.7);
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.6;
-    position: relative;
+    color: var(--gray-500);
+    margin: 0;
 }
 .brands-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
     flex: 1;
+    align-content: start;
 }
 .brand-card {
     border-radius: 12px;
@@ -2597,6 +2578,12 @@ body.drawer-open {
     gap: 0.6rem;
     flex: 1;
 }
+.brand-logo-box {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
 .brand-logo {
     max-width: 130px;
     max-height: 60px;
@@ -2604,7 +2591,6 @@ body.drawer-open {
     height: auto;
     object-fit: contain;
     display: block;
-    margin-bottom: 0.25rem;
 }
 .brand-name {
     font-size: 1.2rem;
@@ -2612,6 +2598,8 @@ body.drawer-open {
     color: var(--navy-900);
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    display: none;
+    align-items: center;
 }
 .brand-desc {
     font-size: 0.82rem;
@@ -2635,9 +2623,8 @@ body.drawer-open {
     .brands-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 640px) {
-    .brands-page { padding: 0 1rem 3rem; min-height: calc(100dvh - 10rem); }
-    .brands-hero { margin: 0 -1rem 2rem; padding: 2.5rem 1rem; }
-    .brands-hero__title { font-size: 1.6rem; }
+    .brands-page { padding: 1.5rem 1rem 3rem; }
     .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .brand-card__body { padding: 1.25rem 1rem 1rem; }
+    .brands-page__title { font-size: 1.4rem; }
 }
