@@ -748,6 +748,10 @@
     border-right: 2px solid var(--navy-500);
 }
 
+.txt-benefits {
+    flex: 1;
+}
+
 .item__benefits:last-child {
     border-right: none;
 }
