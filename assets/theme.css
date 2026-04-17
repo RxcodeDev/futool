@@ -2,17 +2,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.65;
-    transition: opacity 0.18s, transform 0.18s;
+    color: #fff;
+    transition: color 0.18s, transform 0.18s;
 }
 .icon-action:hover,
 .icon-action:focus,
 .icon-action:active {
-    opacity: 1;
-    transform: scale(1.15);
+    color: var(--green-500);
+    transform: scale(1.1);
 }
 .icon-action .icon {
-    fill: #fff;
+    fill: currentColor;
 }
 *{
     margin: 0;
