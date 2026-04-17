@@ -76,10 +76,10 @@
         <li class="has-dropdown">
           <a href="{{ nav_maquinaria_url }}">MAQUINARIAS</a>
           <ul class="dropdown__nav">
-            {%- for type in shop.types -%}
-              {%- assign type_lower = type | downcase -%}
-              {%- unless type_lower contains 'refaccion' -%}
-                <li><a href="/collections/all?filter.p.product_type={{ type | url_encode }}">{{ type }}</a></li>
+            {%- for col in collections -%}
+              {%- assign col_title_lower = col.title | downcase -%}
+              {%- unless col_title_lower contains 'refaccion' -%}
+                <li><a href="{{ col.url }}">{{ col.title }}</a></li>
               {%- endunless -%}
             {%- endfor -%}
           </ul>
@@ -87,10 +87,10 @@
         <li class="has-dropdown">
           <a href="{{ nav_refacciones_url }}">REFACCIONES</a>
           <ul class="dropdown__nav">
-            {%- for type in shop.types -%}
-              {%- assign type_lower = type | downcase -%}
-              {%- if type_lower contains 'refaccion' -%}
-                <li><a href="/collections/all?filter.p.product_type={{ type | url_encode }}">{{ type }}</a></li>
+            {%- for col in collections -%}
+              {%- assign col_title_lower = col.title | downcase -%}
+              {%- if col_title_lower contains 'refaccion' -%}
+                <li><a href="{{ col.url }}">{{ col.title }}</a></li>
               {%- endif -%}
             {%- endfor -%}
           </ul>
@@ -109,10 +109,10 @@
       <li class="mobile-nav__item has-children">
         <a href="{{ nav_maquinaria_url }}">Maquinarias</a>
         <ul class="mobile-nav__sub">
-          {%- for type in shop.types -%}
-            {%- assign type_lower = type | downcase -%}
-            {%- unless type_lower contains 'refaccion' -%}
-              <li><a href="/collections/all?filter.p.product_type={{ type | url_encode }}">{{ type }}</a></li>
+          {%- for col in collections -%}
+            {%- assign col_title_lower = col.title | downcase -%}
+            {%- unless col_title_lower contains 'refaccion' -%}
+              <li><a href="{{ col.url }}">{{ col.title }}</a></li>
             {%- endunless -%}
           {%- endfor -%}
         </ul>
@@ -120,10 +120,10 @@
       <li class="mobile-nav__item has-children">
         <a href="{{ nav_refacciones_url }}">Refacciones</a>
         <ul class="mobile-nav__sub">
-          {%- for type in shop.types -%}
-            {%- assign type_lower = type | downcase -%}
-            {%- if type_lower contains 'refaccion' -%}
-              <li><a href="/collections/all?filter.p.product_type={{ type | url_encode }}">{{ type }}</a></li>
+          {%- for col in collections -%}
+            {%- assign col_title_lower = col.title | downcase -%}
+            {%- if col_title_lower contains 'refaccion' -%}
+              <li><a href="{{ col.url }}">{{ col.title }}</a></li>
             {%- endif -%}
           {%- endfor -%}
         </ul>
