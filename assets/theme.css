@@ -183,7 +183,7 @@
 .hero-prev,
 .hero-next {
     position: absolute;
-    top: calc(50% - 18vh - 1rem);
+    top: 50%;
     transform: translateY(-50%);
     z-index: 3;
     background: rgba(255,255,255,0.18);
@@ -433,7 +433,7 @@
 /* ── Categories Hero ── */
 .categories__hero {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     gap: 0;
     padding: 0 21rem;
