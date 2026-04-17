@@ -481,7 +481,7 @@
 }
 
 .card__categories {
-    flex: 1 1 0;
+    flex: 0 0 calc((100% - 3.5rem) / 6);
     display: flex;
     flex-direction: column;
     height: 36vh;
@@ -524,12 +524,21 @@
 }
 
 /* Category header colors */
-.card__categories:nth-child(1) .header__card-categories { background-color: var(--cat-desbrozadora); }
-.card__categories:nth-child(2) .header__card-categories { background-color: var(--cat-refacciones-generales); }
-.card__categories:nth-child(3) .header__card-categories { background-color: var(--cat-podadora); }
-.card__categories:nth-child(4) .header__card-categories { background-color: var(--cat-motosierra); }
-.card__categories:nth-child(5) .header__card-categories { background-color: var(--cat-aspersor); }
-.card__categories:nth-child(6) .header__card-categories { background-color: var(--cat-motobomba); }
+.card__categories:nth-child(1)  .header__card-categories { background-color: var(--cat-desbrozadora); }
+.card__categories:nth-child(2)  .header__card-categories { background-color: var(--cat-refacciones-generales); }
+.card__categories:nth-child(3)  .header__card-categories { background-color: var(--cat-podadora); }
+.card__categories:nth-child(4)  .header__card-categories { background-color: var(--cat-motosierra); }
+.card__categories:nth-child(5)  .header__card-categories { background-color: var(--cat-aspersor); }
+.card__categories:nth-child(6)  .header__card-categories { background-color: var(--cat-motobomba); }
+.card__categories:nth-child(7)  .header__card-categories { background-color: var(--cat-compresor); }
+.card__categories:nth-child(8)  .header__card-categories { background-color: var(--cat-generador); }
+.card__categories:nth-child(9)  .header__card-categories { background-color: var(--cat-hidrolavadora); }
+.card__categories:nth-child(10) .header__card-categories { background-color: var(--cat-mototaladro); }
+.card__categories:nth-child(11) .header__card-categories { background-color: var(--cat-motocultor); }
+.card__categories:nth-child(12) .header__card-categories { background-color: var(--cat-maquinaria); }
+.card__categories:nth-child(13) .header__card-categories { background-color: var(--cat-parihuela); }
+.card__categories:nth-child(14) .header__card-categories { background-color: var(--cat-sopladora); }
+.card__categories:nth-child(15) .header__card-categories { background-color: var(--cat-triturador); }
 
 /* ── Product Carousel & Card ── */
 .recommended,
