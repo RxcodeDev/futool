@@ -13,6 +13,8 @@
 .icon-action .icon {
     fill: currentColor;
     transition: color 0.18s;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 .icon-action:hover .icon-action-heart,
 .icon-action:focus .icon-action-heart,
