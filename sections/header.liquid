@@ -82,15 +82,8 @@
         <li class="has-dropdown">
           <a href="{{ nav_maquinaria_url }}">MAQUINARIAS</a>
           <ul class="dropdown__nav">
-            {%- assign seen_maq_cats = "" -%}
-            {%- for product in nav_maquinaria_col.products limit: 250 -%}
-              {%- assign cat_name = product.category.name -%}
-              {%- if cat_name != blank -%}
-                {%- unless seen_maq_cats contains cat_name -%}
-                  <li><a href="{{ nav_maquinaria_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                  {%- assign seen_maq_cats = seen_maq_cats | append: "||" | append: cat_name -%}
-                {%- endunless -%}
-              {%- endif -%}
+            {%- for tag in nav_maquinaria_col.all_tags -%}
+              <li><a href="{{ nav_maquinaria_col.url }}/{{ tag | handle }}">{{ tag }}</a></li>
             {%- endfor -%}
           </ul>
         </li>
@@ -101,14 +94,11 @@
             {%- assign ref_col_handles = nav_refacciones_cols | split: "||" -%}
             {%- for ref_handle in ref_col_handles -%}
               {%- assign ref_col = collections[ref_handle] -%}
-              {%- for product in ref_col.products limit: 250 -%}
-                {%- assign cat_name = product.category.name -%}
-                {%- if cat_name != blank -%}
-                  {%- unless seen_ref_cats contains cat_name -%}
-                    <li><a href="/collections/{{ ref_handle }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                    {%- assign seen_ref_cats = seen_ref_cats | append: "||" | append: cat_name -%}
-                  {%- endunless -%}
-                {%- endif -%}
+              {%- for tag in ref_col.all_tags -%}
+                {%- unless seen_ref_cats contains tag -%}
+                  <li><a href="/collections/{{ ref_handle }}/{{ tag | handle }}">{{ tag }}</a></li>
+                  {%- assign seen_ref_cats = seen_ref_cats | append: "||" | append: tag -%}
+                {%- endunless -%}
               {%- endfor -%}
             {%- endfor -%}
           </ul>
@@ -127,15 +117,8 @@
       <li class="mobile-nav__item has-children">
         <a href="{{ nav_maquinaria_url }}">Maquinarias</a>
         <ul class="mobile-nav__sub">
-          {%- assign seen_maq_cats_m = "" -%}
-          {%- for product in nav_maquinaria_col.products limit: 250 -%}
-            {%- assign cat_name = product.category.name -%}
-            {%- if cat_name != blank -%}
-              {%- unless seen_maq_cats_m contains cat_name -%}
-                <li><a href="{{ nav_maquinaria_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                {%- assign seen_maq_cats_m = seen_maq_cats_m | append: "||" | append: cat_name -%}
-              {%- endunless -%}
-            {%- endif -%}
+          {%- for tag in nav_maquinaria_col.all_tags -%}
+            <li><a href="{{ nav_maquinaria_col.url }}/{{ tag | handle }}">{{ tag }}</a></li>
           {%- endfor -%}
         </ul>
       </li>
@@ -146,14 +129,11 @@
           {%- assign ref_col_handles_m = nav_refacciones_cols | split: "||" -%}
           {%- for ref_handle in ref_col_handles_m -%}
             {%- assign ref_col = collections[ref_handle] -%}
-            {%- for product in ref_col.products limit: 250 -%}
-              {%- assign cat_name = product.category.name -%}
-              {%- if cat_name != blank -%}
-                {%- unless seen_ref_cats_m contains cat_name -%}
-                  <li><a href="/collections/{{ ref_handle }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                  {%- assign seen_ref_cats_m = seen_ref_cats_m | append: "||" | append: cat_name -%}
-                {%- endunless -%}
-              {%- endif -%}
+            {%- for tag in ref_col.all_tags -%}
+              {%- unless seen_ref_cats_m contains tag -%}
+                <li><a href="/collections/{{ ref_handle }}/{{ tag | handle }}">{{ tag }}</a></li>
+                {%- assign seen_ref_cats_m = seen_ref_cats_m | append: "||" | append: tag -%}
+              {%- endunless -%}
             {%- endfor -%}
           {%- endfor -%}
         </ul>
