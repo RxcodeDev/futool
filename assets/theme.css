@@ -3126,6 +3126,7 @@ body.drawer-open {
     width: 100%;
     margin-top: auto;
     padding-top: 0.75rem;
+    padding-bottom: 1.5rem;
 }
 .brand-logo {
     width: auto;
