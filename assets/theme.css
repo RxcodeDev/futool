@@ -709,12 +709,14 @@
 }
 
 .advertising{
+    height: 45vh;
     overflow: hidden;
 }
 
 .advertising__img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
