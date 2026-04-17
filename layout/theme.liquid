@@ -11,6 +11,7 @@
     {%- endif -%}
   </title>
   <meta name="description" content="{{ page_description | escape }}">
+  <link rel="icon" type="image/png" href="{{ 'futool-circulo-azul.png' | asset_url }}">
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 </head>
