@@ -1624,8 +1624,8 @@
 }
 #cart-count-badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -10px;
+    right: -14px;
     background: var(--green-600);
     color: var(--white);
     font-size: 0.65rem;
