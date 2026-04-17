@@ -9,14 +9,16 @@
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
-{%- assign nav_refacciones_url = '/collections' -%}
-{%- assign nav_refacciones_col = blank -%}
+{%- assign nav_refacciones_url = '/collections/all' -%}
+{%- assign nav_refacciones_cols = "" -%}
+{%- comment -%} Usamos un array de handles separados por || {%- endcomment -%}
 {%- for _col in collections -%}
   {%- assign _col_lower = _col.title | downcase -%}
   {%- if _col_lower contains 'refaccion' -%}
-    {%- assign nav_refacciones_url = _col.url -%}
-    {%- assign nav_refacciones_col = _col -%}
-    {%- break -%}
+    {%- if nav_refacciones_cols == "" -%}
+      {%- assign nav_refacciones_url = _col.url -%}
+    {%- endif -%}
+    {%- assign nav_refacciones_cols = nav_refacciones_cols | append: _col.handle | append: "||" -%}
   {%- endif -%}
 {%- endfor -%}
 
@@ -96,14 +98,18 @@
           <a href="{{ nav_refacciones_url }}">REFACCIONES</a>
           <ul class="dropdown__nav">
             {%- assign seen_ref_cats = "" -%}
-            {%- for product in nav_refacciones_col.products limit: 250 -%}
-              {%- assign cat_name = product.category.name -%}
-              {%- if cat_name != blank -%}
-                {%- unless seen_ref_cats contains cat_name -%}
-                  <li><a href="{{ nav_refacciones_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                  {%- assign seen_ref_cats = seen_ref_cats | append: "||" | append: cat_name -%}
-                {%- endunless -%}
-              {%- endif -%}
+            {%- assign ref_col_handles = nav_refacciones_cols | split: "||" -%}
+            {%- for ref_handle in ref_col_handles -%}
+              {%- assign ref_col = collections[ref_handle] -%}
+              {%- for product in ref_col.products limit: 250 -%}
+                {%- assign cat_name = product.category.name -%}
+                {%- if cat_name != blank -%}
+                  {%- unless seen_ref_cats contains cat_name -%}
+                    <li><a href="/collections/{{ ref_handle }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
+                    {%- assign seen_ref_cats = seen_ref_cats | append: "||" | append: cat_name -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
             {%- endfor -%}
           </ul>
         </li>
@@ -137,14 +143,18 @@
         <a href="{{ nav_refacciones_url }}">Refacciones</a>
         <ul class="mobile-nav__sub">
           {%- assign seen_ref_cats_m = "" -%}
-          {%- for product in nav_refacciones_col.products limit: 250 -%}
-            {%- assign cat_name = product.category.name -%}
-            {%- if cat_name != blank -%}
-              {%- unless seen_ref_cats_m contains cat_name -%}
-                <li><a href="{{ nav_refacciones_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
-                {%- assign seen_ref_cats_m = seen_ref_cats_m | append: "||" | append: cat_name -%}
-              {%- endunless -%}
-            {%- endif -%}
+          {%- assign ref_col_handles_m = nav_refacciones_cols | split: "||" -%}
+          {%- for ref_handle in ref_col_handles_m -%}
+            {%- assign ref_col = collections[ref_handle] -%}
+            {%- for product in ref_col.products limit: 250 -%}
+              {%- assign cat_name = product.category.name -%}
+              {%- if cat_name != blank -%}
+                {%- unless seen_ref_cats_m contains cat_name -%}
+                  <li><a href="/collections/{{ ref_handle }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
+                  {%- assign seen_ref_cats_m = seen_ref_cats_m | append: "||" | append: cat_name -%}
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
           {%- endfor -%}
         </ul>
       </li>
