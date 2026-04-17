@@ -196,7 +196,7 @@
   startTimer();
 })();
 
-// ── Mobile: ciclo infinito de categorías (fade completo del grid) ──
+// ── Mobile: ciclo infinito de categorías (fade escalonado) ──
 (function () {
   if (window.innerWidth > 768) return;
   var track = document.getElementById('cat-track');
@@ -213,32 +213,35 @@
 
   // Estado inicial: mostrar primeras 6, ocultar el resto
   cards.forEach(function (c, i) {
-    c.style.transition = 'opacity 0.5s ease';
+    c.style.transition = 'opacity 0.4s ease';
     if (i >= 6) c.classList.add('cat-hidden');
   });
 
   var offset = 0;
 
   setInterval(function () {
-    // Fade out las 6 visibles
-    for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].style.opacity = '0';
+    var visible = [];
+    for (var i = 0; i < 6; i++) visible.push(cards[(offset + i) % cards.length]);
+
+    // Fade out escalonado (80ms entre cada carta)
+    visible.forEach(function (c, i) {
+      setTimeout(function () { c.style.opacity = '0'; }, i * 80);
+    });
 
     setTimeout(function () {
-      // Ocultar visibles, mostrar las siguientes 6
-      for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].classList.add('cat-hidden');
+      // Ocultar actuales y preparar las siguientes 6
+      visible.forEach(function (c) { c.classList.add('cat-hidden'); });
       offset = (offset + 3) % cards.length;
-      for (var i = 0; i < 6; i++) {
-        var c = cards[(offset + i) % cards.length];
-        c.classList.remove('cat-hidden');
-        c.style.opacity = '0';
-      }
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].style.opacity = '1';
-        });
+      var next = [];
+      for (var i = 0; i < 6; i++) next.push(cards[(offset + i) % cards.length]);
+      next.forEach(function (c) { c.classList.remove('cat-hidden'); c.style.opacity = '0'; });
+
+      // Fade in escalonado (100ms entre cada carta)
+      next.forEach(function (c, i) {
+        setTimeout(function () { c.style.opacity = '1'; }, 60 + i * 100);
       });
-    }, 500);
-  }, 4000);
+    }, 6 * 80 + 400);
+  }, 5000);
 })();
 
 // ── Category carousel buttons ──
