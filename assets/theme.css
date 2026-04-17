@@ -488,6 +488,7 @@
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease;
+    text-decoration: none;
 }
 
 .card__categories:hover {
