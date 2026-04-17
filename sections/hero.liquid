@@ -1,51 +1,50 @@
-{%- assign slide_blocks = section.blocks | where: 'type', 'hero_slide' -%}
 {%- assign category_blocks = section.blocks | where: 'type', 'category_card' -%}
+
+{%- comment -%} Slides: slug|has_webp|label {%- endcomment -%}
+{%- assign slides_raw = 'desbrozadora|1|Desbrozadoras,podadora|0|Podadoras,motosierra|1|Motosierras,aspersor|1|Aspersores,motobomba|1|Motobombas,compresor|1|Compresores,generador|1|Generadores,hidrolavadora|1|Hidrolavadoras,motaladros|1|Motaladros,motocultor|1|Motocultores,motor|1|Motores,parihuela|0|Parihuelas,refacciones-generales|0|Refacciones Generales,sopladora|0|Sopladoras,trituradora|0|Trituradoras' | split: ',' -%}
 
 <div class="hero">
   <div class="hero-slider" id="hero-slider">
 
-    {%- if slide_blocks.size > 0 -%}
-      {%- for block in slide_blocks -%}
-        <div class="hero-slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
-          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="hero-slide__link">{%- endif -%}
-          {%- if block.settings.image != blank -%}
-            <img
-              src="{{ block.settings.image | image_url: width: 1920 }}"
-              alt="{{ block.settings.image.alt | escape }}"
-              {%- if forloop.first %}loading="eager" fetchpriority="high"{%- else %}loading="lazy"{%- endif %}
-            >
+    <div class="hero-track" id="hero-track">
+      {%- for item in slides_raw -%}
+        {%- assign parts = item | split: '|' -%}
+        {%- assign slug = parts[0] -%}
+        {%- assign has_webp = parts[1] -%}
+        {%- assign slide_label = parts[2] -%}
+        <div class="hero-slide">
+          {%- if has_webp == '1' -%}
+            <picture>
+              <source srcset="{{ 'carrusel-' | append: slug | append: '.webp' | asset_url }}" type="image/webp">
+              <img
+                src="{{ 'carrusel-' | append: slug | append: '.jpg' | asset_url }}"
+                alt="{{ slide_label }}"
+                {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+              >
+            </picture>
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            <img
+              src="{{ 'carrusel-' | append: slug | append: '.jpg' | asset_url }}"
+              alt="{{ slide_label }}"
+              {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+            >
           {%- endif -%}
-          {%- if block.settings.link != blank -%}</a>{%- endif -%}
         </div>
       {%- endfor -%}
-    {%- else -%}
-      <div class="hero-slide is-active">
-        {%- if section.settings.hero_image != blank -%}
-          <img
-            src="{{ section.settings.hero_image | image_url: width: 1920 }}"
-            alt="{{ section.settings.hero_image.alt | escape }}"
-            loading="eager"
-            fetchpriority="high"
-          >
-        {%- else -%}
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+    </div>
 
-    {%- if slide_blocks.size > 1 -%}
-      <div class="hero-slider__dots" id="hero-dots">
-        {%- for block in slide_blocks -%}
-          <button
-            class="hero-dot{% if forloop.first %} is-active{% endif %}"
-            data-index="{{ forloop.index0 }}"
-            aria-label="Diapositiva {{ forloop.index }}"
-          ></button>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    <button class="hero-prev" id="hero-prev" aria-label="Anterior">&#8249;</button>
+    <button class="hero-next" id="hero-next" aria-label="Siguiente">&#8250;</button>
+
+    <div class="hero-slider__dots" id="hero-dots">
+      {%- for item in slides_raw -%}
+        <button
+          class="hero-dot{% if forloop.first %} is-active{% endif %}"
+          data-index="{{ forloop.index0 }}"
+          aria-label="Diapositiva {{ forloop.index }}"
+        ></button>
+      {%- endfor -%}
+    </div>
 
   </div>
 
@@ -79,32 +78,88 @@
 <script>
 (function () {
   var slider = document.getElementById('hero-slider');
-  if (!slider) return;
-  var slides = slider.querySelectorAll('.hero-slide');
-  if (slides.length <= 1) return;
-  var dots = slider.querySelectorAll('.hero-dot');
-  var current = 0;
+  var track = document.getElementById('hero-track');
+  if (!slider || !track) return;
+
+  var origSlides = Array.from(track.querySelectorAll('.hero-slide'));
+  var total = origSlides.length;
+  if (total === 0) return;
+
+  // Clone last slide and prepend; clone first slide and append (for infinite loop)
+  var firstClone = origSlides[0].cloneNode(true);
+  var lastClone = origSlides[total - 1].cloneNode(true);
+  firstClone.setAttribute('aria-hidden', 'true');
+  lastClone.setAttribute('aria-hidden', 'true');
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, origSlides[0]);
+
+  var current = 1; // real first slide is at index 1 (after the cloned last)
+  var isTransitioning = false;
   var timer;
+  var dots = Array.from(document.querySelectorAll('.hero-dot'));
+
+  function setPos(index, animate) {
+    track.style.transition = animate ? 'transform 0.7s ease' : 'none';
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+  }
+
+  function updateDots(realIndex) {
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('is-active', i === realIndex);
+    });
+  }
 
   function goTo(index) {
-    slides[current].classList.remove('is-active');
-    if (dots[current]) dots[current].classList.remove('is-active');
-    current = (index + slides.length) % slides.length;
-    slides[current].classList.add('is-active');
-    if (dots[current]) dots[current].classList.add('is-active');
+    if (isTransitioning) return;
+    isTransitioning = true;
+    current = index;
+    setPos(current, true);
+    updateDots((current - 1 + total) % total);
   }
 
-  function startTimer() {
-    timer = setInterval(function () { goTo(current + 1); }, 5000);
-  }
+  track.addEventListener('transitionend', function () {
+    isTransitioning = false;
+    if (current <= 0) {
+      current = total;
+      setPos(current, false);
+    } else if (current >= total + 1) {
+      current = 1;
+      setPos(current, false);
+    }
+    updateDots((current - 1 + total) % total);
+  });
 
-  dots.forEach(function (dot) {
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  setPos(current, false);
+  updateDots(0);
+
+  dots.forEach(function (dot, i) {
     dot.addEventListener('click', function () {
       clearInterval(timer);
-      goTo(parseInt(dot.dataset.index, 10));
+      goTo(i + 1);
       startTimer();
     });
   });
+
+  var prevBtn = document.getElementById('hero-prev');
+  var nextBtn = document.getElementById('hero-next');
+  if (prevBtn) prevBtn.addEventListener('click', function () { clearInterval(timer); prev(); startTimer(); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { clearInterval(timer); next(); startTimer(); });
+
+  // Touch / swipe support
+  var touchX = 0;
+  slider.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchend', function (e) {
+    var diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { clearInterval(timer); diff > 0 ? next() : prev(); startTimer(); }
+  });
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, 5000);
+  }
 
   startTimer();
 })();
@@ -113,30 +168,8 @@
 {% schema %}
 {
   "name": "Hero Banner",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Imagen del banner principal"
-    }
-  ],
+  "settings": [],
   "blocks": [
-    {
-      "type": "hero_slide",
-      "name": "Slide del banner",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Imagen del slide"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Enlace (opcional)"
-        }
-      ]
-    },
     {
       "type": "category_card",
       "name": "Tarjeta de categoría",
