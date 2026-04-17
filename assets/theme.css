@@ -2,22 +2,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 50%;
-    transition: background-color 0.18s, color 0.18s;
-    position: relative;
+    opacity: 0.65;
+    transition: opacity 0.18s, transform 0.18s;
 }
 .icon-action:hover,
 .icon-action:focus,
 .icon-action:active {
-    background-color: #fff;
-    color: var(--navy-500) !important;
+    opacity: 1;
+    transform: scale(1.15);
 }
-.icon-action:hover .icon,
-.icon-action:focus .icon,
-.icon-action:active .icon {
-    fill: var(--navy-500) !important;
+.icon-action .icon {
+    fill: #fff;
 }
 *{
     margin: 0;
