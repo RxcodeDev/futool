@@ -43,6 +43,8 @@
   </div>
 
   <div class="categories__hero">
+    <button class="cat-btn cat-btn-prev" id="cat-prev" aria-label="Anterior">&#8249;</button>
+    <div class="cat-track" id="cat-track">
     {%- for item in category_data -%}
       {%- assign cparts = item | split: '|' -%}
       {%- assign cslug = cparts[0] -%}
@@ -81,6 +83,8 @@
         </div>
       </a>
     {%- endfor -%}
+    </div>
+    <button class="cat-btn cat-btn-next" id="cat-next" aria-label="Siguiente">&#8250;</button>
   </div>
 </div>
 
@@ -171,6 +175,28 @@
   }
 
   startTimer();
+})();
+
+// ── Category carousel buttons ──
+(function () {
+  var track = document.getElementById('cat-track');
+  var prevBtn = document.getElementById('cat-prev');
+  var nextBtn = document.getElementById('cat-next');
+  if (!track || !prevBtn || !nextBtn) return;
+  var cards = track.querySelectorAll('.card__categories');
+  if (!cards.length) return;
+  var current = 0;
+  function cardW() { return cards[0].offsetWidth + 11; } // 11 = gap ~0.7rem
+  function visible() { return Math.round(track.parentElement.offsetWidth / cardW()); }
+  function update() {
+    track.style.transform = 'translateX(-' + (current * cardW()) + 'px)';
+    prevBtn.style.opacity = current <= 0 ? '0.3' : '1';
+    nextBtn.style.opacity = current >= cards.length - visible() ? '0.3' : '1';
+  }
+  prevBtn.addEventListener('click', function () { if (current > 0) { current--; update(); } });
+  nextBtn.addEventListener('click', function () { if (current < cards.length - visible()) { current++; update(); } });
+  window.addEventListener('resize', function () { current = 0; update(); });
+  update();
 })();
 </script>
 
