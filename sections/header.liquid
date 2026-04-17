@@ -1,9 +1,11 @@
 {%- comment -%} Resolve first matching collection URL for nav parents {%- endcomment -%}
 {%- assign nav_maquinaria_url = '/collections' -%}
+{%- assign nav_maquinaria_col = blank -%}
 {%- for _col in collections -%}
   {%- assign _col_lower = _col.title | downcase -%}
   {%- if _col_lower contains 'maquinaria' -%}
     {%- assign nav_maquinaria_url = _col.url -%}
+    {%- assign nav_maquinaria_col = _col -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
@@ -76,11 +78,15 @@
         <li class="has-dropdown">
           <a href="{{ nav_maquinaria_url }}">MAQUINARIAS</a>
           <ul class="dropdown__nav">
-            {%- for col in collections -%}
-              {%- assign col_title_lower = col.title | downcase -%}
-              {%- unless col_title_lower contains 'refaccion' -%}
-                <li><a href="{{ col.url }}">{{ col.title }}</a></li>
-              {%- endunless -%}
+            {%- assign seen_maq_cats = "" -%}
+            {%- for product in nav_maquinaria_col.products limit: 250 -%}
+              {%- assign cat_name = product.category.name -%}
+              {%- if cat_name != blank -%}
+                {%- unless seen_maq_cats contains cat_name -%}
+                  <li><a href="{{ nav_maquinaria_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
+                  {%- assign seen_maq_cats = seen_maq_cats | append: "||" | append: cat_name -%}
+                {%- endunless -%}
+              {%- endif -%}
             {%- endfor -%}
           </ul>
         </li>
@@ -109,11 +115,15 @@
       <li class="mobile-nav__item has-children">
         <a href="{{ nav_maquinaria_url }}">Maquinarias</a>
         <ul class="mobile-nav__sub">
-          {%- for col in collections -%}
-            {%- assign col_title_lower = col.title | downcase -%}
-            {%- unless col_title_lower contains 'refaccion' -%}
-              <li><a href="{{ col.url }}">{{ col.title }}</a></li>
-            {%- endunless -%}
+          {%- assign seen_maq_cats_m = "" -%}
+          {%- for product in nav_maquinaria_col.products limit: 250 -%}
+            {%- assign cat_name = product.category.name -%}
+            {%- if cat_name != blank -%}
+              {%- unless seen_maq_cats_m contains cat_name -%}
+                <li><a href="{{ nav_maquinaria_col.url }}?filter.p.m.product.category.id={{ product.category.id | url_encode }}">{{ cat_name }}</a></li>
+                {%- assign seen_maq_cats_m = seen_maq_cats_m | append: "||" | append: cat_name -%}
+              {%- endunless -%}
+            {%- endif -%}
           {%- endfor -%}
         </ul>
       </li>
