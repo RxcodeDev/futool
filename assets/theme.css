@@ -3129,8 +3129,9 @@ body.drawer-open {
     left: 0;
 }
 .brand-logo {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: 80px;
+    max-width: 150px;
     object-fit: contain;
     display: block;
 }
