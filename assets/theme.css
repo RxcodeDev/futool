@@ -1329,8 +1329,11 @@
 
     /* ── Advertising ── */
     .advertising {
-        height: 40vw;
-        min-height: 130px;
+        height: auto;
+    }
+    .advertising__img {
+        height: auto;
+        object-fit: contain;
     }
 
     /* ── Offers: 2 columnas ── */
