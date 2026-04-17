@@ -58,6 +58,7 @@
 
   <div class="categories__hero">
     <button class="cat-btn cat-btn-prev" id="cat-prev" aria-label="Anterior">&#8249;</button>
+    <div class="cat-viewport">
     <div class="cat-track" id="cat-track">
     {%- for item in category_data -%}
       {%- assign cparts = item | split: '|' -%}
@@ -100,6 +101,7 @@
         </div>
       </a>
     {%- endfor -%}
+    </div>
     </div>
     <button class="cat-btn cat-btn-next" id="cat-next" aria-label="Siguiente">&#8250;</button>
   </div>

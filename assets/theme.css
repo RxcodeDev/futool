@@ -445,11 +445,14 @@
     padding-bottom: 2rem;
 }
 
+.cat-viewport {
+    flex: 1;
+    overflow: hidden;
+}
+
 .cat-track {
     display: flex;
     gap: 0.7rem;
-    flex: 1;
-    overflow: hidden;
     transition: transform 0.4s ease;
 }
 
@@ -1196,12 +1199,15 @@
 
     .cat-btn { display: none; }
 
+    .cat-viewport {
+        overflow: visible;
+    }
+
     .cat-track {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
         width: 100%;
-        overflow: visible;
         transform: none !important;
         transition: none;
         padding: 0.5rem;
