@@ -1223,8 +1223,9 @@
         border-right: 1px solid rgba(255,255,255,0.08);
         border-bottom: 1px solid rgba(255,255,255,0.08);
     }
+    .card__categories:nth-child(n+7) { display: none; }
     .card__categories:nth-child(3n) { border-right: none; }
-    .card__categories:nth-last-child(-n+3) { border-bottom: none; }
+    .card__categories:nth-child(4), .card__categories:nth-child(5), .card__categories:nth-child(6) { border-bottom: none; }
 
     .header__card-categories {
         padding: 0.45rem 0.5rem;

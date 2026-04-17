@@ -196,6 +196,21 @@
   startTimer();
 })();
 
+// ── Mobile: barajar categorías y mostrar solo 6 ──
+(function () {
+  if (window.innerWidth > 768) return;
+  var track = document.getElementById('cat-track');
+  if (!track) return;
+  var cards = Array.from(track.querySelectorAll('.card__categories'));
+  if (cards.length <= 6) return;
+  // Fisher-Yates shuffle
+  for (var i = cards.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    track.appendChild(track.removeChild(cards[j]));
+    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+  }
+})();
+
 // ── Category carousel buttons ──
 (function () {
   var track = document.getElementById('cat-track');
