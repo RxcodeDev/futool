@@ -157,6 +157,13 @@
     nav.setAttribute('aria-hidden', !open);
   });
 
+  // Multicolumn dropdown cuando hay más de 10 items
+  document.querySelectorAll('.dropdown__nav').forEach(function(dd) {
+    if (dd.querySelectorAll('li').length > 10) {
+      dd.classList.add('is-multicolumn');
+    }
+  });
+
   // Expansión de barra de búsqueda en móvil
   var searchInput = document.getElementById('search-input');
   var searchWrapper = searchInput ? searchInput.closest('.input-wrapper__search') : null;

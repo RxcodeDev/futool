@@ -278,7 +278,10 @@
     top: 100%;
     left: 0;
     min-width: 260px;
-    width: 100%;
+    width: max-content;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: var(--navy-900);
     list-style: none;
     padding: 0.25rem 0;
@@ -286,6 +289,21 @@
     display: none;
     text-align: left;
     box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    scrollbar-width: thin;
+    scrollbar-color: var(--navy-600) transparent;
+    column-count: 1;
+}
+
+/* Cuando hay muchos items, usar 2 columnas */
+.dropdown__nav.is-multicolumn {
+    column-count: 2;
+    min-width: 480px;
+    width: max-content;
+    max-height: 70vh;
+}
+
+.dropdown__nav li {
+    break-inside: avoid;
 }
 
 .dropdown__nav li a {
