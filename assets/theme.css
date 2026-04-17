@@ -1,3 +1,27 @@
+.icon-action .icon,
+.icon-action-heart,
+.icon-action-cart,
+.icon-action-person {
+    transition: fill 0.18s, color 0.18s;
+}
+.icon-action:hover .icon,
+.icon-action:focus .icon,
+.icon-action-heart:hover,
+.icon-action-heart:focus,
+.icon-action-cart:hover,
+.icon-action-cart:focus,
+.icon-action-person:hover,
+.icon-action-person:focus {
+    fill: #fff !important;
+    color: #fff !important;
+}
+.icon-action:active .icon,
+.icon-action-heart:active,
+.icon-action-cart:active,
+.icon-action-person:active {
+    fill: #fff !important;
+    color: #fff !important;
+}
 *{
     margin: 0;
     padding: 0;
