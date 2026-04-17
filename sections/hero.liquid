@@ -42,9 +42,7 @@
 
   </div>
 
-  <div class="cat-carousel-wrap">
-    <button class="cat-carousel-btn cat-carousel-prev" id="cat-prev" aria-label="Anterior">&#8249;</button>
-    <div class="categories__hero" id="cat-track">
+  <div class="categories__hero">
     {%- for item in category_data -%}
       {%- assign cparts = item | split: '|' -%}
       {%- assign cslug = cparts[0] -%}
@@ -83,8 +81,6 @@
         </div>
       </a>
     {%- endfor -%}
-    </div>
-    <button class="cat-carousel-btn cat-carousel-next" id="cat-next" aria-label="Siguiente">&#8250;</button>
   </div>
 </div>
 
@@ -175,43 +171,6 @@
   }
 
   startTimer();
-})();
-
-// ── Category carousel ──
-(function () {
-  var track = document.getElementById('cat-track');
-  var prevBtn = document.getElementById('cat-prev');
-  var nextBtn = document.getElementById('cat-next');
-  if (!track || !prevBtn || !nextBtn) return;
-
-  var cards = Array.from(track.querySelectorAll('.card__categories'));
-  var total = cards.length;
-  if (total === 0) return;
-
-  function visibleCount() {
-    return Math.round(track.offsetWidth / cards[0].offsetWidth);
-  }
-
-  var current = 0;
-
-  function update() {
-    var vis = visibleCount();
-    prevBtn.style.visibility = current <= 0 ? 'hidden' : 'visible';
-    nextBtn.style.visibility = current >= total - vis ? 'hidden' : 'visible';
-    var cardW = cards[0].offsetWidth + parseInt(getComputedStyle(track).gap || 0);
-    track.style.transform = 'translateX(-' + (current * cardW) + 'px)';
-  }
-
-  prevBtn.addEventListener('click', function () {
-    if (current > 0) { current--; update(); }
-  });
-  nextBtn.addEventListener('click', function () {
-    var vis = visibleCount();
-    if (current < total - vis) { current++; update(); }
-  });
-
-  window.addEventListener('resize', function () { current = 0; update(); });
-  update();
 })();
 </script>
 
