@@ -1,26 +1,23 @@
-.icon-action .icon,
-.icon-action-heart,
-.icon-action-cart,
-.icon-action-person {
-    transition: fill 0.18s, color 0.18s;
+.icon-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    transition: background-color 0.18s, color 0.18s;
+    position: relative;
+}
+.icon-action:hover,
+.icon-action:focus,
+.icon-action:active {
+    background-color: #fff;
+    color: var(--navy-500) !important;
 }
 .icon-action:hover .icon,
 .icon-action:focus .icon,
-.icon-action-heart:hover,
-.icon-action-heart:focus,
-.icon-action-cart:hover,
-.icon-action-cart:focus,
-.icon-action-person:hover,
-.icon-action-person:focus {
-    fill: #fff !important;
-    color: #fff !important;
-}
-.icon-action:active .icon,
-.icon-action-heart:active,
-.icon-action-cart:active,
-.icon-action-person:active {
-    fill: #fff !important;
-    color: #fff !important;
+.icon-action:active .icon {
+    fill: var(--navy-500) !important;
 }
 *{
     margin: 0;
