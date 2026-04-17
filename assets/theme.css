@@ -3093,12 +3093,11 @@ body.drawer-open {
     border-radius: 12px;
     background: var(--white);
     border: 1.5px solid var(--gray-200);
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
-    margin-bottom: 50px;
 }
 .brand-card:hover {
     transform: translateY(-5px);
@@ -3111,7 +3110,7 @@ body.drawer-open {
     flex-shrink: 0;
 }
 .brand-card__body {
-    padding: 1.75rem 1.5rem 5rem;
+    padding: 1.75rem 1.5rem 1.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -3119,16 +3118,14 @@ body.drawer-open {
     gap: 0.6rem;
     flex: 1;
     border-radius: 0 0 12px 12px;
-    overflow: hidden;
 }
 .brand-logo-box {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: absolute;
-    bottom: -50px;
-    left: 0;
+    margin-top: auto;
+    padding-top: 0.75rem;
 }
 .brand-logo {
     width: auto;
