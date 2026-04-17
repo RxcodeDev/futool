@@ -196,74 +196,53 @@
   startTimer();
 })();
 
-// ── Mobile: ciclo infinito de categorías (fade escalonado) ──
-(function () {
-  if (window.innerWidth > 768) return;
-  var track = document.getElementById('cat-track');
-  if (!track) return;
-  var cards = Array.from(track.querySelectorAll('.card__categories'));
-  if (cards.length <= 6) return;
-
-  // Shuffle inicial Fisher-Yates
-  for (var i = cards.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
-  }
-  cards.forEach(function (c) { track.appendChild(c); });
-
-  // Estado inicial: mostrar primeras 6, ocultar el resto
-  cards.forEach(function (c, i) {
-    c.style.transition = 'opacity 0.4s ease';
-    if (i >= 6) c.classList.add('cat-hidden');
-  });
-
-  var offset = 0;
-
-  setInterval(function () {
-    var visible = [];
-    for (var i = 0; i < 6; i++) visible.push(cards[(offset + i) % cards.length]);
-
-    // Fade out escalonado (80ms entre cada carta)
-    visible.forEach(function (c, i) {
-      setTimeout(function () { c.style.opacity = '0'; }, i * 80);
-    });
-
-    setTimeout(function () {
-      // Ocultar actuales y preparar las siguientes 6
-      visible.forEach(function (c) { c.classList.add('cat-hidden'); });
-      offset = (offset + 3) % cards.length;
-      var next = [];
-      for (var i = 0; i < 6; i++) next.push(cards[(offset + i) % cards.length]);
-      next.forEach(function (c) { c.classList.remove('cat-hidden'); c.style.opacity = '0'; });
-
-      // Fade in escalonado (100ms entre cada carta)
-      next.forEach(function (c, i) {
-        setTimeout(function () { c.style.opacity = '1'; }, 60 + i * 100);
-      });
-    }, 6 * 80 + 400);
-  }, 5000);
-})();
-
-// ── Category carousel buttons ──
+// ── Category carousel buttons (mobile: páginas de 6 | desktop: translateX) ──
 (function () {
   var track = document.getElementById('cat-track');
   var prevBtn = document.getElementById('cat-prev');
   var nextBtn = document.getElementById('cat-next');
   if (!track || !prevBtn || !nextBtn) return;
-  var cards = track.querySelectorAll('.card__categories');
+  var cards = Array.from(track.querySelectorAll('.card__categories'));
   if (!cards.length) return;
-  var current = 0;
-  function cardW() { return cards[0].offsetWidth + 11; } // 11 = gap ~0.7rem
-  function visible() { return Math.round(track.parentElement.offsetWidth / cardW()); }
-  function update() {
-    track.style.transform = 'translateX(-' + (current * cardW()) + 'px)';
-    prevBtn.style.opacity = current <= 0 ? '0.3' : '1';
-    nextBtn.style.opacity = current >= cards.length - visible() ? '0.3' : '1';
+
+  if (window.innerWidth <= 640) {
+    // ── Mobile: páginas de 6 tarjetas en grid 3×2 ──
+    var PAGE = 6;
+    var page = 0;
+    var totalPages = Math.ceil(cards.length / PAGE);
+
+    function showPage(p) {
+      page = p;
+      cards.forEach(function (c, i) {
+        if (i >= p * PAGE && i < (p + 1) * PAGE) {
+          c.classList.remove('cat-hidden');
+        } else {
+          c.classList.add('cat-hidden');
+        }
+      });
+      prevBtn.style.opacity = p <= 0 ? '0.3' : '1';
+      nextBtn.style.opacity = p >= totalPages - 1 ? '0.3' : '1';
+    }
+
+    prevBtn.addEventListener('click', function () { if (page > 0) showPage(page - 1); });
+    nextBtn.addEventListener('click', function () { if (page < totalPages - 1) showPage(page + 1); });
+    showPage(0);
+
+  } else {
+    // ── Desktop: carrusel horizontal con translateX ──
+    var current = 0;
+    function cardW() { return cards[0].offsetWidth + 11; }
+    function visible() { return Math.round(track.parentElement.offsetWidth / cardW()); }
+    function update() {
+      track.style.transform = 'translateX(-' + (current * cardW()) + 'px)';
+      prevBtn.style.opacity = current <= 0 ? '0.3' : '1';
+      nextBtn.style.opacity = current >= cards.length - visible() ? '0.3' : '1';
+    }
+    prevBtn.addEventListener('click', function () { if (current > 0) { current--; update(); } });
+    nextBtn.addEventListener('click', function () { if (current < cards.length - visible()) { current++; update(); } });
+    window.addEventListener('resize', function () { current = 0; update(); });
+    update();
   }
-  prevBtn.addEventListener('click', function () { if (current > 0) { current--; update(); } });
-  nextBtn.addEventListener('click', function () { if (current < cards.length - visible()) { current++; update(); } });
-  window.addEventListener('resize', function () { current = 0; update(); });
-  update();
 })();
 </script>
 
