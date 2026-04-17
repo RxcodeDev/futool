@@ -452,6 +452,16 @@
     padding: 2.5rem 4rem;
 }
 
+.title__showcase {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    max-width: calc(5 * 230px + 4 * 1.25rem);
+    margin-inline: auto;
+}
+
 .recommended-title {
     font-size: 1.3rem;
     font-weight: 700;

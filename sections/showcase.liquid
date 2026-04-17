@@ -2,6 +2,9 @@
 {%- if showcase_collection == blank -%}{%- assign showcase_collection = collections.all -%}{%- endif -%}
 
 <div class="showcase">
+  {%- if section.settings.title != blank -%}
+    <h2 class="title__showcase">{{ section.settings.title }}</h2>
+  {%- endif -%}
   <div class="products__carrusel-app">
     {%- if showcase_collection != blank and showcase_collection.products_count > 0 -%}
       {%- for product in showcase_collection.products limit: section.settings.products_limit -%}
@@ -19,6 +22,12 @@
 {
   "name": "Vitrina de Productos",
   "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Más Productos"
+    },
     {
       "type": "collection",
       "id": "collection",
