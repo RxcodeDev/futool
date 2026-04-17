@@ -1,10 +1,11 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
+{%- assign _bc_collection = collection | default: product.collections.first -%}
 <nav class="product-breadcrumb" aria-label="Ruta de navegación">
   <a href="/" class="product-breadcrumb__link">INICIO</a>
-  {%- if collection != blank -%}
+  {%- if _bc_collection != blank -%}
     <span class="product-breadcrumb__sep">/</span>
-    <a href="{{ collection.url }}" class="product-breadcrumb__link">{{ collection.title | upcase }}</a>
+    <a href="{{ _bc_collection.url }}" class="product-breadcrumb__link">{{ _bc_collection.title | upcase }}</a>
   {%- endif -%}
   <span class="product-breadcrumb__sep">/</span>
   <span class="product-breadcrumb__current">{{ product.title }}</span>
