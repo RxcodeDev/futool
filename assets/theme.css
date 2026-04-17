@@ -1190,11 +1190,12 @@
     .cat-track {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 0;
+        gap: 0.5rem;
         width: 100%;
         overflow: visible;
         transform: none !important;
         transition: none;
+        padding: 0.5rem;
     }
 
     /* Mostrar imagen normalmente */

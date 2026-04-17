@@ -3,8 +3,8 @@
 {%- comment -%} Banner slides: slug|label (solo imágenes banner-*) {%- endcomment -%}
 {%- assign banner_slides = 'desbrozadora|Desbrozadoras,podadora|Podadoras,aspersores|Aspersores' | split: ',' -%}
 
-{%- comment -%} Categorías: slug_carrusel|has_webp|título (imágenes carrusel-*) {%- endcomment -%}
-{%- assign category_data = 'desbrozadora|1|DESBROZADORAS,refacciones-generales|0|REFACCIONES,podadora|0|PODADORAS,motosierra|1|MOTOSIERRAS,aspersor|1|ASPERSORES,motobomba|1|MOTOBOMBAS' | split: ',' -%}
+{%- comment -%} Categorías: slug_carrusel|has_webp|título|url_colección {%- endcomment -%}
+{%- assign category_data = 'desbrozadora|1|DESBROZADORAS|/collections/maquinaria/Desbrozadoras,refacciones-generales|0|REFACCIONES|/collections/refacciones,podadora|0|PODADORAS|/collections/maquinaria/Podadoras,motosierra|1|MOTOSIERRAS|/collections/maquinaria/Motosierras,aspersor|1|ASPERSORES|/collections/maquinaria/Aspersoras,motobomba|1|MOTOBOMBAS|/collections/maquinaria/Motobombas' | split: ',' -%}
 
 <div class="hero">
   <div class="hero-slider" id="hero-slider">
@@ -51,13 +51,8 @@
       {%- assign cwebp = cparts[1] -%}
       {%- assign ctitle = cparts[2] -%}
       {%- comment -%} Buscar bloque con el mismo título para obtener el link {%- endcomment -%}
-      {%- assign clink = '#' -%}
-      {%- for block in category_blocks -%}
-        {%- if block.settings.title == ctitle -%}
-          {%- assign clink = block.settings.link | default: '#' -%}
-        {%- endif -%}
-      {%- endfor -%}
-      <a class="card__categories" href="{{ clink }}" >
+      {%- assign clink = cparts[3] | default: '#' -%}
+      <a class="card__categories" href="{{ clink }}">
         <div class="header__card-categories">
           <h3>{{ ctitle }}</h3>
         </div>
