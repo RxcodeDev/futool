@@ -1217,8 +1217,8 @@
     .header__card-categories h3 { font-size: 0.55rem; letter-spacing: 0.06em; }
 
     .body__card-categories {
-        height: 17vw;
-        min-height: 55px;
+        height: 12vw;
+        min-height: 40px;
         overflow: hidden;
     }
 
