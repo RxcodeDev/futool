@@ -1,34 +1,28 @@
 {%- assign category_blocks = section.blocks | where: 'type', 'category_card' -%}
 
-{%- comment -%} Slides: slug|has_webp|label {%- endcomment -%}
-{%- assign slides_raw = 'desbrozadora|1|Desbrozadoras,podadora|0|Podadoras,motosierra|1|Motosierras,aspersor|1|Aspersores,motobomba|1|Motobombas,compresor|1|Compresores,generador|1|Generadores,hidrolavadora|1|Hidrolavadoras,motaladros|1|Motaladros,motocultor|1|Motocultores,motor|1|Motores,parihuela|0|Parihuelas,refacciones-generales|0|Refacciones Generales,sopladora|0|Sopladoras,trituradora|0|Trituradoras' | split: ',' -%}
+{%- comment -%} Banner slides: slug|label (solo imágenes banner-*) {%- endcomment -%}
+{%- assign banner_slides = 'desbrozadora|Desbrozadoras,podadora|Podadoras,aspersores|Aspersores' | split: ',' -%}
+
+{%- comment -%} Categorías: slug_carrusel|has_webp|título (imágenes carrusel-*) {%- endcomment -%}
+{%- assign category_data = 'desbrozadora|1|DESBROZADORAS,refacciones-generales|0|REFACCIONES,podadora|0|PODADORAS,motosierra|1|MOTOSIERRAS,aspersor|1|ASPERSORES,motobomba|1|MOTOBOMBAS' | split: ',' -%}
 
 <div class="hero">
   <div class="hero-slider" id="hero-slider">
 
     <div class="hero-track" id="hero-track">
-      {%- for item in slides_raw -%}
+      {%- for item in banner_slides -%}
         {%- assign parts = item | split: '|' -%}
         {%- assign slug = parts[0] -%}
-        {%- assign has_webp = parts[1] -%}
-        {%- assign slide_label = parts[2] -%}
+        {%- assign slide_label = parts[1] -%}
         <div class="hero-slide">
-          {%- if has_webp == '1' -%}
-            <picture>
-              <source srcset="{{ 'carrusel-' | append: slug | append: '.webp' | asset_url }}" type="image/webp">
-              <img
-                src="{{ 'carrusel-' | append: slug | append: '.jpg' | asset_url }}"
-                alt="{{ slide_label }}"
-                {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
-              >
-            </picture>
-          {%- else -%}
+          <picture>
+            <source srcset="{{ 'banner-' | append: slug | append: '.webp' | asset_url }}" type="image/webp">
             <img
-              src="{{ 'carrusel-' | append: slug | append: '.jpg' | asset_url }}"
+              src="{{ 'banner-' | append: slug | append: '.jpg' | asset_url }}"
               alt="{{ slide_label }}"
               {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
             >
-          {%- endif -%}
+          </picture>
         </div>
       {%- endfor -%}
     </div>
@@ -37,7 +31,7 @@
     <button class="hero-next" id="hero-next" aria-label="Siguiente">&#8250;</button>
 
     <div class="hero-slider__dots" id="hero-dots">
-      {%- for item in slides_raw -%}
+      {%- for item in banner_slides -%}
         <button
           class="hero-dot{% if forloop.first %} is-active{% endif %}"
           data-index="{{ forloop.index0 }}"
@@ -49,25 +43,40 @@
   </div>
 
   <div class="categories__hero">
-    {%- for block in category_blocks -%}
-      <a
-        class="card__categories"
-        href="{{ block.settings.link | default: '#' }}"
-        {{ block.shopify_attributes }}
-      >
+    {%- for item in category_data -%}
+      {%- assign cparts = item | split: '|' -%}
+      {%- assign cslug = cparts[0] -%}
+      {%- assign cwebp = cparts[1] -%}
+      {%- assign ctitle = cparts[2] -%}
+      {%- comment -%} Buscar bloque con el mismo título para obtener el link {%- endcomment -%}
+      {%- assign clink = '#' -%}
+      {%- for block in category_blocks -%}
+        {%- if block.settings.title == ctitle -%}
+          {%- assign clink = block.settings.link | default: '#' -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <a class="card__categories" href="{{ clink }}" >
         <div class="header__card-categories">
-          <h3>{{ block.settings.title }}</h3>
+          <h3>{{ ctitle }}</h3>
         </div>
         <div class="body__card-categories">
-          {%- if block.settings.image != blank -%}
+          {%- if cwebp == '1' -%}
+            <picture>
+              <source srcset="{{ 'carrusel-' | append: cslug | append: '.webp' | asset_url }}" type="image/webp">
+              <img
+                class="img__card-categories"
+                src="{{ 'carrusel-' | append: cslug | append: '.jpg' | asset_url }}"
+                alt="{{ ctitle }}"
+                loading="lazy"
+              >
+            </picture>
+          {%- else -%}
             <img
               class="img__card-categories"
-              src="{{ block.settings.image | image_url: width: 400 }}"
-              alt="{{ block.settings.title | escape }}"
+              src="{{ 'carrusel-' | append: cslug | append: '.jpg' | asset_url }}"
+              alt="{{ ctitle }}"
               loading="lazy"
             >
-          {%- else -%}
-            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg img__card-categories' }}
           {%- endif -%}
         </div>
       </a>
