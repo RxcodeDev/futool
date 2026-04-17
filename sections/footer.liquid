@@ -25,12 +25,11 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.whatsapp_1 != blank or section.settings.whatsapp_2 != blank or section.settings.whatsapp_3 != blank -%}
+        {%- if section.settings.whatsapp_1 != blank or section.settings.whatsapp_2 != blank -%}
           <div class="contact-group__footer">
             <p class="contact-label__footer">WhatsApp.</p>
             {%- if section.settings.whatsapp_1 != blank -%}<p>{{ section.settings.whatsapp_1 }}</p>{%- endif -%}
             {%- if section.settings.whatsapp_2 != blank -%}<p>{{ section.settings.whatsapp_2 }}</p>{%- endif -%}
-            {%- if section.settings.whatsapp_3 != blank -%}<p>{{ section.settings.whatsapp_3 }}</p>{%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -79,16 +78,16 @@
           <p>{{ section.settings.attention_saturday }}</p>
         {%- endif -%}
         {%- if section.settings.email != blank -%}
-          <p>{{ section.settings.email }}</p>
+          <p>{{ section.settings.email | downcase }}</p>
         {%- endif -%}
       </div>
     </div>
 
-    <!-- Catalog download anchor banner -->
-    <a href="{{ section.settings.catalog_url | default: '#' }}" class="catalog-banner__footer">
+    <!-- Catalog banner -->
+    <div class="catalog-banner__footer">
       <span>AQUÍ DESCARGA LOS</span>
       <span><span>NUEVOS</span> CATÁLOGOS</span>
-    </a>
+    </div>
 
     <!-- Social & Payment methods -->
     <div class="pays-method__footer">
@@ -126,11 +125,11 @@
   <!-- Right column: catalog PDFs -->
   <div class="content__footer --catalog-layout">
 
-    <!-- Copia del botón solo visible en móvil -->
-    <a href="{{ section.settings.catalog_url | default: '#' }}" class="catalog-banner__footer catalog-banner--mobile-only">
+    <!-- Copia visible en móvil -->
+    <div class="catalog-banner__footer catalog-banner--mobile-only">
       <span>AQUÍ DESCARGA LOS</span>
       <span><span>NUEVOS</span> CATÁLOGOS</span>
-    </a>
+    </div>
 
     <div class="item__catalog-footer">
       <a
@@ -236,12 +235,6 @@
       "default": "55 2786 7639"
     },
     {
-      "type": "text",
-      "id": "whatsapp_3",
-      "label": "WhatsApp 3",
-      "default": "55 5412 9563"
-    },
-    {
       "type": "header",
       "content": "Menús del footer"
     },
@@ -280,7 +273,7 @@
       "type": "text",
       "id": "email",
       "label": "Email de ventas",
-      "default": "Ventas@futoolmexico.com"
+      "default": "ventas@futoolmexico.com"
     },
     {
       "type": "header",
