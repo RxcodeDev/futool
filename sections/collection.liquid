@@ -8,9 +8,15 @@
   <!-- Encabezado -->
   <div class="collection-header">
     <div class="collection-header-left">
-      <h1 class="collection-title">{{ collection.title }}</h1>
-      {%- if collection.description != blank -%}
-        <p class="collection-desc">{{ collection.description }}</p>
+      {%- if current_tags != blank -%}
+        {%- assign active_tag = current_tags | first -%}
+        <h1 class="collection-title">{{ active_tag }}</h1>
+        <p class="collection-desc">{{ collection.title }}: {{ active_tag }}</p>
+      {%- else -%}
+        <h1 class="collection-title">{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}
+          <p class="collection-desc">{{ collection.description }}</p>
+        {%- endif -%}
       {%- endif -%}
       <span class="collection-count">{{ collection.products_count }} productos</span>
     </div>
