@@ -196,7 +196,7 @@
   startTimer();
 })();
 
-// ── Mobile: ciclo infinito de categorías (3 en 3, fade) ──
+// ── Mobile: ciclo infinito de categorías (fade completo del grid) ──
 (function () {
   if (window.innerWidth > 768) return;
   var track = document.getElementById('cat-track');
@@ -211,27 +211,34 @@
   }
   cards.forEach(function (c) { track.appendChild(c); });
 
-  // Transición de opacidad a todas
-  cards.forEach(function (c) { c.style.transition = 'opacity 0.5s ease'; });
+  // Estado inicial: mostrar primeras 6, ocultar el resto
+  cards.forEach(function (c, i) {
+    c.style.transition = 'opacity 0.5s ease';
+    if (i >= 6) c.classList.add('cat-hidden');
+  });
+
+  var offset = 0;
 
   setInterval(function () {
     // Fade out las 6 visibles
-    for (var i = 0; i < 6; i++) cards[i].style.opacity = '0';
+    for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].style.opacity = '0';
 
     setTimeout(function () {
-      // Rotar: las primeras 3 van al final
-      var moved = cards.splice(0, 3);
-      Array.prototype.push.apply(cards, moved);
-      // Reordenar DOM
-      cards.forEach(function (c) { track.appendChild(c); });
-      // Fade in las nuevas 6
+      // Ocultar visibles, mostrar las siguientes 6
+      for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].classList.add('cat-hidden');
+      offset = (offset + 3) % cards.length;
+      for (var i = 0; i < 6; i++) {
+        var c = cards[(offset + i) % cards.length];
+        c.classList.remove('cat-hidden');
+        c.style.opacity = '0';
+      }
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          for (var i = 0; i < 6; i++) cards[i].style.opacity = '1';
+          for (var i = 0; i < 6; i++) cards[(offset + i) % cards.length].style.opacity = '1';
         });
       });
     }, 500);
-  }, 3500);
+  }, 4000);
 })();
 
 // ── Category carousel buttons ──
