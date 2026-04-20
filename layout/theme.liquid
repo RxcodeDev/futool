@@ -257,8 +257,8 @@
         var currentQuery = '';
         var activeIndex = -1;
 
-        function formatPrice(cents) {
-          return '$' + (cents / 100).toLocaleString('es-MX', { minimumFractionDigits: 2 });
+        function formatPrice(amount) {
+          return '$' + parseFloat(amount).toLocaleString('es-MX', { minimumFractionDigits: 2 });
         }
 
         function renderPreview(resources) {
