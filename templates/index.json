@@ -98,7 +98,7 @@
         "o3": {
           "type": "offer_image",
           "settings": {
-            "image": "shopify://shop_images/789_x_630px_WEB_3_mini_soldadora_webp.jpg",
+            "image": "shopify://shop_images/789_x_630px_WEB_1_cabezal_webp.jpg",
             "link": ""
           }
         },
@@ -112,7 +112,7 @@
         "o5": {
           "type": "offer_image",
           "settings": {
-            "image": "shopify://shop_images/789_x_630px_WEB_1_cabezal.jpg",
+            "image": "shopify://shop_images/789_x_630px_WEB_3_mini_soldadora_webp_8eec5294-bb94-4256-bed6-cfebe5e5609a.jpg",
             "link": ""
           }
         }
