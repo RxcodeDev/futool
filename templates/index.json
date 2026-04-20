@@ -84,30 +84,35 @@
         "o1": {
           "type": "offer_image",
           "settings": {
+            "image": "shopify://shop_images/420_x_552px_WEB_promocion_Aspersora_KWA350_webp.jpg",
             "link": ""
           }
         },
         "o2": {
           "type": "offer_image",
           "settings": {
+            "image": "shopify://shop_images/1606_x_668px_WEB_Desbrozadora_PZ-530A_webp.jpg",
             "link": ""
           }
         },
         "o3": {
           "type": "offer_image",
           "settings": {
+            "image": "shopify://shop_images/789_x_630px_WEB_3_mini_soldadora_webp.jpg",
             "link": ""
           }
         },
         "o4": {
           "type": "offer_image",
           "settings": {
+            "image": "shopify://shop_images/789_x_630px_WEB_2_llave_webp.jpg",
             "link": ""
           }
         },
         "o5": {
           "type": "offer_image",
           "settings": {
+            "image": "shopify://shop_images/789_x_630px_WEB_1_cabezal.jpg",
             "link": ""
           }
         }
@@ -130,6 +135,7 @@
     "showcase": {
       "type": "showcase",
       "settings": {
+        "title": "Más Productos",
         "collection": "",
         "products_limit": 5
       }
