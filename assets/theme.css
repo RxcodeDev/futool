@@ -1215,12 +1215,18 @@
     }
 
     .hero-slider {
-        /* Slider ocupa 50% del espacio disponible */
         flex: 0 0 50%;
+        height: 50%; /* altura explícita para que hero-track la herede */
         min-height: 0;
-        height: auto;
         aspect-ratio: unset;
+        overflow: hidden;
     }
+
+    /* hero-track y hero-slide heredan la altura del slider */
+    .hero-track { height: 100%; }
+    .hero-slide { height: 100%; }
+    .hero-slide picture,
+    .hero-slide picture img { height: 100%; }
 
     /* Categorías: grid 2×2 en móvil, botones encima sin ocupar espacio */
     .categories__hero {
