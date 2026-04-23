@@ -6,11 +6,16 @@
       {{ block.shopify_attributes }}
     >
       {%- if block.settings.image != blank -%}
-        <img
-          src="{{ block.settings.image | image_url: width: 800 }}"
-          alt="{{ block.settings.image.alt | escape }}"
-          loading="lazy"
-        >
+        <picture>
+          {%- if block.settings.image_mobile != blank -%}
+            <source media="(max-width: 640px)" srcset="{{ block.settings.image_mobile | image_url: width: 750 }}" type="image/webp">
+          {%- endif -%}
+          <img
+            src="{{ block.settings.image | image_url: width: 800 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+          >
+        </picture>
       {%- else -%}
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
@@ -29,7 +34,12 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Imagen"
+          "label": "Imagen (desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Imagen móvil (opcional)"
         },
         {
           "type": "url",
