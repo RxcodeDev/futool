@@ -431,6 +431,7 @@
 }
 
 /* ── Categories Hero ── */
+.categories-label__hero { display: none; }
 .categories__hero {
     display: flex;
     align-items: center;
@@ -1228,6 +1229,19 @@
     .hero-slide picture,
     .hero-slide picture img { height: 100%; }
 
+    /* Label CATEGORÍAS — oculto en desktop */
+    .categories-label__hero {
+        display: block;
+        text-align: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.85);
+        padding: 0.3rem 0 0.2rem;
+        flex-shrink: 0;
+        text-transform: uppercase;
+    }
+
     /* Categorías: grid 2×2 en móvil, botones encima sin ocupar espacio */
     .categories__hero {
         position: relative;
@@ -1239,7 +1253,7 @@
         min-height: 0;
         display: flex;
         flex-direction: column;
-        padding: 0;
+        padding: 0 0.4rem 0.4rem;
         width: 100%;
         flex-shrink: 0;
         box-sizing: border-box;
@@ -1274,7 +1288,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 0;
+        gap: 4px;
         width: 100%;
         height: 100%;
         flex: 1 1 0;
