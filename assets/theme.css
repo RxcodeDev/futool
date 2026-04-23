@@ -1300,8 +1300,6 @@
     .card__categories:nth-child(3),
     .card__categories:nth-child(4) { border-bottom: none; }
     .card__categories.cat-hidden { display: none; }
-    /* Ocultar tarjetas 5 en adelante */
-    .card__categories:nth-child(n+5) { display: none; }
 
     .header__card-categories {
         padding: 0.4rem 0.25rem;
