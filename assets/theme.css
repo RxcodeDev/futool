@@ -1152,24 +1152,58 @@
     .billing-link__nav { display: none; }
     .hamburger__nav { display: flex; }
 
+    /* Logo más compacto en móvil */
+    .img__search {
+        padding: 0.3rem 0.6rem;
+        height: 2.2rem;
+    }
+
+    /* Barra de búsqueda: ocupa el espacio disponible */
     .search__navigation {
         flex: 1;
         min-width: 0;
         transition: flex 0.25s ease;
     }
 
-    /* Expansión de búsqueda hasta el hamburger */
+    /* Input de búsqueda más compacto */
+    .search__navigation input {
+        padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    /* Ocultar favoritos y cuenta en móvil (solo carrito y hamburguesa visibles) */
+    .icon-action--heart,
+    .icon-action--person {
+        display: none;
+    }
+
+    /* Expansión de búsqueda: ocultar carrito también */
     .nav-inner.search-expanded .actions__navigation > *:not(.hamburger__nav) {
         display: none;
     }
 
-    .img__search { padding: 0.35rem 0.65rem; }
-
     .actions__navigation {
         display: flex;
-        gap: 0.6rem;
+        gap: 0.5rem;
         padding: 0;
         flex-shrink: 0;
+        align-items: center;
+    }
+
+    /* Carrito con badge — asegurar visibilidad */
+    .cart-link__nav {
+        position: relative;
+    }
+
+    /* Íconos de acción: tamaño adecuado en móvil */
+    .icon-action .icon {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+    #cart-count-badge {
+        font-size: 0.6rem;
+        min-width: 1.1rem;
+        height: 1.1rem;
     }
 
     /* ── Hero: ocupa toda la pantalla (menos el header ~52px) ── */
