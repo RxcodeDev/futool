@@ -1206,17 +1206,18 @@
         height: 1.1rem;
     }
 
-    /* ── Hero: ocupa toda la pantalla (menos el header ~52px) ── */
+    /* ── Hero: slider proporcional al ancho (fix corte horizontal) ── */
     .hero {
-        display: flex;
-        flex-direction: column;
-        height: calc(100svh - 52px);
+        display: block;
+        height: auto;
     }
 
     .hero-slider {
-        flex: 1;
-        min-height: 0;
+        /* aspect-ratio 16:9 para mostrar imágenes landscape sin recorte */
+        aspect-ratio: 16 / 9;
         height: auto;
+        min-height: 180px;
+        max-height: 280px;
     }
 
     /* Categorías: grid 3×2 fijo al fondo, altura calculada */

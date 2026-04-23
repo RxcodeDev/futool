@@ -30,6 +30,10 @@
         {%- assign slide_label = parts[1] -%}
         <div class="hero-slide">
           <picture>
+            {%- comment -%} Imagen móvil (portrait 750×1000px) si existe {%- endcomment -%}
+            <source media="(max-width: 640px)" srcset="{{ 'banner-' | append: slug | append: '-mobile.webp' | asset_url }}" type="image/webp">
+            <source media="(max-width: 640px)" srcset="{{ 'banner-' | append: slug | append: '-mobile.jpg' | asset_url }}">
+            {%- comment -%} Imagen desktop (landscape) {%- endcomment -%}
             <source srcset="{{ 'banner-' | append: slug | append: '.webp' | asset_url }}" type="image/webp">
             <img
               src="{{ 'banner-' | append: slug | append: '.jpg' | asset_url }}"
