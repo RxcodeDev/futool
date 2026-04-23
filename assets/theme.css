@@ -1232,6 +1232,7 @@
     /* Label CATEGORÍAS — oculto en desktop */
     .categories-label__hero {
         display: block;
+        width: 100%;
         text-align: left;
         font-size: 1rem;
         font-weight: 900;
@@ -1240,6 +1241,7 @@
         padding: 0.35rem 0.4rem 0.25rem;
         flex-shrink: 0;
         text-transform: uppercase;
+        align-self: stretch;
     }
 
     /* Categorías: grid 2×2 en móvil, botones encima sin ocupar espacio */
