@@ -1232,12 +1232,12 @@
     /* Label CATEGORÍAS — oculto en desktop */
     .categories-label__hero {
         display: block;
-        text-align: center;
-        font-size: 0.7rem;
+        text-align: left;
+        font-size: 0.75rem;
         font-weight: 700;
-        letter-spacing: 0.12em;
-        color: rgba(255,255,255,0.85);
-        padding: 0.3rem 0 0.2rem;
+        letter-spacing: 0.1em;
+        color: #111111;
+        padding: 0.3rem 0.2rem 0.2rem;
         flex-shrink: 0;
         text-transform: uppercase;
     }
