@@ -1054,6 +1054,25 @@
     font-size: 0.75rem;
 }
 
+.poweredby__footer {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--gray-900);
+    padding: 0.5rem 2rem 0.75rem;
+    font-size: 0.7rem;
+    color: var(--gray-400, #9ca3af);
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.poweredby-logo__footer {
+    height: 18px;
+    width: auto;
+    opacity: 0.8;
+}
+
 /* ── Shopify logo link (transparent to grid) ── */
 .logo-link {
     display: contents;
