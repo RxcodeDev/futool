@@ -148,6 +148,8 @@
           "type": "category_card",
           "settings": {
             "title": "PARIHUELA",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_PARIHUELA.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_PARIHUELA_webp.webp",
             "link": ""
           }
         },
@@ -155,6 +157,8 @@
           "type": "category_card",
           "settings": {
             "title": "SOPLADORAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_SOPLADORA.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_SOPLADORA_webp.webp",
             "link": ""
           }
         },
@@ -162,6 +166,8 @@
           "type": "category_card",
           "settings": {
             "title": "TRITURADORAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_TRITURADORA.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_TRITURADORA_webp.webp",
             "link": ""
           }
         }
