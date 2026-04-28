@@ -1,46 +1,24 @@
+{%- assign banner_blocks = section.blocks | where: 'type', 'banner_slide' -%}
 {%- assign category_blocks = section.blocks | where: 'type', 'category_card' -%}
-
-{%- comment -%} Resolver URLs de colecciones igual que el nav {%- endcomment -%}
-{%- assign hero_maq_col = blank -%}
-{%- assign hero_ref_url = '/collections/all' -%}
-{%- for _col in collections -%}
-  {%- assign _col_lower = _col.title | downcase -%}
-  {%- if _col_lower contains 'maquinaria' and hero_maq_col == blank -%}
-    {%- assign hero_maq_col = _col -%}
-  {%- endif -%}
-  {%- if _col_lower contains 'refaccion' and hero_ref_url == '/collections/all' -%}
-    {%- assign hero_ref_url = _col.url -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- assign hero_maq_url = hero_maq_col.url | default: '/collections/maquinaria' -%}
-
-{%- comment -%} Banner slides: slug|label (solo imágenes banner-*) {%- endcomment -%}
-{%- assign banner_slides = 'desbrozadora|Desbrozadoras,podadora|Podadoras,aspersores|Aspersores' | split: ',' -%}
-
-{%- comment -%} Categorías: slug_carrusel|has_webp|título|tipo(maq/ref)|tag {%- endcomment -%}
-{%- assign category_data = 'desbrozadora|1|DESBROZADORAS|maq|Desbrozadoras,refacciones-generales|0|REFACCIONES|ref|,podadora|0|PODADORAS|maq|Podadoras,motosierra|1|MOTOSIERRAS|maq|Motosierras,aspersor|1|ASPERSORES|maq|Aspersoras,motobomba|1|MOTOBOMBAS|maq|Motobombas,compresor|1|COMPRESORES|maq|Compresores,generador|1|GENERADORES|maq|Generadores,hidrolavadora|1|HIDROLAVADORAS|maq|Hidrolavadoras,motaladros|1|MOTOLADROS|maq|Motoladros,motocultor|1|MOTOCULTORES|maq|Motocultores,motor|1|MOTORES|maq|Motores,parihuela|0|PARIHUELA|maq|Parihuela,sopladora|0|SOPLADORAS|maq|Sopladoras,trituradora|0|TRITURADORAS|maq|Trituradoras' | split: ',' -%}
 
 <div class="hero">
   <div class="hero-slider" id="hero-slider">
 
     <div class="hero-track" id="hero-track">
-      {%- for item in banner_slides -%}
-        {%- assign parts = item | split: '|' -%}
-        {%- assign slug = parts[0] -%}
-        {%- assign slide_label = parts[1] -%}
-        <div class="hero-slide">
-          <picture>
-            {%- comment -%} Imagen móvil (portrait 750×1000px) si existe {%- endcomment -%}
-            <source media="(max-width: 640px)" srcset="{{ 'banner-' | append: slug | append: '-mobile.webp' | asset_url }}" type="image/webp">
-            <source media="(max-width: 640px)" srcset="{{ 'banner-' | append: slug | append: '-mobile.jpg' | asset_url }}">
-            {%- comment -%} Imagen desktop (landscape) {%- endcomment -%}
-            <source srcset="{{ 'banner-' | append: slug | append: '.webp' | asset_url }}" type="image/webp">
-            <img
-              src="{{ 'banner-' | append: slug | append: '.jpg' | asset_url }}"
-              alt="{{ slide_label }}"
-              {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
-            >
-          </picture>
+      {%- for block in banner_blocks -%}
+        <div class="hero-slide" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <picture>
+              {%- if block.settings.mobile_image != blank -%}
+                <source media="(max-width: 640px)" srcset="{{ block.settings.mobile_image | image_url: width: 750 }}">
+              {%- endif -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 1920 }}"
+                alt="{{ block.settings.label | escape }}"
+                {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+              >
+            </picture>
+          {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
@@ -49,7 +27,7 @@
     <button class="hero-next" id="hero-next" aria-label="Siguiente">&#8250;</button>
 
     <div class="hero-slider__dots" id="hero-dots">
-      {%- for item in banner_slides -%}
+      {%- for block in banner_blocks -%}
         <button
           class="hero-dot{% if forloop.first %} is-active{% endif %}"
           data-index="{{ forloop.index0 }}"
@@ -65,41 +43,18 @@
     <button class="cat-btn cat-btn-prev" id="cat-prev" aria-label="Anterior">&#8249;</button>
     <div class="cat-viewport">
     <div class="cat-track" id="cat-track">
-    {%- for item in category_data -%}
-      {%- assign cparts = item | split: '|' -%}
-      {%- assign cslug = cparts[0] -%}
-      {%- assign cwebp = cparts[1] -%}
-      {%- assign ctitle = cparts[2] -%}
-      {%- comment -%} Buscar bloque con el mismo título para obtener el link {%- endcomment -%}
-      {%- assign ctype = cparts[3] -%}
-      {%- assign ctag  = cparts[4] -%}
-      {%- if ctype == 'ref' -%}
-        {%- assign clink = hero_ref_url -%}
-      {%- elsif ctag != blank -%}
-        {%- assign clink = hero_maq_url | append: '/' | append: ctag -%}
-      {%- else -%}
-        {%- assign clink = hero_maq_url -%}
-      {%- endif -%}
-      <a class="card__categories" href="{{ clink }}">
+    {%- for block in category_blocks -%}
+      {%- assign clink = block.settings.link | default: '/collections/all' -%}
+      <a class="card__categories" href="{{ clink }}" {{ block.shopify_attributes }}>
         <div class="header__card-categories">
-          <h3>{{ ctitle }}</h3>
+          <h3>{{ block.settings.title }}</h3>
         </div>
         <div class="body__card-categories">
-          {%- if cwebp == '1' -%}
-            <picture>
-              <source srcset="{{ 'carrusel-' | append: cslug | append: '.webp' | asset_url }}" type="image/webp">
-              <img
-                class="img__card-categories"
-                src="{{ 'carrusel-' | append: cslug | append: '.jpg' | asset_url }}"
-                alt="{{ ctitle }}"
-                loading="lazy"
-              >
-            </picture>
-          {%- else -%}
+          {%- if block.settings.image != blank -%}
             <img
               class="img__card-categories"
-              src="{{ 'carrusel-' | append: cslug | append: '.jpg' | asset_url }}"
-              alt="{{ ctitle }}"
+              src="{{ block.settings.image | image_url: width: 400 }}"
+              alt="{{ block.settings.title | escape }}"
               loading="lazy"
             >
           {%- endif -%}
@@ -257,6 +212,28 @@
   "settings": [],
   "blocks": [
     {
+      "type": "banner_slide",
+      "name": "Diapositiva del banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Imagen móvil (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta / Alt",
+          "default": "Banner"
+        }
+      ]
+    },
+    {
       "type": "category_card",
       "name": "Tarjeta de categoría",
       "settings": [
@@ -279,11 +256,12 @@
       ]
     }
   ],
-  "max_blocks": 12,
+  "max_blocks": 30,
   "presets": [
     {
       "name": "Hero Banner",
       "blocks": [
+        { "type": "banner_slide", "settings": { "label": "Banner 1" } },
         { "type": "category_card", "settings": { "title": "DESBROZADORAS" } },
         { "type": "category_card", "settings": { "title": "REFACCIONES" } },
         { "type": "category_card", "settings": { "title": "PODADORAS" } },
