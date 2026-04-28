@@ -1111,57 +1111,101 @@
     display: none;
     flex-direction: column;
     background-color: var(--navy-900);
-    border-top: 1px solid var(--white-alpha-20);
+    border-top: 2px solid var(--white-alpha-20);
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 999;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
 }
 .mobile-nav.is-open { display: flex; }
-.mobile-nav ul { list-style: none; padding: 0; margin: 0; }
+.mobile-nav > ul { list-style: none; padding: 0; margin: 0; width: 100%; }
+
+/* Cada ítem de primer nivel */
+.mobile-nav__item {
+    border-bottom: 1px solid var(--white-alpha-10);
+}
+
+/* Ítem simple (sin dropdown) */
 .mobile-nav__item > a {
     display: block;
-    padding: 0.9rem 1.25rem;
+    padding: 1rem 1.5rem;
     color: var(--white);
     text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--white-alpha-10);
+    letter-spacing: 0.06em;
+    background-color: transparent;
     transition: background-color 0.15s;
 }
-.mobile-nav__item > a:hover { background-color: var(--navy-600); }
-.mobile-nav__sub { background-color: var(--navy-950); display: none; }
-.mobile-nav__sub.is-open { display: block; }
+.mobile-nav__item > a:hover,
+.mobile-nav__item > a:active { background-color: var(--navy-700); }
+
+/* Fila con chevron (MAQUINARIAS / REFACCIONES) */
 .mobile-nav__parent {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: stretch;
 }
-.mobile-nav__parent > a { flex: 1; }
+.mobile-nav__parent > a {
+    flex: 1;
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: background-color 0.15s;
+}
+.mobile-nav__parent > a:hover { background-color: var(--navy-700); }
 .mobile-nav__toggle {
     background: none;
     border: none;
+    border-left: 1px solid var(--white-alpha-10);
     cursor: pointer;
     color: var(--white);
-    padding: 0.9rem 1.25rem;
+    padding: 0 1.1rem;
     display: flex;
     align-items: center;
-    transition: transform 0.2s;
+    transition: background-color 0.15s;
+    flex-shrink: 0;
 }
-.mobile-nav__toggle.is-rotated { transform: rotate(180deg); }
+.mobile-nav__toggle svg { transition: transform 0.25s ease; }
+.mobile-nav__toggle.is-rotated svg { transform: rotate(180deg); }
+.mobile-nav__toggle:hover { background-color: var(--navy-700); }
+
+/* Submenú desplegable */
+.mobile-nav__sub {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--navy-950);
+    border-top: 1px solid var(--white-alpha-10);
+}
+.mobile-nav__sub.is-open { display: block; }
+.mobile-nav__sub li { border-bottom: 1px solid var(--white-alpha-10); }
+.mobile-nav__sub li:last-child { border-bottom: none; }
 .mobile-nav__sub li a {
     display: block;
-    padding: 0.6rem 2rem;
-    color: var(--white);
+    padding: 0.75rem 2rem;
+    color: rgba(255,255,255,0.82);
     text-decoration: none;
     font-size: 0.85rem;
-    border-bottom: 1px solid var(--white-alpha-10);
+    font-weight: 400;
+    transition: background-color 0.15s, color 0.15s;
 }
-.mobile-nav__sub li a:hover { background-color: var(--navy-700); }
+.mobile-nav__sub li a:hover,
+.mobile-nav__sub li a:active {
+    background-color: var(--navy-700);
+    color: var(--white);
+}
+
 .billing-link__nav { font-size: 0.8rem; white-space: nowrap; }
 
 /* ═══════════════════════════════════════════════════════════════
