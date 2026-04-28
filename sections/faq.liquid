@@ -1,0 +1,140 @@
+{%- assign faq_blocks = section.blocks | where: 'type', 'faq_item' -%}
+
+{%- if contact.posted_successfully? -%}
+<div class="form-confirm">
+  <div class="form-confirm__box">
+    <div class="form-confirm__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    </div>
+    <h1 class="form-confirm__title">¡Pregunta enviada!</h1>
+    <p class="form-confirm__msg">Recibimos tu pregunta y te responderemos al correo que nos proporcionaste a la brevedad posible.</p>
+    <a href="{{ page.url }}" class="form-confirm__btn">Ver más preguntas</a>
+  </div>
+</div>
+{%- else -%}
+<div class="faq-page">
+
+  <div class="faq-page__header">
+    <h1 class="faq-page__title">{{ page.title }}</h1>
+    <p class="faq-page__sub">{{ section.settings.subtitle }}</p>
+  </div>
+
+  <div class="faq-page__layout">
+
+    <!-- Columna izquierda: FAQs -->
+    <div class="faq-page__left">
+      <h2 class="faq-section-title">{{ section.settings.section_title }}</h2>
+
+      <div class="faq-list">
+        {%- for block in faq_blocks -%}
+          {%- if block.settings.question != blank -%}
+            <details class="faq-item" {{ block.shopify_attributes }}>
+              <summary class="faq-question">
+                <span>{{ block.settings.question }}</span>
+                <svg class="faq-arrow icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </summary>
+              <div class="faq-answer">
+                {{ block.settings.answer }}
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Columna derecha: Formulario -->
+    <div class="faq-page__right">
+      <div class="faq-form-card">
+        <h2 class="faq-form-card__title">{{ section.settings.form_title }}</h2>
+        <p class="faq-form-card__sub">{{ section.settings.form_subtitle }}</p>
+
+        {%- form 'contact', id: 'faq-form', class: 'faq-form' -%}
+            <input type="hidden" name="contact[tags]" value="pregunta-pagina-faq">
+
+            <div class="faq-form__field">
+              <label for="faq-name" class="faq-form__label">Nombre <span class="faq-form__req">*</span></label>
+              <input type="text" id="faq-name" name="contact[name]" class="faq-form__input" placeholder="Tu nombre" required autocomplete="name">
+            </div>
+
+            <div class="faq-form__field">
+              <label for="faq-email" class="faq-form__label">Correo electrónico <span class="faq-form__req">*</span></label>
+              <input type="email" id="faq-email" name="contact[email]" class="faq-form__input" placeholder="correo@ejemplo.com" required autocomplete="email">
+            </div>
+
+            <div class="faq-form__field">
+              <label for="faq-question" class="faq-form__label">Tu pregunta <span class="faq-form__req">*</span></label>
+              <textarea id="faq-question" name="contact[body]" class="faq-form__textarea" placeholder="Escribe aquí tu pregunta..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="faq-form__btn">
+              Enviar pregunta
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        {%- endform -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Preguntas Frecuentes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo de la página",
+      "default": "Encuentra respuestas a las preguntas más frecuentes o envíanos la tuya"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título de la sección FAQ",
+      "default": "Preguntas frecuentes"
+    },
+    {
+      "type": "header",
+      "content": "Formulario de contacto"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Título del formulario",
+      "default": "¿No encontraste tu respuesta?"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Subtítulo del formulario",
+      "default": "Envíanos tu pregunta y te respondemos a la brevedad"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pregunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "¿Escribe aquí tu pregunta?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>Escribe aquí la respuesta.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preguntas Frecuentes"
+    }
+  ]
+}
+{% endschema %}

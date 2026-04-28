@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿En qué zonas hacen entregas?",
+            "answer": "<p>Realizamos envíos a toda la República Mexicana a través de paquetería certificada. Los tiempos de entrega varían de 3 a 7 días hábiles dependiendo de la zona.<\/p>"
+          }
+        },
+        "faq2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo puedo rastrear mi pedido?",
+            "answer": "<p>Una vez enviado tu pedido recibirás un correo con el número de guía y la paquetería asignada. Puedes rastrear tu envío directamente en el sitio de la paquetería.<\/p>"
+          }
+        },
+        "faq3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué formas de pago aceptan?",
+            "answer": "<p>Aceptamos pagos con tarjeta de crédito y débito (Visa, Mastercard, Amex), transferencia bancaria, depósito en OXXO y a través de Mercado Pago.<\/p>"
+          }
+        },
+        "faq4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Ofrecen garantía en sus productos?",
+            "answer": "<p>Sí, todos nuestros productos cuentan con garantía del fabricante. El periodo varía según la marca y el tipo de producto. Puedes consultar la garantía específica en la ficha de cada artículo.<\/p>"
+          }
+        },
+        "faq5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo hacer devoluciones?",
+            "answer": "<p>Aceptamos devoluciones dentro de los 30 días naturales posteriores a la recepción del producto, siempre que se encuentre en su empaque original y sin uso. Contáctanos para iniciar el proceso.<\/p>"
+          }
+        },
+        "faq6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Venden refacciones para todas las marcas?",
+            "answer": "<p>Contamos con refacciones para la mayoría de las marcas que distribuimos. Si no encuentras la pieza que necesitas en nuestra tienda, contáctanos y la buscamos para ti.<\/p>"
+          }
+        },
+        "faq7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Ofrecen servicio técnico o mantenimiento?",
+            "answer": "<p>Contamos con técnicos certificados en nuestros centros de servicio. Puedes llevar tu equipo directamente o contactarnos para coordinar la revisión.<\/p>"
+          }
+        },
+        "faq8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Hacen factura electrónica?",
+            "answer": "<p>Sí, emitimos facturas electrónicas (CFDI). Para solicitarla, utiliza el enlace de facturación disponible en el encabezado de la tienda o contáctanos con los datos fiscales.<\/p>"
+          }
+        }
+      },
+      "block_order": ["faq1", "faq2", "faq3", "faq4", "faq5", "faq6", "faq7", "faq8"],
+      "settings": {
+        "subtitle": "Encuentra respuestas a las preguntas más frecuentes o envíanos la tuya",
+        "section_title": "Preguntas frecuentes",
+        "form_title": "¿No encontraste tu respuesta?",
+        "form_subtitle": "Envíanos tu pregunta y te respondemos a la brevedad"
+      }
+    }
+  },
+  "order": ["faq"]
+}
