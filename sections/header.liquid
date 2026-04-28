@@ -114,8 +114,16 @@
   <!-- Mobile nav drawer -->
   <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
     <ul>
+      <li class="mobile-nav__item">
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">MI PERFIL</a>
+      </li>
       <li class="mobile-nav__item has-children">
-        <a href="{{ nav_maquinaria_url }}">Maquinarias</a>
+        <div class="mobile-nav__parent">
+          <a href="{{ nav_maquinaria_url }}">MAQUINARIAS</a>
+          <button class="mobile-nav__toggle" aria-expanded="false" aria-label="Expandir Maquinarias">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
         <ul class="mobile-nav__sub">
           {%- for tag in nav_maquinaria_col.all_tags -%}
             <li><a href="{{ nav_maquinaria_col.url }}/{{ tag | handle }}">{{ tag }}</a></li>
@@ -123,7 +131,12 @@
         </ul>
       </li>
       <li class="mobile-nav__item has-children">
-        <a href="{{ nav_refacciones_url }}">Refacciones</a>
+        <div class="mobile-nav__parent">
+          <a href="{{ nav_refacciones_url }}">REFACCIONES</a>
+          <button class="mobile-nav__toggle" aria-expanded="false" aria-label="Expandir Refacciones">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
         <ul class="mobile-nav__sub">
           {%- assign seen_ref_cats_m = "" -%}
           {%- assign ref_col_handles_m = nav_refacciones_cols | split: "||" -%}
@@ -138,9 +151,9 @@
           {%- endfor -%}
         </ul>
       </li>
-      <li class="mobile-nav__item"><a href="/pages/nuestras-marcas">Nuestras Marcas</a></li>
-      <li class="mobile-nav__item"><a href="/pages/preguntas-y-respuestas">Preguntas y Respuestas</a></li>
-      <li class="mobile-nav__item"><a href="/pages/distribuidores">Distribuidores</a></li>
+      <li class="mobile-nav__item"><a href="/pages/nuestras-marcas">NUESTRAS MARCAS</a></li>
+      <li class="mobile-nav__item"><a href="/pages/preguntas-y-respuestas">PREGUNTAS Y RESPUESTAS</a></li>
+      <li class="mobile-nav__item"><a href="/pages/distribuidores">DISTRIBUIDORES</a></li>
     </ul>
   </nav>
 </header>
@@ -155,6 +168,16 @@
     btn.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open);
     nav.setAttribute('aria-hidden', !open);
+  });
+
+  // Toggle submenus en mobile
+  nav.querySelectorAll('.mobile-nav__toggle').forEach(function(toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      var sub = this.closest('.mobile-nav__item').querySelector('.mobile-nav__sub');
+      var isOpen = sub.classList.toggle('is-open');
+      this.setAttribute('aria-expanded', isOpen);
+      this.classList.toggle('is-rotated', isOpen);
+    });
   });
 
   // Multicolumn dropdown cuando hay más de 10 items
