@@ -96,7 +96,7 @@
   --search-logo-bg:   rgba(200, 205, 220, 0.45);
   --search-input-bg:  #ffffff;
   /*Degradado de blanco */
-  --gradient-white: linear-gradient(0deg, rgb(233, 230, 230) 0%, rgba(255, 255, 255, 0) 45%);
+  --gradient-white: linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.85) 18%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0) 55%);
 
   /* Product card */
   --card-bg:            #ffffff;
