@@ -15,18 +15,24 @@
         "slide1": {
           "type": "banner_slide",
           "settings": {
+            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_ASPERSORES_webp.jpg",
+            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_ASPERSORES_webp.jpg",
             "label": "Banner 1"
           }
         },
         "slide2": {
           "type": "banner_slide",
           "settings": {
+            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_DESBROZADORA_webp.jpg",
+            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_DESBROZADORA_webp.jpg",
             "label": "Banner 2"
           }
         },
         "slide3": {
           "type": "banner_slide",
           "settings": {
+            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_PODADORA_webp.jpg",
+            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_PODADORA_webp.jpg",
             "label": "Banner 3"
           }
         },
@@ -96,6 +102,7 @@
     "advertising": {
       "type": "advertising-banner",
       "settings": {
+        "image": "shopify://shop_images/WEB_futool_Banner_publicitario_1920_x_490px_webp.jpg",
         "link": ""
       }
     },
@@ -106,6 +113,7 @@
           "type": "offer_image",
           "settings": {
             "image": "shopify://shop_images/420_x_552px_WEB_promocion_Aspersora_KWA350_webp.jpg",
+            "image_mobile": "shopify://shop_images/PHONE_420_x_552px_WEB_promocion_Aspersora_KWA350.jpg",
             "link": "https://futoolmexico.com/products/aspersora-fumigadora-kawano-kwa350-1-hp-25l-gx35?_pos=6&_psq=aspersora+ka&_ss=e&_v=1.0"
           }
         },
@@ -113,6 +121,7 @@
           "type": "offer_image",
           "settings": {
             "image": "shopify://shop_images/1606_x_668px_WEB_Desbrozadora_PZ-530A_webp.jpg",
+            "image_mobile": "shopify://shop_images/PHONE_750_x_355px_Desbrozadora_PZ-530A.jpg",
             "link": ""
           }
         },
@@ -127,6 +136,7 @@
           "type": "offer_image",
           "settings": {
             "image": "shopify://shop_images/789_x_630px_WEB_2_llave_webp.jpg",
+            "image_mobile": "shopify://shop_images/PHONE_750_x_670px_WEB_llave_de_paso.jpg",
             "link": "https://futoolmexico.com/products/llave-de-paso-universal?_pos=1&_psq=llave+univers&_ss=e&_v=1.0"
           }
         },
@@ -134,6 +144,7 @@
           "type": "offer_image",
           "settings": {
             "image": "shopify://shop_images/789_x_630px_WEB_3_mini_soldadora_webp_8eec5294-bb94-4256-bed6-cfebe5e5609a.jpg",
+            "image_mobile": "shopify://shop_images/PHONE_750_x_670px_WEB_mini_soldadora.jpg",
             "link": "https://futoolmexico.com/products/mini-soldadora-inversora-palezzi-pz-130-130-a?_pos=1&_psq=mini&_ss=e&_v=1.0"
           }
         }
@@ -150,6 +161,7 @@
     "mercadolibre": {
       "type": "mercadolibre-banner",
       "settings": {
+        "image": "shopify://shop_images/WEB_futool_Banner_mercado_libre_1920x380px_webp.jpg",
         "url": ""
       }
     },
