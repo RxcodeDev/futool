@@ -40,6 +40,8 @@
           "type": "category_card",
           "settings": {
             "title": "DESBROZADORAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_DESBROZADORA_webp.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_DESBROZADORA_webp.webp",
             "link": ""
           }
         },
@@ -47,6 +49,8 @@
           "type": "category_card",
           "settings": {
             "title": "REFACCIONES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_REFACCIONES_GENRALES.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_REFACCIONES_GENRALES_webp.webp",
             "link": ""
           }
         },
@@ -54,6 +58,8 @@
           "type": "category_card",
           "settings": {
             "title": "PODADORAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_PODADORA.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_PODADORA_webp.webp",
             "link": ""
           }
         },
@@ -61,6 +67,8 @@
           "type": "category_card",
           "settings": {
             "title": "MOTOSIERRAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_MOTOSIERRA_webp.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_MOTOSIERRA.webp",
             "link": ""
           }
         },
