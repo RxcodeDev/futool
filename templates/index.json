@@ -129,6 +129,7 @@
           "type": "offer_image",
           "settings": {
             "image": "shopify://shop_images/789_x_630px_WEB_1_cabezal_webp.jpg",
+            "image_mobile": "shopify://shop_images/PHONE_750_x_670px_WEB_mini_soldadora_e7415ef0-9e44-4f2b-a1b0-7f98517019c2.jpg",
             "link": ""
           }
         },
