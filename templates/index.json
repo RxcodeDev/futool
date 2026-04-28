@@ -12,6 +12,24 @@
     "hero": {
       "type": "hero",
       "blocks": {
+        "slide1": {
+          "type": "banner_slide",
+          "settings": {
+            "label": "Banner 1"
+          }
+        },
+        "slide2": {
+          "type": "banner_slide",
+          "settings": {
+            "label": "Banner 2"
+          }
+        },
+        "slide3": {
+          "type": "banner_slide",
+          "settings": {
+            "label": "Banner 3"
+          }
+        },
         "cat1": {
           "type": "category_card",
           "settings": {
@@ -56,6 +74,9 @@
         }
       },
       "block_order": [
+        "slide1",
+        "slide2",
+        "slide3",
         "cat1",
         "cat2",
         "cat3",
