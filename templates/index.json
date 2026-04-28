@@ -77,6 +77,69 @@
             "title": "MOTOBOMBAS",
             "link": ""
           }
+        },
+        "cat7": {
+          "type": "category_card",
+          "settings": {
+            "title": "COMPRESORES",
+            "link": ""
+          }
+        },
+        "cat8": {
+          "type": "category_card",
+          "settings": {
+            "title": "GENERADORES",
+            "link": ""
+          }
+        },
+        "cat9": {
+          "type": "category_card",
+          "settings": {
+            "title": "HIDROLAVADORAS",
+            "link": ""
+          }
+        },
+        "cat10": {
+          "type": "category_card",
+          "settings": {
+            "title": "MOTOLADROS",
+            "link": ""
+          }
+        },
+        "cat11": {
+          "type": "category_card",
+          "settings": {
+            "title": "MOTOCULTORES",
+            "link": ""
+          }
+        },
+        "cat12": {
+          "type": "category_card",
+          "settings": {
+            "title": "MOTORES",
+            "link": ""
+          }
+        },
+        "cat13": {
+          "type": "category_card",
+          "settings": {
+            "title": "PARIHUELA",
+            "link": ""
+          }
+        },
+        "cat14": {
+          "type": "category_card",
+          "settings": {
+            "title": "SOPLADORAS",
+            "link": ""
+          }
+        },
+        "cat15": {
+          "type": "category_card",
+          "settings": {
+            "title": "TRITURADORAS",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -88,7 +151,16 @@
         "cat3",
         "cat4",
         "cat5",
-        "cat6"
+        "cat6",
+        "cat7",
+        "cat8",
+        "cat9",
+        "cat10",
+        "cat11",
+        "cat12",
+        "cat13",
+        "cat14",
+        "cat15"
       ],
       "settings": {}
     },
