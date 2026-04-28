@@ -50,13 +50,20 @@
           <h3>{{ block.settings.title }}</h3>
         </div>
         <div class="body__card-categories">
-          {%- if block.settings.image != blank -%}
-            <img
-              class="img__card-categories"
-              src="{{ block.settings.image | image_url: width: 400 }}"
-              alt="{{ block.settings.title | escape }}"
-              loading="lazy"
-            >
+          {%- if block.settings.image != blank or block.settings.mobile_image != blank -%}
+            <picture>
+              {%- if block.settings.mobile_image != blank -%}
+                <source media="(max-width: 640px)" srcset="{{ block.settings.mobile_image | image_url: width: 400 }}">
+              {%- elsif block.settings.image != blank -%}
+                <source media="(max-width: 640px)" srcset="{{ block.settings.image | image_url: width: 400 }}">
+              {%- endif -%}
+              <img
+                class="img__card-categories"
+                src="{{ block.settings.image | default: block.settings.mobile_image | image_url: width: 400 }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+              >
+            </picture>
           {%- endif -%}
         </div>
       </a>
@@ -246,7 +253,12 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Imagen"
+          "label": "Imagen desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Imagen m\u00f3vil (opcional)"
         },
         {
           "type": "url",
