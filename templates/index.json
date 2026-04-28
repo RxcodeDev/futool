@@ -76,6 +76,8 @@
           "type": "category_card",
           "settings": {
             "title": "ASPERSORES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_ASPERSOR_webp_6767504e-9ca3-4e94-91b7-8dd919b9c9fe.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_ASPERSOR_webp_e62ac647-be59-4a75-96b0-ab55d2879e08.webp",
             "link": ""
           }
         },
@@ -83,6 +85,8 @@
           "type": "category_card",
           "settings": {
             "title": "MOTOBOMBAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_MOTOBOMBA_webp_48ca4e90-92e0-4e9c-af6c-b861b5e8046b.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_MOTOBOMBA_webp_6e509da3-b279-4019-96d4-36fa99428310.webp",
             "link": ""
           }
         },
@@ -90,6 +94,8 @@
           "type": "category_card",
           "settings": {
             "title": "COMPRESORES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_COMPRESOR_webp_dce71101-72ac-480d-9304-040806533af4.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_COMPRESOR_webp_2461c0fc-282f-4e0b-9d0b-8dfee0638fa6.webp",
             "link": ""
           }
         },
@@ -97,6 +103,8 @@
           "type": "category_card",
           "settings": {
             "title": "GENERADORES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_GENERADOR_webp_0801cde9-dbf3-49b9-95bc-0dab5dc9b5f3.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_GENERADOR_webp_d14df410-553e-4580-bd90-86ca854c4942.webp",
             "link": ""
           }
         },
@@ -104,6 +112,8 @@
           "type": "category_card",
           "settings": {
             "title": "HIDROLAVADORAS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_HIDROLAVADORA_webp_267d8367-d9a5-40e6-b294-a9ef0d77d7fa.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_HIDROLAVADORA_webp_99dcf27b-db31-4d15-8f24-97f3e5424ed3.webp",
             "link": ""
           }
         },
@@ -111,6 +121,8 @@
           "type": "category_card",
           "settings": {
             "title": "MOTOTALADROS",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_MOTALADROS_webp.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_MOTALADROS_webp.webp",
             "link": ""
           }
         },
@@ -118,6 +130,8 @@
           "type": "category_card",
           "settings": {
             "title": "MOTOCULTORES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_MOTOCULTOR_webp.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_MOTOCULTOR_webp.webp",
             "link": ""
           }
         },
@@ -125,6 +139,8 @@
           "type": "category_card",
           "settings": {
             "title": "MOTORES",
+            "image": "shopify://shop_images/WEB_tarjetas_400_x_700px_MOTOR_webp.jpg",
+            "mobile_image": "shopify://shop_images/PHONE_WEB_cards_400px_MOTOR_webp.webp",
             "link": ""
           }
         },
