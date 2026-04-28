@@ -186,25 +186,32 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 3;
-    background: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
     border: none;
     border-radius: 50%;
     width: 48px;
     height: 48px;
     font-size: 2.2rem;
     line-height: 1;
-    color: #fff;
+    color: rgba(255,255,255,0.3);
     cursor: pointer;
-    transition: background 0.2s;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.2s, color 0.2s;
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.hero-slider:hover .hero-prev,
+.hero-slider:hover .hero-next {
+    opacity: 1;
+    color: #fff;
+}
+
 .hero-prev:hover,
 .hero-next:hover {
-    background: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.28);
 }
 
 .hero-prev { left: 1.5rem; }
