@@ -1260,8 +1260,7 @@
         font-size: 0.875rem;
     }
 
-    /* Ocultar favoritos y cuenta en móvil (solo carrito y hamburguesa visibles) */
-    .icon-action--heart,
+    /* Ocultar cuenta en móvil (solo carrito, favoritos y hamburguesa visibles) */
     .icon-action--person {
         display: none;
     }
