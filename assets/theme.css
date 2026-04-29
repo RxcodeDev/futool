@@ -1260,7 +1260,10 @@
         font-size: 0.875rem;
     }
 
-    /* Ocultar cuenta en móvil (solo carrito, favoritos y hamburguesa visibles) */
+    /* Ocultar corazón y persona en móvil */
+    .icon-action--heart {
+        display: none;
+    }
     .icon-action--person {
         display: none;
     }
