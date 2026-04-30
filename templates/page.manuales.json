@@ -15,53 +15,123 @@
         "card-motosierras": {
           "type": "category_card",
           "settings": {
-            "category_title": "MOTOSIERRAS",
-            "category_url": ""
-          }
-        },
-        "card-desbrozadoras": {
-          "type": "category_card",
-          "settings": {
             "category_title": "DESBROZADORAS",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Desbrozadoras.webp",
             "category_url": ""
           }
         },
         "card-motocultores": {
           "type": "category_card",
           "settings": {
-            "category_title": "MOTOCULTORES",
+            "category_title": "PODADORAS",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Podadoras.webp",
             "category_url": ""
           }
         },
         "card-mototaladros": {
           "type": "category_card",
           "settings": {
-            "category_title": "MOTOTALADROS",
+            "category_title": "MOTOSIERRAS",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Motosierras.webp",
             "category_url": ""
           }
         },
         "card-podadoras": {
           "type": "category_card",
           "settings": {
-            "category_title": "PODADORAS",
+            "category_title": "ASPERSORES",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Aspersores.webp",
             "category_url": ""
           }
         },
         "card-triturador": {
           "type": "category_card",
           "settings": {
-            "category_title": "TRITURADOR",
+            "category_title": "MOTOBOMBAS",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Motobombas.webp",
+            "category_url": ""
+          }
+        },
+        "category_card_egneW6": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "COMPRESORES",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Compresores.webp",
+            "category_url": ""
+          }
+        },
+        "category_card_7MgTLz": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "GENERADORES",
+            "category_url": ""
+          }
+        },
+        "category_card_fhThbX": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "HIDROLAVADORAS",
+            "category_url": ""
+          }
+        },
+        "category_card_77Dmdi": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTOTALADROS",
+            "category_url": ""
+          }
+        },
+        "category_card_XRyXWB": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTOCULTORES",
+            "category_url": ""
+          }
+        },
+        "category_card_aQPq6i": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTORES",
+            "category_url": ""
+          }
+        },
+        "category_card_ciiMBU": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "PARIHUELA",
+            "category_url": ""
+          }
+        },
+        "category_card_RrMWAW": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "SOPLADORAS",
+            "category_url": ""
+          }
+        },
+        "category_card_NeD3QW": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "TRITURADORAS",
             "category_url": ""
           }
         }
       },
       "block_order": [
         "card-motosierras",
-        "card-desbrozadoras",
         "card-motocultores",
         "card-mototaladros",
         "card-podadoras",
-        "card-triturador"
+        "card-triturador",
+        "category_card_egneW6",
+        "category_card_7MgTLz",
+        "category_card_fhThbX",
+        "category_card_77Dmdi",
+        "category_card_XRyXWB",
+        "category_card_aQPq6i",
+        "category_card_ciiMBU",
+        "category_card_RrMWAW",
+        "category_card_NeD3QW"
       ],
       "settings": {
         "page_title": "MANUALES",
@@ -69,5 +139,7 @@
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
