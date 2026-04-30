@@ -12,6 +12,21 @@
     "main": {
       "type": "page-manual-categoria",
       "blocks": {
+        "category_xnfnYr": {
+          "type": "category",
+          "settings": {
+            "slug": "mi-categoria",
+            "category_name": "Generadores",
+            "machine_description": "<p>Descripción de la máquina o categoría.</p>",
+            "manual_pdf_url": "",
+            "video_1": "",
+            "video_2": "",
+            "video_3": "",
+            "video_4": "",
+            "video_5": "",
+            "video_6": ""
+          }
+        },
         "category_jhKcnd": {
           "type": "category",
           "settings": {
@@ -29,6 +44,7 @@
         }
       },
       "block_order": [
+        "category_xnfnYr",
         "category_jhKcnd"
       ],
       "settings": {}
