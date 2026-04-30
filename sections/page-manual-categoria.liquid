@@ -26,6 +26,10 @@
           <a class="pmc__pdf-btn" href="{{ block.settings.manual_pdf_url }}" target="_blank" rel="noopener noreferrer">
             DESCARGA AQU&Iacute; EL MANUAL
           </a>
+        {%- else -%}
+          <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">
+            DESCARGA AQU&Iacute; EL MANUAL
+          </span>
         {%- endif -%}
       </div>
       <div class="pmc__image-col">
@@ -37,39 +41,40 @@
       </div>
     </div>
     <!-- Videos -->
-    {%- assign has_videos = false -%}
-    {%- for i in (1..6) -%}
-      {%- assign vid_key = 'video_' | append: i -%}
-      {%- if block.settings[vid_key] != blank -%}{%- assign has_videos = true -%}{%- endif -%}
-    {%- endfor -%}
-    {%- if has_videos -%}
-      <div class="pmc__videos">
-        <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
-        <div class="pmc__videos-grid">
-          {%- for i in (1..6) -%}
-            {%- assign vid_key = 'video_' | append: i -%}
-            {%- assign raw_url = block.settings[vid_key] | strip -%}
-            {%- if raw_url != blank -%}
-              {%- assign video_id = '' -%}
-              {%- if raw_url contains 'youtu.be/' -%}
-                {%- assign video_id = raw_url | split: 'youtu.be/' | last | split: '?' | first | strip -%}
-              {%- elsif raw_url contains '?v=' -%}
-                {%- assign video_id = raw_url | split: '?v=' | last | split: '&' | first | strip -%}
-              {%- elsif raw_url contains '&v=' -%}
-                {%- assign video_id = raw_url | split: '&v=' | last | split: '&' | first | strip -%}
-              {%- endif -%}
-              {%- if video_id != blank -%}
-                <div class="pmc__video-item">
-                  <div class="pmc__video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/{{ video_id }}" title="{{ block.settings.category_name | escape }} – Video {{ i }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                  </div>
-                </div>
-              {%- endif -%}
+    <div class="pmc__videos">
+      <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
+      <div class="pmc__videos-grid">
+        {%- for i in (1..6) -%}
+          {%- assign vid_key = 'video_' | append: i -%}
+          {%- assign raw_url = block.settings[vid_key] | strip -%}
+          {%- if raw_url != blank -%}
+            {%- assign video_id = '' -%}
+            {%- if raw_url contains 'youtu.be/' -%}
+              {%- assign video_id = raw_url | split: 'youtu.be/' | last | split: '?' | first | strip -%}
+            {%- elsif raw_url contains '?v=' -%}
+              {%- assign video_id = raw_url | split: '?v=' | last | split: '&' | first | strip -%}
+            {%- elsif raw_url contains '&v=' -%}
+              {%- assign video_id = raw_url | split: '&v=' | last | split: '&' | first | strip -%}
             {%- endif -%}
-          {%- endfor -%}
-        </div>
+            {%- if video_id != blank -%}
+              <div class="pmc__video-item">
+                <div class="pmc__video-wrapper">
+                  <iframe src="https://www.youtube.com/embed/{{ video_id }}" title="{{ block.settings.category_name | escape }} \u2013 Video {{ i }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </div>
+            {%- else -%}
+              <div class="pmc__video-item pmc__video-item--soon">
+                <div class="pmc__video-soon"><span>PR&Oacute;XIMAMENTE</span></div>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            <div class="pmc__video-item pmc__video-item--soon">
+              <div class="pmc__video-soon"><span>PR&Oacute;XIMAMENTE</span></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
-    {%- endif -%}
+    </div>
   </div>
 {%- endfor -%}
 
@@ -183,9 +188,9 @@
   .pmc__pdf-btn {
     display: inline-block;
     padding: 0.6em 1.4em;
-    background: var(--pmc-white);
-    color: #000000;
-    border: 2px solid #000000;
+    background: var(--pmc-blue);
+    color: var(--pmc-white);
+    border: 2px solid var(--pmc-blue);
     font-size: 0.82rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -196,9 +201,34 @@
 
   .pmc__pdf-btn:hover,
   .pmc__pdf-btn:focus-visible {
-    background: #000000;
+    background: var(--pmc-navy);
+    border-color: var(--pmc-navy);
     color: var(--pmc-white);
     outline: none;
+  }
+
+  .pmc__pdf-btn--disabled {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .pmc__video-soon {
+    aspect-ratio: 16 / 9;
+    background: var(--pmc-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--pmc-radius);
+  }
+
+  .pmc__video-soon span {
+    color: var(--pmc-white);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
   }
 
   .pmc__image-col {
