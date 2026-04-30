@@ -19,7 +19,7 @@
             "category_name": "Motosierras",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motosierras.webp",
             "machine_description": "<p>Es ideal para tareas que requieren potencia y control, como el corte de troncos, ramas o piezas de madera en distintos entornos, desde uso doméstico hasta aplicaciones más exigentes en campo o taller.</p><p>Destaca por su capacidad de ofrecer cortes limpios con menor esfuerzo, optimizando tiempos de trabajo y reduciendo la fatiga del usuario. Su diseño está enfocado en brindar estabilidad y seguridad durante la operación, permitiendo un manejo firme incluso en condiciones demandantes. Además, su sistema de corte está diseñado para mantener un desempeño constante, facilitando trabajos continuos sin pérdida significativa de eficiencia.</p><p>Gracias a su versatilidad, es una herramienta útil en múltiples escenarios: mantenimiento de áreas verdes, poda, tala ligera, preparación de leña o trabajos de carpintería rústica. Puede adaptarse a distintos niveles de experiencia, desde usuarios ocasionales hasta quienes requieren una solución confiable para uso frecuente.</p><p><strong>Características generales:</strong></p><ul><li>Sistema de corte de alta eficiencia para trabajos rápidos y precisos</li><li>Diseño ergonómico que mejora el control y reduce la fatiga</li><li>Mecanismos de seguridad integrados para una operación más confiable</li><li>Estructura resistente para uso en condiciones exigentes</li><li>Fácil mantenimiento y ajuste de componentes clave</li><li>Capacidad de adaptación a distintos tipos de trabajo en madera</li><li>Equilibrio entre potencia y maniobrabilidad para mayor productividad</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Motosierra 40V Futool.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -32,10 +32,12 @@
             "category_name": "Desbrozadoras",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Desbrozadoras.webp",
             "machine_description": "<p>Diseñada para el corte eficiente de maleza, pasto denso y vegetación resistente en áreas donde una podadora convencional no es suficiente. Su configuración permite trabajar con precisión en terrenos irregulares, bordes, pendientes y zonas de difícil acceso, ofreciendo una solución práctica tanto para mantenimiento de áreas verdes como para trabajos más exigentes en entornos semi-profesionales y profesionales.</p><p>Destaca por su rendimiento constante y capacidad de trabajo continuo, gracias a motores de alta eficiencia y sistemas de corte optimizados. Proporciona un balance adecuado entre potencia y control, lo que se traduce en cortes más rápidos, uniformes y con menor esfuerzo operativo. Además, su diseño ergonómico y sistemas de amortiguación contribuyen a reducir la fatiga durante jornadas prolongadas, mejorando la productividad del usuario.</p><p>Su versatilidad permite adaptarse a diferentes tipos de vegetación y condiciones de trabajo. Es ideal para limpieza de terrenos, mantenimiento de jardines, control de maleza en caminos, parcelas, áreas agrícolas y espacios urbanos. Dependiendo del accesorio de corte, puede utilizarse tanto para trabajos ligeros como para vegetación más densa o leñosa, ampliando su rango de aplicación.</p><p><strong>Características generales:</strong></p><ul><li>Motor de alto desempeño con consumo eficiente de combustible o energía</li><li>Sistema de corte intercambiable (hilo, cuchilla u otros accesorios)</li><li>Diseño ergonómico con empuñaduras ajustables</li><li>Estructura robusta para mayor durabilidad en uso continuo</li><li>Arranque optimizado para facilitar la puesta en marcha</li><li>Arnés o sistema de soporte para mejor distribución del peso</li><li>Bajo nivel de vibración para mayor comodidad operativa</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Desbrozadora 2 Tiempos Futool.pdf",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "manual_pdf_2": "Manual Desbrozadora 4 Tiempos.pdf",
+            "manual_pdf_3": "Manual Desbrozadora de Carrito FTC430 Futool.pdf"
           }
         },
         "cat_motocultores": {
@@ -71,7 +73,7 @@
             "category_name": "Podadoras",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Podadoras.webp",
             "machine_description": "<p>Diseñada para el mantenimiento eficiente de áreas verdes, para cortar y nivelar el césped con precisión. Su uso permite conservar jardines, terrenos y espacios abiertos en óptimas condiciones estéticas y funcionales, reduciendo el esfuerzo manual y mejorando la uniformidad del corte.</p><p>En términos de desempeño, puede ofrecer cortes limpios y consistentes, optimizando tiempos de trabajo incluso en superficies extensas. Su sistema de corte y tracción (según configuración) permite trabajar con mayor control, estabilidad y rendimiento, adaptándose a diferentes densidades de pasto. Además, contribuyen a un acabado profesional, favoreciendo el crecimiento saludable del césped.</p><p>Su versatilidad las hace adecuadas para una amplia gama de aplicaciones, desde uso residencial hasta mantenimiento de áreas comerciales, industriales o públicas. Pueden emplearse en jardines, parques, campos deportivos o zonas de difícil acceso, dependiendo de sus especificaciones.</p><p><strong>Características generales:</strong></p><ul><li>Sistema de corte eficiente para resultados uniformes</li><li>Ajuste de altura para diferentes niveles de césped</li><li>Opciones de alimentación (manual, eléctrica o a combustión)</li><li>Diseño ergonómico para mayor comodidad en operación</li><li>Capacidad de trabajo en superficies de distintos tamaños</li><li>Estructura resistente para uso continuo</li><li>Fácil mantenimiento y limpieza</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Podadora Futool.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -84,7 +86,7 @@
             "category_name": "Trituradoras",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Triturador.webp",
             "machine_description": "<p>Su función principal es facilitar el manejo, transporte o reutilización de residuos y materias primas, optimizando operaciones en entornos industriales, comerciales o productivos donde el volumen y la consistencia del material representan un reto.</p><p>En términos de desempeño, este tipo de maquinaria destaca por su eficiencia operativa, capacidad de procesamiento continuo y reducción significativa de volumen. Permite mejorar la productividad al disminuir tiempos de manejo manual. Su construcción robusta y sistemas de trabajo están orientados a ofrecer durabilidad, estabilidad y un funcionamiento confiable incluso bajo cargas exigentes.</p><p>Pueden emplearse en la gestión de residuos, reciclaje, procesamiento de materiales orgánicos o inorgánicos, y preparación de insumos en sectores como manufactura, construcción, jardinería o mantenimiento industrial.</p><p><strong>Características generales:</strong></p><ul><li>Estructura resistente diseñada para uso continuo</li><li>Sistemas de corte o trituración de alta eficiencia</li><li>Capacidad para procesar diversos tipos de materiales</li><li>Operación estable con bajo nivel de vibración</li><li>Diseño orientado a facilitar mantenimiento y limpieza</li><li>Enfoque en seguridad operativa y control del proceso</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Trituradora.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -97,7 +99,7 @@
             "category_name": "Motobombas",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motobombas.webp",
             "machine_description": "<p>Las motobombas son equipos diseñados para el traslado eficiente de líquidos mediante un sistema impulsado por motor, lo que permite operar en zonas sin acceso a energía eléctrica o donde se requiere movilidad. Son una solución confiable para tareas de abastecimiento, drenaje o riego, ofreciendo autonomía y rendimiento constante en entornos exigentes.</p><p>Su diseño está orientado a ofrecer arranque rápido, funcionamiento continuo y bajo mantenimiento, lo que las convierte en una herramienta clave para operaciones que demandan eficiencia y resistencia. Dependiendo de la configuración, pueden manejar desde agua limpia hasta líquidos con cierto nivel de sólidos.</p><p>Su versatilidad permite utilizarlas en múltiples escenarios: agricultura, construcción, industria, servicios de emergencia o mantenimiento general. Son ideales para riego de cultivos, llenado de depósitos, desagüe de áreas inundadas, suministro en obras o transferencia de líquidos en procesos productivos.</p><p><strong>Características generales:</strong></p><ul><li>Sistema autónomo con motor de combustión para uso en campo</li><li>Capacidad de bombeo adaptable a distintos niveles de caudal y presión</li><li>Estructura robusta diseñada para condiciones de trabajo exigentes</li><li>Arranque práctico y operación continua</li><li>Compatibilidad con diferentes tipos de líquidos según configuración</li><li>Diseño portátil para fácil transporte e instalación</li><li>Componentes optimizados para durabilidad y mantenimiento accesible</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Motobomba KWB300.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -110,7 +112,7 @@
             "category_name": "Aspersores",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Aspersores.webp",
             "machine_description": "<p>Los aspersores manuales y eléctricos son herramientas esenciales para la aplicación eficiente de líquidos en tareas de fumigación, desinfección y mantenimiento. Diseñados para ofrecer un flujo controlado y uniforme, permiten cubrir superficies de manera precisa, optimizando el uso de insumos y reduciendo el esfuerzo operativo en actividades agrícolas, industriales y de servicios.</p><p>Estos equipos destacan por su capacidad de generar presión constante y una pulverización homogénea, lo que mejora la penetración y adherencia de los productos aplicados. Los modelos manuales ofrecen control directo y portabilidad, mientras que las versiones eléctricas incrementan la productividad al minimizar el esfuerzo físico y mantener un rendimiento continuo en jornadas prolongadas.</p><p>Su versatilidad permite utilizarlos en múltiples entornos: desde el cuidado de jardines y cultivos, hasta la sanitización de espacios, control de plagas, limpieza técnica y aplicaciones en sectores como construcción, ganadería o mantenimiento urbano.</p><p><strong>Características generales:</strong></p><ul><li>Capacidad variable para adaptarse a diferentes volúmenes de trabajo</li><li>Sistemas de presión manual o motorizada según el nivel de exigencia</li><li>Boquillas ajustables para distintos tipos de pulverización</li><li>Diseño ergonómico que facilita el transporte y la operación</li><li>Materiales resistentes a químicos y condiciones de uso intensivo</li><li>Alcance y cobertura optimizados para aplicaciones eficientes</li><li>Componentes de fácil mantenimiento y reemplazo</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Aspersor 2 y 4 Tiempos Kawano.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -136,7 +138,7 @@
             "category_name": "Generadores",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Generadores.webp",
             "machine_description": "<p>Los generadores son equipos diseñados para suministrar energía eléctrica de forma autónoma en situaciones donde no hay acceso a la red o se requiere respaldo continuo. Son una solución clave para mantener la operación de herramientas, maquinaria y sistemas críticos, garantizando continuidad en actividades industriales, comerciales o residenciales ante cortes de energía o en ubicaciones remotas.</p><p>Destacan por su capacidad de ofrecer un rendimiento confiable, con motores optimizados para largas jornadas de trabajo y sistemas que estabilizan la corriente para proteger los equipos conectados. Su eficiencia energética permite aprovechar al máximo el combustible, reduciendo costos operativos, mientras que su construcción robusta está pensada para soportar condiciones exigentes.</p><p>Gracias a su versatilidad, pueden utilizarse en una amplia variedad de escenarios: desde obras de construcción y trabajos en campo, hasta eventos, negocios o como respaldo en instalaciones críticas.</p><p><strong>Características generales:</strong></p><ul><li>Arranque manual o eléctrico según configuración</li><li>Salidas múltiples para conexión de distintos equipos</li><li>Sistemas de regulación de voltaje para mayor estabilidad</li><li>Estructura resistente para uso en exteriores o entornos exigentes</li><li>Opciones portátiles o de mayor capacidad fija</li><li>Bajo consumo de combustible en relación al rendimiento</li><li>Sistemas de protección contra sobrecarga y sobrecalentamiento</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Generador KWG950.pdf",
             "video_1": "",
             "video_2": "",
             "video_3": ""
@@ -201,10 +203,11 @@
             "category_name": "Inversores",
             "machine_image": "shopify://shop_images/CARD_manuales_-_Soldadoras.webp",
             "machine_description": "<p>Los inversores para soldadura son equipos diseñados para proporcionar una corriente estable y eficiente en procesos de unión metálica. Gracias a su tecnología electrónica avanzada, permiten realizar soldaduras más precisas, limpias y controladas en comparación con equipos tradicionales. Son una solución confiable tanto para trabajos profesionales como para aplicaciones industriales que requieren consistencia y calidad en cada punto de soldadura.</p><p>Estos equipos ofrecen arranques más suaves, menor salpicadura y un control más fino del proceso, facilitando el trabajo incluso en materiales delicados o de distintos espesores. Además, su diseño compacto mejora la portabilidad sin comprometer la potencia.</p><p>La versatilidad de los inversores permite su uso en una amplia variedad de entornos: desde talleres y mantenimiento industrial hasta construcción, herrería y trabajos en campo. Son compatibles con distintos tipos de electrodos y procesos.</p><p><strong>Características generales:</strong></p><ul><li>Tecnología de inversor para mayor eficiencia y menor consumo energético</li><li>Arco estable con reducción de salpicaduras</li><li>Diseño compacto y fácil de transportar</li><li>Ajustes precisos de corriente para diferentes aplicaciones</li><li>Compatibilidad con múltiples tipos de electrodos</li><li>Sistemas de protección contra sobrecalentamiento y sobrecarga</li><li>Funcionamiento confiable en diferentes condiciones de trabajo</li></ul>",
-            "manual_pdf_url": "",
+            "manual_pdf_url": "Manual Soldadora IGBT-200K Futool.pdf",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "manual_pdf_2": "Manual Soldadora PZ-130 Palezzi.pdf"
           }
         }
       },

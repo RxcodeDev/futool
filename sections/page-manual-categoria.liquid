@@ -22,10 +22,27 @@
     <div class="pmc__content">
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- if block.settings.manual_pdf_url != blank -%}
-          <a class="pmc__pdf-btn" href="{{ block.settings.manual_pdf_url }}" target="_blank" rel="noopener noreferrer">
-            DESCARGA AQU&Iacute; EL MANUAL
-          </a>
+        {%- assign _pdfs_raw = block.settings.manual_pdf_url | append: '||' | append: block.settings.manual_pdf_2 | append: '||' | append: block.settings.manual_pdf_3 -%}
+        {%- assign _pdf_list = _pdfs_raw | split: '||' -%}
+        {%- assign _any_pdf = false -%}
+        {%- for _p in _pdf_list -%}{%- assign _pt = _p | strip -%}{%- if _pt != blank -%}{%- assign _any_pdf = true -%}{%- endif -%}{%- endfor -%}
+        {%- if _any_pdf -%}
+          <div class="pmc__pdf-buttons">
+          {%- for _p in _pdf_list -%}
+            {%- assign _pt = _p | strip -%}
+            {%- if _pt != blank -%}
+              {%- if _pt contains 'http' -%}
+                {%- assign _href = _pt -%}
+              {%- else -%}
+                {%- assign _href = _pt | asset_url -%}
+              {%- endif -%}
+              {%- assign _lbl = _pt | remove: 'Manual ' | split: '.pdf' | first | upcase | truncate: 55 -%}
+              <a class="pmc__pdf-btn" href="{{ _href }}" target="_blank" rel="noopener noreferrer">
+                {{ _lbl }}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+          </div>
         {%- else -%}
           <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">
             DESCARGA AQU&Iacute; EL MANUAL
@@ -183,6 +200,13 @@
   .pmc__richtext ul,
   .pmc__richtext ol { padding-left: 1.2em; margin-bottom: 0.55em; }
   .pmc__richtext li { margin-bottom: 0.2em; }
+
+  .pmc__pdf-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
 
   /* Outlined CTA button — matches reference */
   .pmc__pdf-btn {
@@ -389,9 +413,20 @@
           "default": "<p>Descripci\u00f3n de la m\u00e1quina o categor\u00eda.</p>"
         },
         {
-          "type": "url",
+          "type": "text",
           "id": "manual_pdf_url",
-          "label": "URL del manual PDF"
+          "label": "Manual PDF 1 – nombre de archivo o URL",
+          "info": "Escribe el nombre del archivo (ej: Manual Podadora Futool.pdf) o pega una URL externa"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_2",
+          "label": "Manual PDF 2 – nombre de archivo o URL"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_3",
+          "label": "Manual PDF 3 – nombre de archivo o URL"
         },
         {
           "type": "image_picker",
