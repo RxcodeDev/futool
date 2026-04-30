@@ -1012,6 +1012,22 @@
     margin: 0 0.25rem;
 }
 
+.catalogs-row__footer {
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.catalogs-row__footer .catalog-banner__footer,
+.catalogs-row__footer .catalog-banner--manuales__footer {
+    position: relative;
+    top: auto;
+    right: auto;
+}
+
 .catalog-banner--manuales__footer {
     position: absolute;
     top: calc(1.5rem + 5rem + 0.5rem); /* offset = top del primero + altura aprox del primero + gap */
@@ -1594,13 +1610,25 @@
     .links-col__footer  { grid-column: 2; grid-row: 1 / 3; }
     .attention-col__footer { grid-column: 1; }
 
+    .catalogs-row__footer {
+        position: relative;
+        top: auto;
+        right: auto;
+        flex-direction: row;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        align-self: flex-start;
+        width: 100%;
+    }
+
     .catalog-banner__footer {
         position: relative;
         top: auto;
         right: auto;
         border-radius: 2rem;
-        margin-top: 1.5rem;
-        align-self: flex-start;
+        margin-top: 0;
+        flex: 1;
+        align-self: stretch;
     }
 
     .pays-method__footer {
