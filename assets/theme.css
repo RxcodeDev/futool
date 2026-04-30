@@ -1012,6 +1012,17 @@
     margin: 0 0.25rem;
 }
 
+.catalog-banner--manuales__footer {
+    position: absolute;
+    top: calc(1.5rem + 5rem + 0.5rem); /* offset = top del primero + altura aprox del primero + gap */
+    right: 0;
+    text-decoration: none;
+}
+
+.catalog-banner--manuales__footer:hover {
+    background-color: rgba(200, 205, 220, 0.65);
+}
+
 .catalog-banner--mobile-only {
     display: none;
 }
