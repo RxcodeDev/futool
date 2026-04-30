@@ -1625,7 +1625,7 @@
 
     .mobile-banners-row__footer {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 0.75rem;
         grid-column: 1 / -1;
         width: 100%;
