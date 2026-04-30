@@ -36,9 +36,8 @@
               {%- else -%}
                 {%- assign _href = _pt | asset_url -%}
               {%- endif -%}
-              {%- assign _lbl = _pt | remove: 'Manual ' | split: '.pdf' | first | upcase | truncate: 55 -%}
               <a class="pmc__pdf-btn" href="{{ _href }}" target="_blank" rel="noopener noreferrer">
-                {{ _lbl }}
+                DESCARGA AQU&Iacute; EL MANUAL
               </a>
             {%- endif -%}
           {%- endfor -%}
