@@ -83,17 +83,10 @@
       </div>
     </div>
 
-    <!-- Catalog + Manuales banners -->
-    <div class="catalog-banners-group__footer">
-      <a class="catalog-banner__footer" href="{{ section.settings.catalog_url | default: '#' }}">
-        <span>AQUÍ DESCARGA LOS</span>
-        <span><span>NUEVOS</span> CATÁLOGOS</span>
-      </a>
-      <a class="catalog-banner__footer catalog-banner--manuales" href="{{ section.settings.manuales_url | default: '/pages/manuales' }}">
-        <span>CONSULTA AQUÍ LOS</span>
-        <span>MANUALES DE LA</span>
-        <span>MAQUINARIA</span>
-      </a>
+    <!-- Catalog banner -->
+    <div class="catalog-banner__footer">
+      <span>AQUÍ DESCARGA LOS</span>
+      <span><span>NUEVOS</span> CATÁLOGOS</span>
     </div>
 
     <!-- Social & Payment methods -->
@@ -133,16 +126,9 @@
   <div class="content__footer --catalog-layout">
 
     <!-- Copia visible en móvil -->
-    <div class="catalog-banners-group__footer catalog-banners-group--mobile">
-      <a class="catalog-banner__footer catalog-banner--mobile-only" href="{{ section.settings.catalog_url | default: '#' }}">
-        <span>AQUÍ DESCARGA LOS</span>
-        <span><span>NUEVOS</span> CATÁLOGOS</span>
-      </a>
-      <a class="catalog-banner__footer catalog-banner--mobile-only catalog-banner--manuales" href="{{ section.settings.manuales_url | default: '/pages/manuales' }}">
-        <span>CONSULTA AQUÍ LOS</span>
-        <span>MANUALES DE LA</span>
-        <span>MAQUINARIA</span>
-      </a>
+    <div class="catalog-banner__footer catalog-banner--mobile-only">
+      <span>AQUÍ DESCARGA LOS</span>
+      <span><span>NUEVOS</span> CATÁLOGOS</span>
     </div>
 
     <div class="item__catalog-footer">
@@ -355,12 +341,6 @@
       "type": "url",
       "id": "catalog_url",
       "label": "Enlace del botón 'Descarga catálogos'"
-    },
-    {
-      "type": "url",
-      "id": "manuales_url",
-      "label": "Enlace del botón 'Manuales de la maquinaria'",
-      "default": "/pages/manuales"
     },
     {
       "type": "image_picker",
