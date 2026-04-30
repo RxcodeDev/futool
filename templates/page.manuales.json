@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-manuales",
+      "blocks": {
+        "card-motosierras": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTOSIERRAS",
+            "category_url": ""
+          }
+        },
+        "card-desbrozadoras": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "DESBROZADORAS",
+            "category_url": ""
+          }
+        },
+        "card-motocultores": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTOCULTORES",
+            "category_url": ""
+          }
+        },
+        "card-mototaladros": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "MOTOTALADROS",
+            "category_url": ""
+          }
+        },
+        "card-podadoras": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "PODADORAS",
+            "category_url": ""
+          }
+        },
+        "card-triturador": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "TRITURADOR",
+            "category_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "card-motosierras",
+        "card-desbrozadoras",
+        "card-motocultores",
+        "card-mototaladros",
+        "card-podadoras",
+        "card-triturador"
+      ],
+      "settings": {
+        "page_title": "MANUALES",
+        "page_subtitle": "Da click en cualquiera de nuestras máquinas para acceder a la información, catálogos y videos"
+      }
+    }
+  },
+  "order": ["main"]
+}

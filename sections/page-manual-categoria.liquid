@@ -1,0 +1,354 @@
+{%- assign video_blocks = section.blocks | where: 'type', 'video' -%}
+
+<!-- ══ Hero Banner ══ -->
+<div class="pmc__hero">
+  <div class="pmc__hero-panel" aria-hidden="true"></div>
+  <div class="pmc__hero-inner">
+    <h1 class="pmc__hero-title">{{ section.settings.category_name | escape }}</h1>
+  </div>
+</div>
+
+<!-- ══ Description + Image ══ -->
+<div class="pmc__content">
+
+  <div class="pmc__description">
+    <div class="pmc__richtext">
+      {{ section.settings.machine_description }}
+    </div>
+    {%- if section.settings.manual_pdf_url != blank -%}
+      <a
+        class="pmc__pdf-btn"
+        href="{{ section.settings.manual_pdf_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        DESCARGA AQUÍ EL MANUAL
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="pmc__image-col">
+    {%- if section.settings.machine_image != blank -%}
+      <img
+        src="{{ section.settings.machine_image | image_url: width: 700 }}"
+        alt="{{ section.settings.category_name | escape }}"
+        loading="eager"
+        class="pmc__machine-img"
+      >
+    {%- else -%}
+      <div class="pmc__image-placeholder" aria-hidden="true"></div>
+    {%- endif -%}
+  </div>
+
+</div>
+
+<!-- ══ Videos Section ══ -->
+{%- if video_blocks.size > 0 -%}
+  <div class="pmc__videos">
+    <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
+    <div class="pmc__videos-grid">
+      {%- for block in video_blocks -%}
+
+        {%- comment -%} Extract YouTube video ID from multiple URL formats {%- endcomment -%}
+        {%- assign raw_url = block.settings.youtube_url | strip -%}
+        {%- assign video_id = '' -%}
+        {%- if raw_url contains 'youtu.be/' -%}
+          {%- assign yt_parts = raw_url | split: 'youtu.be/' -%}
+          {%- assign video_id = yt_parts[1] | split: '?' | first | strip -%}
+        {%- elsif raw_url contains '?v=' -%}
+          {%- assign yt_parts = raw_url | split: '?v=' -%}
+          {%- assign video_id = yt_parts[1] | split: '&' | first | strip -%}
+        {%- elsif raw_url contains '&v=' -%}
+          {%- assign yt_parts = raw_url | split: '&v=' -%}
+          {%- assign video_id = yt_parts[1] | split: '&' | first | strip -%}
+        {%- endif -%}
+
+        {%- if video_id != blank -%}
+          <div class="pmc__video-item" {{ block.shopify_attributes }}>
+            <div class="pmc__video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}"
+                title="Video {{ forloop.index }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  /* ══ CSS custom properties (section-scoped) ══ */
+  .pmc__hero,
+  .pmc__content,
+  .pmc__videos {
+    --pmc-black:    #111111;
+    --pmc-navy:     #17306D;
+    --pmc-blue:     #183477;
+    --pmc-white:    #ffffff;
+    --pmc-radius:   8px;
+    --pmc-max-w:    1200px;
+  }
+
+  /* ══ Hero ══ */
+  .pmc__hero {
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    background: var(--pmc-black);
+    overflow: hidden;
+  }
+
+  /* Right-side navy panel with diagonal left edge via clip-path */
+  .pmc__hero-panel {
+    position: absolute;
+    inset: 0;
+    background: var(--pmc-navy);
+    clip-path: polygon(38% 0%, 100% 0%, 100% 100%, 52% 100%);
+    z-index: 0;
+  }
+
+  .pmc__hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--pmc-max-w);
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  .pmc__hero-title {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--pmc-white);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    max-width: 55%;
+  }
+
+  /* ══ Content: description + image ══ */
+  .pmc__content {
+    display: flex;
+    gap: 2.5rem;
+    padding: 2.5rem 2rem;
+    max-width: var(--pmc-max-w);
+    margin: 0 auto;
+    background: var(--pmc-white);
+    align-items: flex-start;
+  }
+
+  .pmc__description {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+
+  .pmc__richtext {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #333333;
+    margin-bottom: 1.75rem;
+  }
+
+  .pmc__richtext p  { margin-bottom: 0.85em; }
+  .pmc__richtext ul,
+  .pmc__richtext ol { padding-left: 1.3em; margin-bottom: 0.85em; }
+  .pmc__richtext li { margin-bottom: 0.3em; }
+
+  /* Outlined CTA button — matches reference */
+  .pmc__pdf-btn {
+    display: inline-block;
+    padding: 0.6em 1.4em;
+    background: var(--pmc-white);
+    color: #000000;
+    border: 2px solid #000000;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .pmc__pdf-btn:hover,
+  .pmc__pdf-btn:focus-visible {
+    background: #000000;
+    color: var(--pmc-white);
+    outline: none;
+  }
+
+  .pmc__image-col {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
+
+  .pmc__machine-img {
+    width: 100%;
+    max-height: 340px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .pmc__image-placeholder {
+    width: 100%;
+    height: 280px;
+    background: #f0f0f0;
+    border-radius: var(--pmc-radius);
+  }
+
+  /* ══ Videos ══ */
+  .pmc__videos {
+    padding: 0 2rem 3rem;
+    max-width: var(--pmc-max-w);
+    margin: 0 auto;
+    background: var(--pmc-white);
+  }
+
+  .pmc__videos-title {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    font-weight: 900;
+    color: var(--pmc-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .pmc__videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* 16:9 aspect-ratio wrapper */
+  .pmc__video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--pmc-radius);
+  }
+
+  .pmc__video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--pmc-radius);
+  }
+
+  /* ══ Responsive ══ */
+  @media (max-width: 900px) {
+    .pmc__hero-title {
+      max-width: 75%;
+    }
+
+    .pmc__content {
+      flex-direction: column;
+    }
+
+    .pmc__description {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .pmc__image-col {
+      width: 100%;
+      padding: 0;
+    }
+
+    .pmc__videos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pmc__hero-panel {
+      clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 40% 100%);
+    }
+
+    .pmc__hero-title {
+      max-width: 100%;
+      font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .pmc__content {
+      padding: 1.5rem 1rem;
+      gap: 1.5rem;
+    }
+
+    .pmc__videos {
+      padding: 0 1rem 2rem;
+    }
+
+    .pmc__videos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Manual – Categoría",
+  "settings": [
+    {
+      "type": "text",
+      "id": "category_name",
+      "label": "Nombre de la categoría",
+      "default": "NOMBRE DE CATEGORÍA"
+    },
+    {
+      "type": "richtext",
+      "id": "machine_description",
+      "label": "Descripción",
+      "default": "<p>Descripción de la máquina o categoría.</p>"
+    },
+    {
+      "type": "url",
+      "id": "manual_pdf_url",
+      "label": "URL del manual PDF"
+    },
+    {
+      "type": "image_picker",
+      "id": "machine_image",
+      "label": "Imagen de la máquina"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video de YouTube",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "youtube_url",
+          "label": "URL de YouTube",
+          "info": "Acepta: https://youtu.be/ID  o  https://www.youtube.com/watch?v=ID",
+          "default": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manual – Categoría",
+      "settings": {
+        "category_name": "NOMBRE DE CATEGORÍA",
+        "machine_description": "<p>Descripción de la máquina o categoría.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

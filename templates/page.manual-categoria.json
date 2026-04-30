@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-manual-categoria",
+      "blocks": {
+        "video-1": {
+          "type": "video",
+          "settings": {
+            "youtube_url": ""
+          }
+        }
+      },
+      "block_order": ["video-1"],
+      "settings": {
+        "category_name": "NOMBRE DE CATEGORÍA",
+        "machine_description": "<p>Descripción de la máquina o categoría.</p>",
+        "manual_pdf_url": ""
+      }
+    }
+  },
+  "order": ["main"]
+}
