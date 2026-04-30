@@ -1,93 +1,110 @@
-{%- assign video_blocks = section.blocks | where: 'type', 'video' -%}
+{%- assign cat_blocks = section.blocks | where: 'type', 'category' -%}
 
 <!-- ══ Hero Banner ══ -->
 <div class="pmc__hero">
   <div class="pmc__hero-panel" aria-hidden="true"></div>
   <div class="pmc__hero-inner">
-    <h1 class="pmc__hero-title">{{ section.settings.category_name | escape }}</h1>
+    <h1 class="pmc__hero-title" id="pmc-hero-title">&#160;</h1>
   </div>
 </div>
 
-<!-- ══ Description + Image ══ -->
-<div class="pmc__content">
-
-  <div class="pmc__description">
-    <div class="pmc__richtext">
-      {{ section.settings.machine_description }}
+<!-- ══ Category data blocks (rendered all, JS shows the matching one) ══ -->
+{%- for block in cat_blocks -%}
+  {%- assign block_slug = block.settings.slug | downcase | strip -%}
+  <div
+    class="pmc__category-data"
+    data-slug="{{ block_slug }}"
+    data-name="{{ block.settings.category_name | escape }}"
+    hidden
+    {{ block.shopify_attributes }}
+  >
+    <!-- Description + Image -->
+    <div class="pmc__content">
+      <div class="pmc__description">
+        <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
+        {%- if block.settings.manual_pdf_url != blank -%}
+          <a class="pmc__pdf-btn" href="{{ block.settings.manual_pdf_url }}" target="_blank" rel="noopener noreferrer">
+            DESCARGA AQU&Iacute; EL MANUAL
+          </a>
+        {%- endif -%}
+      </div>
+      <div class="pmc__image-col">
+        {%- if block.settings.machine_image != blank -%}
+          <img src="{{ block.settings.machine_image | image_url: width: 700 }}" alt="{{ block.settings.category_name | escape }}" loading="eager" class="pmc__machine-img">
+        {%- else -%}
+          <div class="pmc__image-placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
     </div>
-    {%- if section.settings.manual_pdf_url != blank -%}
-      <a
-        class="pmc__pdf-btn"
-        href="{{ section.settings.manual_pdf_url }}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        DESCARGA AQUÍ EL MANUAL
-      </a>
+    <!-- Videos -->
+    {%- assign has_videos = false -%}
+    {%- for i in (1..6) -%}
+      {%- assign vid_key = 'video_' | append: i -%}
+      {%- if block.settings[vid_key] != blank -%}{%- assign has_videos = true -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if has_videos -%}
+      <div class="pmc__videos">
+        <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
+        <div class="pmc__videos-grid">
+          {%- for i in (1..6) -%}
+            {%- assign vid_key = 'video_' | append: i -%}
+            {%- assign raw_url = block.settings[vid_key] | strip -%}
+            {%- if raw_url != blank -%}
+              {%- assign video_id = '' -%}
+              {%- if raw_url contains 'youtu.be/' -%}
+                {%- assign video_id = raw_url | split: 'youtu.be/' | last | split: '?' | first | strip -%}
+              {%- elsif raw_url contains '?v=' -%}
+                {%- assign video_id = raw_url | split: '?v=' | last | split: '&' | first | strip -%}
+              {%- elsif raw_url contains '&v=' -%}
+                {%- assign video_id = raw_url | split: '&v=' | last | split: '&' | first | strip -%}
+              {%- endif -%}
+              {%- if video_id != blank -%}
+                <div class="pmc__video-item">
+                  <div class="pmc__video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/{{ video_id }}" title="{{ block.settings.category_name | escape }} – Video {{ i }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
     {%- endif -%}
   </div>
+{%- endfor -%}
 
-  <div class="pmc__image-col">
-    {%- if section.settings.machine_image != blank -%}
-      <img
-        src="{{ section.settings.machine_image | image_url: width: 700 }}"
-        alt="{{ section.settings.category_name | escape }}"
-        loading="eager"
-        class="pmc__machine-img"
-      >
-    {%- else -%}
-      <div class="pmc__image-placeholder" aria-hidden="true"></div>
-    {%- endif -%}
-  </div>
-
+<!-- ══ Not found ══ -->
+<div class="pmc__not-found" id="pmc-not-found" hidden>
+  <p>Categor&iacute;a no encontrada.</p>
 </div>
 
-<!-- ══ Videos Section ══ -->
-{%- if video_blocks.size > 0 -%}
-  <div class="pmc__videos">
-    <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
-    <div class="pmc__videos-grid">
-      {%- for block in video_blocks -%}
-
-        {%- comment -%} Extract YouTube video ID from multiple URL formats {%- endcomment -%}
-        {%- assign raw_url = block.settings.youtube_url | strip -%}
-        {%- assign video_id = '' -%}
-        {%- if raw_url contains 'youtu.be/' -%}
-          {%- assign yt_parts = raw_url | split: 'youtu.be/' -%}
-          {%- assign video_id = yt_parts[1] | split: '?' | first | strip -%}
-        {%- elsif raw_url contains '?v=' -%}
-          {%- assign yt_parts = raw_url | split: '?v=' -%}
-          {%- assign video_id = yt_parts[1] | split: '&' | first | strip -%}
-        {%- elsif raw_url contains '&v=' -%}
-          {%- assign yt_parts = raw_url | split: '&v=' -%}
-          {%- assign video_id = yt_parts[1] | split: '&' | first | strip -%}
-        {%- endif -%}
-
-        {%- if video_id != blank -%}
-          <div class="pmc__video-item" {{ block.shopify_attributes }}>
-            <div class="pmc__video-wrapper">
-              <iframe
-                src="https://www.youtube.com/embed/{{ video_id }}"
-                title="Video {{ forloop.index }}"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy"
-              ></iframe>
-            </div>
-          </div>
-        {%- endif -%}
-
-      {%- endfor -%}
-    </div>
-  </div>
-{%- endif -%}
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var slug = (params.get('categoria') || '').toLowerCase().trim();
+  var blocks = document.querySelectorAll('.pmc__category-data');
+  var heroTitle = document.getElementById('pmc-hero-title');
+  var found = false;
+  blocks.forEach(function (b) {
+    if (b.dataset.slug === slug) {
+      b.removeAttribute('hidden');
+      if (heroTitle) heroTitle.textContent = b.dataset.name || slug.toUpperCase();
+      found = true;
+    }
+  });
+  if (!found) {
+    var nf = document.getElementById('pmc-not-found');
+    if (nf) nf.removeAttribute('hidden');
+    if (heroTitle) heroTitle.textContent = slug ? slug.toUpperCase() : 'MANUALES';
+  }
+})();
+</script>
 
 <style>
-  /* ══ CSS custom properties (section-scoped) ══ */
+  /* ══ CSS custom properties ══ */
   .pmc__hero,
-  .pmc__content,
-  .pmc__videos {
+  .pmc__category-data,
+  .pmc__not-found {
     --pmc-black:    #111111;
     --pmc-navy:     #17306D;
     --pmc-blue:     #183477;
@@ -300,54 +317,53 @@
 
 {% schema %}
 {
-  "name": "Manual – Categoría",
-  "settings": [
-    {
-      "type": "text",
-      "id": "category_name",
-      "label": "Nombre de la categoría",
-      "default": "NOMBRE DE CATEGORÍA"
-    },
-    {
-      "type": "richtext",
-      "id": "machine_description",
-      "label": "Descripción",
-      "default": "<p>Descripción de la máquina o categoría.</p>"
-    },
-    {
-      "type": "url",
-      "id": "manual_pdf_url",
-      "label": "URL del manual PDF"
-    },
-    {
-      "type": "image_picker",
-      "id": "machine_image",
-      "label": "Imagen de la máquina"
-    }
-  ],
+  "name": "Manual \u2013 Categor\u00eda",
   "blocks": [
     {
-      "type": "video",
-      "name": "Video de YouTube",
-      "limit": 6,
+      "type": "category",
+      "name": "Categor\u00eda",
       "settings": [
         {
           "type": "text",
-          "id": "youtube_url",
-          "label": "URL de YouTube",
-          "info": "Acepta: https://youtu.be/ID  o  https://www.youtube.com/watch?v=ID",
-          "default": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        }
+          "id": "slug",
+          "label": "Slug (par\u00e1metro URL)",
+          "info": "Debe coincidir con el valor de ?categoria= en la URL. Ej: desbrozadoras",
+          "default": "mi-categoria"
+        },
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Nombre de la categor\u00eda",
+          "default": "NOMBRE DE CATEGOR\u00cdA"
+        },
+        {
+          "type": "richtext",
+          "id": "machine_description",
+          "label": "Descripci\u00f3n",
+          "default": "<p>Descripci\u00f3n de la m\u00e1quina o categor\u00eda.</p>"
+        },
+        {
+          "type": "url",
+          "id": "manual_pdf_url",
+          "label": "URL del manual PDF"
+        },
+        {
+          "type": "image_picker",
+          "id": "machine_image",
+          "label": "Imagen de la m\u00e1quina"
+        },
+        { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
+        { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
+        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" },
+        { "type": "text", "id": "video_4", "label": "Video 4 (URL YouTube)" },
+        { "type": "text", "id": "video_5", "label": "Video 5 (URL YouTube)" },
+        { "type": "text", "id": "video_6", "label": "Video 6 (URL YouTube)" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Manual – Categoría",
-      "settings": {
-        "category_name": "NOMBRE DE CATEGORÍA",
-        "machine_description": "<p>Descripción de la máquina o categoría.</p>"
-      }
+      "name": "Manual \u2013 Categor\u00eda"
     }
   ]
 }

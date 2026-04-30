@@ -10,14 +10,14 @@
   {%- if section.blocks.size > 0 -%}
     <div class="page-manuales__grid">
       {%- for block in section.blocks -%}
-        {%- comment -%} Auto-generate URL from title if no URL is set {%- endcomment -%}
+        {%- comment -%} Auto-generate URL as /pages/categoria?categoria=slug {%- endcomment -%}
         {%- assign card_url = block.settings.category_url -%}
         {%- if card_url == blank -%}
           {%- assign auto_slug = block.settings.category_title | downcase
             | replace: ' ', '-'
             | replace: 'á', 'a' | replace: 'é', 'e' | replace: 'í', 'i'
             | replace: 'ó', 'o' | replace: 'ú', 'u' | replace: 'ñ', 'n' -%}
-          {%- assign card_url = '/pages/manual-' | append: auto_slug -%}
+          {%- assign card_url = '/pages/categoria?categoria=' | append: auto_slug -%}
         {%- endif -%}
         <a
           class="page-manuales__card"
