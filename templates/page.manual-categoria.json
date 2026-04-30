@@ -11,10 +11,10 @@
   "sections": {
     "main": {
       "type": "page-manual-categoria",
-      "blocks": {},
-      "block_order": [],
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

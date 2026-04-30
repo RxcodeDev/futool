@@ -123,6 +123,14 @@
             "category_image": "shopify://shop_images/CARD_manuales_-_Triturador.webp",
             "category_url": ""
           }
+        },
+        "category_card_gWWqb6": {
+          "type": "category_card",
+          "settings": {
+            "category_title": "INVERSORES",
+            "category_image": "shopify://shop_images/CARD_manuales_-_Soldadoras.webp",
+            "category_url": ""
+          }
         }
       },
       "block_order": [
@@ -139,7 +147,8 @@
         "category_card_aQPq6i",
         "category_card_ciiMBU",
         "category_card_RrMWAW",
-        "category_card_NeD3QW"
+        "category_card_NeD3QW",
+        "category_card_gWWqb6"
       ],
       "settings": {
         "page_title": "MANUALES",
