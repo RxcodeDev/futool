@@ -983,10 +983,17 @@
     overflow: hidden;
 }
 
-.catalog-banner__footer {
+.catalog-banners-group__footer {
     position: absolute;
     top: 1.5rem;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.catalog-banner__footer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1001,6 +1008,12 @@
     padding: 0.75rem 1.5rem;
     border-radius: 2rem 0 0 2rem;
     line-height: 1.4;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.catalog-banner__footer:hover {
+    background-color: rgba(200, 205, 220, 0.65);
 }
 
 .catalog-banner__footer > span {
@@ -1583,12 +1596,16 @@
     .links-col__footer  { grid-column: 2; grid-row: 1 / 3; }
     .attention-col__footer { grid-column: 1; }
 
-    .catalog-banner__footer {
+    .catalog-banners-group__footer {
         position: relative;
         top: auto;
         right: auto;
-        border-radius: 2rem;
+        align-items: flex-start;
         margin-top: 1.5rem;
+    }
+
+    .catalog-banner__footer {
+        border-radius: 2rem;
         align-self: flex-start;
     }
 
@@ -1604,9 +1621,17 @@
         padding: 1rem;
     }
 
+    .catalog-banners-group--mobile {
+        position: relative;
+        top: auto;
+        right: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        grid-column: 1 / -1;
+    }
+
     .catalog-banner--mobile-only {
         display: flex;
-        grid-column: 1 / -1;
     }
 
     .bottom__footer { text-align: center; }
