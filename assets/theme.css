@@ -1019,10 +1019,6 @@
     text-decoration: none;
 }
 
-.catalogs-pair__footer {
-    position: relative;
-}
-
 .catalog-banner--manuales__footer:hover {
     background-color: rgba(200, 205, 220, 0.65);
 }
@@ -1603,23 +1599,8 @@
         top: auto;
         right: auto;
         border-radius: 2rem;
-        margin-top: 0;
-        align-self: stretch;
-        flex: 1;
-    }
-
-    .catalog-banner--manuales__footer {
-        position: relative;
-        top: auto;
-        right: auto;
-    }
-
-    .catalogs-pair__footer {
-        display: flex;
-        flex-direction: row;
-        gap: 0.75rem;
         margin-top: 1.5rem;
-        width: 100%;
+        align-self: flex-start;
     }
 
     .pays-method__footer {
