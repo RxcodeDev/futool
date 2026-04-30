@@ -1,32 +1,31 @@
+{%- assign category_blocks = sections['hero'].blocks | where: 'type', 'category_card' -%}
+
 <section class="page-manuales">
 
   <div class="page-manuales__header">
     <h1 class="page-manuales__title">{{ section.settings.page_title | escape }}</h1>
     {%- if section.settings.page_subtitle != blank -%}
-      <p class="page-manuales__subtitle">
-        <span class="page-manuales__subtitle-hl">{{ section.settings.page_subtitle | escape }}</span>
-      </p>
+      <p class="page-manuales__subtitle">{{ section.settings.page_subtitle | escape }}</p>
     {%- endif -%}
   </div>
 
-  {%- if section.blocks.size > 0 -%}
+  {%- if category_blocks.size > 0 -%}
     <div class="page-manuales__grid">
-      {%- for block in section.blocks -%}
-        {%- assign card_url = block.settings.category_url | default: '#' -%}
+      {%- for block in category_blocks -%}
+        {%- assign card_url = block.settings.link | default: '#' -%}
         <a
           class="page-manuales__card"
           href="{{ card_url }}"
-          aria-label="{{ block.settings.category_title | escape }}"
-          {{ block.shopify_attributes }}
+          aria-label="{{ block.settings.title | escape }}"
         >
           <div class="page-manuales__card-header">
-            <h2 class="page-manuales__card-title">{{ block.settings.category_title | escape }}</h2>
+            <h2 class="page-manuales__card-title">{{ block.settings.title | escape }}</h2>
           </div>
           <div class="page-manuales__card-body">
-            {%- if block.settings.category_image != blank -%}
+            {%- if block.settings.image != blank -%}
               <img
-                src="{{ block.settings.category_image | image_url: width: 400 }}"
-                alt="{{ block.settings.category_title | escape }}"
+                src="{{ block.settings.image | image_url: width: 400 }}"
+                alt="{{ block.settings.title | escape }}"
                 loading="lazy"
                 class="page-manuales__card-img"
               >
@@ -71,21 +70,12 @@
   }
 
   .page-manuales__subtitle {
-    display: block;
-    text-align: center;
-  }
-
-  /* Text-marker / highlighter effect — background applied per line on wrap */
-  .page-manuales__subtitle-hl {
-    display: inline;
-    background-color: var(--pm-blue);
-    color: #ffffff;
-    padding: 0.3em 0.75em;
     font-size: clamp(0.85rem, 1.6vw, 1rem);
     font-weight: 400;
-    line-height: 2;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+    color: #000000;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
   }
 
   /* ── Grid ── */
@@ -101,7 +91,7 @@
     flex-direction: column;
     background: #ffffff;
     border: 1.5px solid var(--pm-card-border);
-    border-left: 5px solid var(--pm-blue);
+    border-top: 5px solid var(--pm-blue);
     border-radius: var(--pm-card-radius);
     text-decoration: none;
     overflow: hidden;
@@ -112,7 +102,6 @@
   .page-manuales__card:hover,
   .page-manuales__card:focus-visible {
     box-shadow: 0 6px 24px rgba(24, 52, 119, 0.18);
-    border-color: #a0aec0;
     outline: none;
   }
 
@@ -186,41 +175,9 @@
       "default": "Da click en cualquiera de nuestras máquinas para acceder a la información, catálogos y videos"
     }
   ],
-  "blocks": [
-    {
-      "type": "category_card",
-      "name": "Tarjeta de categoría",
-      "settings": [
-        {
-          "type": "text",
-          "id": "category_title",
-          "label": "Nombre de la categoría",
-          "default": "CATEGORÍA"
-        },
-        {
-          "type": "image_picker",
-          "id": "category_image",
-          "label": "Imagen de la categoría"
-        },
-        {
-          "type": "url",
-          "id": "category_url",
-          "label": "URL de la categoría"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Manuales – Índice",
-      "blocks": [
-        { "type": "category_card", "settings": { "category_title": "MOTOSIERRAS" } },
-        { "type": "category_card", "settings": { "category_title": "DESBROZADORAS" } },
-        { "type": "category_card", "settings": { "category_title": "MOTOCULTORES" } },
-        { "type": "category_card", "settings": { "category_title": "MOTOTALADROS" } },
-        { "type": "category_card", "settings": { "category_title": "PODADORAS" } },
-        { "type": "category_card", "settings": { "category_title": "TRITURADOR" } }
-      ]
+      "name": "Manuales – Índice"
     }
   ]
 }
