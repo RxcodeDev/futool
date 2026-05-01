@@ -27,7 +27,7 @@
         {%- assign _any_pdf = false -%}
         {%- for _p in _pdf_list -%}{%- assign _pt = _p | strip -%}{%- if _pt != blank -%}{%- assign _any_pdf = true -%}{%- endif -%}{%- endfor -%}
         {%- if _any_pdf -%}
-          <div class="pmc__pdf-buttons">
+          {%- assign _hrefs = '' -%}
           {%- for _p in _pdf_list -%}
             {%- assign _pt = _p | strip -%}
             {%- if _pt != blank -%}
@@ -36,11 +36,17 @@
               {%- else -%}
                 {%- assign _href = _pt | asset_url -%}
               {%- endif -%}
-              <a class="pmc__pdf-btn" href="{{ _href }}">
-                DESCARGA AQU&Iacute; EL MANUAL
-              </a>
+              {%- if _hrefs == '' -%}
+                {%- assign _hrefs = _href -%}
+              {%- else -%}
+                {%- assign _hrefs = _hrefs | append: '|' | append: _href -%}
+              {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
+          <div class="pmc__pdf-buttons">
+            <button class="pmc__pdf-btn" data-pdfs="{{ _hrefs }}">
+              DESCARGA AQU&Iacute; EL MANUAL
+            </button>
           </div>
         {%- else -%}
           <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">
@@ -119,23 +125,28 @@
     if (heroTitle) heroTitle.textContent = slug ? slug.toUpperCase() : 'MANUALES';
   }
 
-  document.querySelectorAll('.pmc__pdf-btn[href]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var url = link.getAttribute('href');
-      var filename = url.split('/').pop().split('?')[0] || 'manual.pdf';
-      fetch(url)
-        .then(function(res) { return res.blob(); })
-        .then(function(blob) {
-          var blobUrl = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = decodeURIComponent(filename);
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(blobUrl);
-        });
+  document.querySelectorAll('.pmc__pdf-btn[data-pdfs]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var urls = btn.getAttribute('data-pdfs').split('|');
+      urls.forEach(function(url, i) {
+        url = url.trim();
+        if (!url) return;
+        var filename = decodeURIComponent(url.split('/').pop().split('?')[0]) || 'manual.pdf';
+        setTimeout(function() {
+          fetch(url)
+            .then(function(res) { return res.blob(); })
+            .then(function(blob) {
+              var blobUrl = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = blobUrl;
+              a.download = filename;
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              URL.revokeObjectURL(blobUrl);
+            });
+        }, i * 800);
+      });
     });
   });
 })();
