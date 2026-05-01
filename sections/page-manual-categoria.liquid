@@ -36,7 +36,7 @@
               {%- else -%}
                 {%- assign _href = _pt | asset_url -%}
               {%- endif -%}
-              <a class="pmc__pdf-btn" href="{{ _href }}" target="_blank" rel="noopener noreferrer">
+              <a class="pmc__pdf-btn" href="{{ _href }}">
                 DESCARGA AQU&Iacute; EL MANUAL
               </a>
             {%- endif -%}
@@ -118,6 +118,26 @@
     if (nf) nf.removeAttribute('hidden');
     if (heroTitle) heroTitle.textContent = slug ? slug.toUpperCase() : 'MANUALES';
   }
+
+  document.querySelectorAll('.pmc__pdf-btn[href]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var url = link.getAttribute('href');
+      var filename = url.split('/').pop().split('?')[0] || 'manual.pdf';
+      fetch(url)
+        .then(function(res) { return res.blob(); })
+        .then(function(blob) {
+          var blobUrl = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = decodeURIComponent(filename);
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        });
+    });
+  });
 })();
 </script>
 
