@@ -17,19 +17,40 @@
           "phone_2": "55 5535 4854",
           "whatsapp_1": "55 3124 8376",
           "whatsapp_2": "55 2786 7639",
+          "info_menu": "",
+          "payment_menu": "",
+          "billing_menu": "",
+          "attention_hours": "Lunes a viernes 9:30 a 5:30",
+          "attention_saturday": "Sábados 9:30 a 12:30",
+          "email": "ventas@futoolmexico.com",
+          "whatsapp_link": "https://wa.me/525527867639",
           "facebook_link": "https://www.facebook.com/futool",
           "instagram_link": "https://www.instagram.com/futool_mexico/",
           "tiktok_link": "https://www.tiktok.com/@futoolinternacional",
-          "whatsapp_link": "https://wa.me/525527867639"
+          "show_visa": true,
+          "show_mastercard": true,
+          "show_amex": true,
+          "show_oxxo": true,
+          "catalog_url": "",
+          "manuales_url": "",
+          "catalog_1_image": "shopify://shop_images/1_-_Portada_maquinaria.jpg",
+          "catalog_1_file": "",
+          "catalog_1_download_name": "2026mayo FUTOOL Catálogo Maquinaria.pdf",
+          "catalog_2_file": "",
+          "catalog_2_download_name": "Catalogo-Refacciones-2026.pdf",
+          "copyright_text": "@2026 Futool Internacional. Todos los derechos reservados"
         }
       },
       "header": {
         "type": "header",
         "settings": {
+          "menu": "main-menu",
+          "billing_url": "",
           "float_whatsapp": "525527867639",
           "float_phone": "5555672138"
         }
       }
-    }
+    },
+    "content_for_index": []
   }
 }
