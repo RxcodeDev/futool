@@ -22,36 +22,30 @@
     <div class="pmc__content">
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- assign _pdfs_raw = block.settings.manual_pdf_url | append: '||' | append: block.settings.manual_pdf_2 | append: '||' | append: block.settings.manual_pdf_3 -%}
-        {%- assign _pdf_list = _pdfs_raw | split: '||' -%}
+        {%- assign _pdf_urls   = block.settings.manual_pdf_url | append: '||' | append: block.settings.manual_pdf_2 | append: '||' | append: block.settings.manual_pdf_3 | append: '||' | append: block.settings.manual_pdf_4 | append: '||' | append: block.settings.manual_pdf_5 -%}
+        {%- assign _pdf_labels  = block.settings.manual_pdf_1_label | append: '||' | append: block.settings.manual_pdf_2_label | append: '||' | append: block.settings.manual_pdf_3_label | append: '||' | append: block.settings.manual_pdf_4_label | append: '||' | append: block.settings.manual_pdf_5_label -%}
+        {%- assign _url_list    = _pdf_urls  | split: '||' -%}
+        {%- assign _label_list  = _pdf_labels | split: '||' -%}
         {%- assign _any_pdf = false -%}
-        {%- for _p in _pdf_list -%}{%- assign _pt = _p | strip -%}{%- if _pt != blank -%}{%- assign _any_pdf = true -%}{%- endif -%}{%- endfor -%}
+        {%- for _p in _url_list -%}{%- if _p | strip != blank -%}{%- assign _any_pdf = true -%}{%- endif -%}{%- endfor -%}
         {%- if _any_pdf -%}
-          {%- assign _hrefs = '' -%}
-          {%- for _p in _pdf_list -%}
-            {%- assign _pt = _p | strip -%}
-            {%- if _pt != blank -%}
-              {%- if _pt contains 'http' -%}
-                {%- assign _href = _pt -%}
-              {%- else -%}
-                {%- assign _href = _pt | asset_url -%}
-              {%- endif -%}
-              {%- if _hrefs == '' -%}
-                {%- assign _hrefs = _href -%}
-              {%- else -%}
-                {%- assign _hrefs = _hrefs | append: '|' | append: _href -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
           <div class="pmc__pdf-buttons">
-            <button class="pmc__pdf-btn" data-pdfs="{{ _hrefs }}">
-              DESCARGA AQU&Iacute; EL MANUAL
-            </button>
+            {%- for _p in _url_list -%}
+              {%- assign _pt = _p | strip -%}
+              {%- if _pt != blank -%}
+                {%- if _pt contains 'http' -%}
+                  {%- assign _href = _pt -%}
+                {%- else -%}
+                  {%- assign _href = _pt | asset_url -%}
+                {%- endif -%}
+                {%- assign _lbl = _label_list[forloop.index0] | strip -%}
+                {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
+                <button class="pmc__pdf-btn" data-pdf="{{ _href }}">{{ _lbl }}</button>
+              {%- endif -%}
+            {%- endfor -%}
           </div>
         {%- else -%}
-          <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">
-            DESCARGA AQU&Iacute; EL MANUAL
-          </span>
+          <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">DESCARGA AQUÍ EL MANUAL</span>
         {%- endif -%}
       </div>
       <div class="pmc__image-col">
@@ -125,28 +119,23 @@
     if (heroTitle) heroTitle.textContent = slug ? slug.toUpperCase() : 'MANUALES';
   }
 
-  document.querySelectorAll('.pmc__pdf-btn[data-pdfs]').forEach(function(btn) {
+  document.querySelectorAll('.pmc__pdf-btn[data-pdf]').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var urls = btn.getAttribute('data-pdfs').split('|');
-      urls.forEach(function(url, i) {
-        url = url.trim();
-        if (!url) return;
-        var filename = decodeURIComponent(url.split('/').pop().split('?')[0]) || 'manual.pdf';
-        setTimeout(function() {
-          fetch(url)
-            .then(function(res) { return res.blob(); })
-            .then(function(blob) {
-              var blobUrl = URL.createObjectURL(blob);
-              var a = document.createElement('a');
-              a.href = blobUrl;
-              a.download = filename;
-              document.body.appendChild(a);
-              a.click();
-              a.remove();
-              URL.revokeObjectURL(blobUrl);
-            });
-        }, i * 800);
-      });
+      var url = btn.getAttribute('data-pdf').trim();
+      if (!url) return;
+      var filename = decodeURIComponent(url.split('/').pop().split('?')[0]) || 'manual.pdf';
+      fetch(url)
+        .then(function(res) { return res.blob(); })
+        .then(function(blob) {
+          var blobUrl = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        });
     });
   });
 })();
@@ -444,20 +433,60 @@
           "default": "<p>Descripci\u00f3n de la m\u00e1quina o categor\u00eda.</p>"
         },
         {
+          "type": "header",
+          "content": "Botones de descarga (PDF)"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_1_label",
+          "label": "Texto botón 1",
+          "default": "DESCARGA AQUÍ EL MANUAL"
+        },
+        {
           "type": "text",
           "id": "manual_pdf_url",
-          "label": "Manual PDF 1 – nombre de archivo o URL",
-          "info": "Escribe el nombre del archivo (ej: Manual Podadora Futool.pdf) o pega una URL externa"
+          "label": "URL PDF 1",
+          "info": "Pega la URL del PDF (desde Admin > Contenido > Archivos) o nombre de archivo en assets"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_2_label",
+          "label": "Texto botón 2"
         },
         {
           "type": "text",
           "id": "manual_pdf_2",
-          "label": "Manual PDF 2 – nombre de archivo o URL"
+          "label": "URL PDF 2"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_3_label",
+          "label": "Texto botón 3"
         },
         {
           "type": "text",
           "id": "manual_pdf_3",
-          "label": "Manual PDF 3 – nombre de archivo o URL"
+          "label": "URL PDF 3"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_4_label",
+          "label": "Texto botón 4"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_4",
+          "label": "URL PDF 4"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_5_label",
+          "label": "Texto botón 5"
+        },
+        {
+          "type": "text",
+          "id": "manual_pdf_5",
+          "label": "URL PDF 5"
         },
         {
           "type": "image_picker",
