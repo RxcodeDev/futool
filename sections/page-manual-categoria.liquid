@@ -22,18 +22,16 @@
     <div class="pmc__content">
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- assign _cat_slug = block.settings.slug | downcase | strip -%}
-        {%- assign _pdf_blocks = section.blocks | where: 'type', 'pdf_button' -%}
         {%- assign _any_pdf = false -%}
-        {%- for _pb in _pdf_blocks -%}
-          {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
+        {%- for _pb in block.blocks -%}
+          {%- if _pb.type == 'pdf_button' and _pb.settings.pdf_url != blank -%}
             {%- assign _any_pdf = true -%}
           {%- endif -%}
         {%- endfor -%}
         {%- if _any_pdf -%}
           <div class="pmc__pdf-buttons">
-            {%- for _pb in _pdf_blocks -%}
-              {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
+            {%- for _pb in block.blocks -%}
+              {%- if _pb.type == 'pdf_button' and _pb.settings.pdf_url != blank -%}
                 {%- assign _url = _pb.settings.pdf_url | strip -%}
                 {%- if _url contains 'http' -%}
                   {%- assign _href = _url -%}
@@ -442,29 +440,25 @@
         { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
         { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
         { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" }
-      ]
-    },
-    {
-      "type": "pdf_button",
-      "name": "Bot\u00f3n de descarga PDF",
-      "settings": [
+      ],
+      "blocks": [
         {
-          "type": "text",
-          "id": "category_slug",
-          "label": "Slug de la categor\u00eda",
-          "info": "Debe coincidir exactamente con el slug de la categor\u00eda. Ej: desbrozadoras"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Texto del bot\u00f3n",
-          "default": "DESCARGA AQU\u00cd EL MANUAL"
-        },
-        {
-          "type": "text",
-          "id": "pdf_url",
-          "label": "URL del PDF",
-          "info": "Pega la URL del PDF subido en Admin > Contenido > Archivos"
+          "type": "pdf_button",
+          "name": "Bot\u00f3n de descarga PDF",
+          "settings": [
+            {
+              "type": "text",
+              "id": "button_label",
+              "label": "Texto del bot\u00f3n",
+              "default": "DESCARGA AQU\u00cd EL MANUAL"
+            },
+            {
+              "type": "text",
+              "id": "pdf_url",
+              "label": "URL del PDF",
+              "info": "Pega la URL del PDF subido en Admin > Contenido > Archivos"
+            }
+          ]
         }
       ]
     }
