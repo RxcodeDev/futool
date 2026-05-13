@@ -23,24 +23,24 @@
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
         {%- assign _any_pdf = false -%}
-        {%- for _pb in block.blocks -%}
-          {%- if _pb.type == 'pdf_button' and _pb.settings.pdf_url != blank -%}
-            {%- assign _any_pdf = true -%}
-          {%- endif -%}
-        {%- endfor -%}
+        {%- if block.settings.pdf_1_url != blank or block.settings.pdf_2_url != blank or block.settings.pdf_3_url != blank -%}
+          {%- assign _any_pdf = true -%}
+        {%- endif -%}
         {%- if _any_pdf -%}
           <div class="pmc__pdf-buttons">
-            {%- for _pb in block.blocks -%}
-              {%- if _pb.type == 'pdf_button' and _pb.settings.pdf_url != blank -%}
-                {%- assign _url = _pb.settings.pdf_url | strip -%}
+            {%- for i in (1..3) -%}
+              {%- assign _url_key = 'pdf_' | append: i | append: '_url' -%}
+              {%- assign _lbl_key = 'pdf_' | append: i | append: '_label' -%}
+              {%- assign _url = block.settings[_url_key] | strip -%}
+              {%- if _url != blank -%}
                 {%- if _url contains 'http' -%}
                   {%- assign _href = _url -%}
                 {%- else -%}
                   {%- assign _href = _url | asset_url -%}
                 {%- endif -%}
-                {%- assign _lbl = _pb.settings.button_label | strip -%}
+                {%- assign _lbl = block.settings[_lbl_key] | strip -%}
                 {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
-                <button class="pmc__pdf-btn" data-pdf="{{ _href }}" {{ _pb.shopify_attributes }}>{{ _lbl }}</button>
+                <button class="pmc__pdf-btn" data-pdf="{{ _href }}">{{ _lbl }}</button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -439,28 +439,18 @@
         },
         { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
         { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
-        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" }
+        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" },
+        { "type": "header", "content": "Bot\u00f3n de descarga 1" },
+        { "type": "text", "id": "pdf_1_label", "label": "Texto del bot\u00f3n 1", "default": "DESCARGA AQU\u00cd EL MANUAL" },
+        { "type": "text", "id": "pdf_1_url", "label": "URL del PDF 1", "info": "Pega la URL del PDF desde Admin > Contenido > Archivos" },
+        { "type": "header", "content": "Bot\u00f3n de descarga 2" },
+        { "type": "text", "id": "pdf_2_label", "label": "Texto del bot\u00f3n 2" },
+        { "type": "text", "id": "pdf_2_url", "label": "URL del PDF 2" },
+        { "type": "header", "content": "Bot\u00f3n de descarga 3" },
+        { "type": "text", "id": "pdf_3_label", "label": "Texto del bot\u00f3n 3" },
+        { "type": "text", "id": "pdf_3_url", "label": "URL del PDF 3" }
       ],
-      "blocks": [
-        {
-          "type": "pdf_button",
-          "name": "Bot\u00f3n de descarga PDF",
-          "settings": [
-            {
-              "type": "text",
-              "id": "button_label",
-              "label": "Texto del bot\u00f3n",
-              "default": "DESCARGA AQU\u00cd EL MANUAL"
-            },
-            {
-              "type": "text",
-              "id": "pdf_url",
-              "label": "URL del PDF",
-              "info": "Pega la URL del PDF subido en Admin > Contenido > Archivos"
-            }
-          ]
-        }
-      ]
+      "blocks": []
     }
   ],
   "presets": [
