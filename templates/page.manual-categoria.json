@@ -21,7 +21,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motosierras.webp",
             "video_1": "https://www.youtube.com/watch?v=POaJOOqtRGc",
             "video_2": "https://www.youtube.com/watch?v=u7kf4BHEMPM",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Motosierra 40V Futool.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_desbrozadoras": {
@@ -33,7 +39,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Desbrozadoras.webp",
             "video_1": "https://www.youtube.com/watch?v=UumTAl4Z6yY",
             "video_2": "https://www.youtube.com/watch?v=DPbfrLRDTds",
-            "video_3": "https://www.youtube.com/watch?v=SIDU6_kFiQQ"
+            "video_3": "https://www.youtube.com/watch?v=SIDU6_kFiQQ",
+            "pdf_1_url": "Manual Desbrozadora 2 Tiempos Futool.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "Manual Desbrozadora 4 Tiempos.pdf",
+            "pdf_2_label": "",
+            "pdf_3_url": "Manual Desbrozadora de Carrito FTC430 Futool.pdf",
+            "pdf_3_label": ""
           }
         },
         "cat_motocultores": {
@@ -45,7 +57,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motocultores.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_mototaladros": {
@@ -57,7 +75,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Mototaladros.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_podadoras": {
@@ -69,7 +93,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Podadoras.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Podadora Futool.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_trituradoras": {
@@ -81,7 +111,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Triturador.webp",
             "video_1": "https://www.youtube.com/watch?v=vocl0F7SYW0",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Trituradora.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_motobombas": {
@@ -93,7 +129,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motobombas.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Motobomba KWB300.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_aspersores": {
@@ -105,7 +147,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Aspersores.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Aspersor 2 y 4 Tiempos Kawano.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_parihuela": {
@@ -117,7 +165,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Parihuelas.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "pdf_button_tYjjTk": {
@@ -137,7 +191,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Generadores.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Generador KWG950.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_hidrolavadoras": {
@@ -149,7 +209,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Hidrolavadora.webp",
             "video_1": "https://www.youtube.com/watch?v=tF6JxUmj9bk",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_sopladoras": {
@@ -161,7 +227,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Sopladoras.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_compresores": {
@@ -173,7 +245,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Compresores.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_motores": {
@@ -185,7 +263,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Motores.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         },
         "cat_inversores": {
@@ -197,7 +281,13 @@
             "machine_image": "shopify://shop_images/CARD_manuales_-_Soldadoras.webp",
             "video_1": "",
             "video_2": "",
-            "video_3": ""
+            "video_3": "",
+            "pdf_1_url": "Manual Soldadora IGBT-200K Futool.pdf",
+            "pdf_1_label": "DESCARGA AQUÍ EL MANUAL",
+            "pdf_2_url": "Manual Soldadora PZ-130 Palezzi.pdf",
+            "pdf_2_label": "",
+            "pdf_3_url": "",
+            "pdf_3_label": ""
           }
         }
       },
