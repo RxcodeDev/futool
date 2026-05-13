@@ -22,25 +22,27 @@
     <div class="pmc__content">
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- assign _pdf_urls   = block.settings.manual_pdf_url | append: '||' | append: block.settings.manual_pdf_2 | append: '||' | append: block.settings.manual_pdf_3 | append: '||' | append: block.settings.manual_pdf_4 | append: '||' | append: block.settings.manual_pdf_5 -%}
-        {%- assign _pdf_labels  = block.settings.manual_pdf_1_label | append: '||' | append: block.settings.manual_pdf_2_label | append: '||' | append: block.settings.manual_pdf_3_label | append: '||' | append: block.settings.manual_pdf_4_label | append: '||' | append: block.settings.manual_pdf_5_label -%}
-        {%- assign _url_list    = _pdf_urls  | split: '||' -%}
-        {%- assign _label_list  = _pdf_labels | split: '||' -%}
+        {%- assign _cat_slug = block.settings.slug | downcase | strip -%}
+        {%- assign _pdf_blocks = section.blocks | where: 'type', 'pdf_button' -%}
         {%- assign _any_pdf = false -%}
-        {%- for _p in _url_list -%}{%- if _p | strip != blank -%}{%- assign _any_pdf = true -%}{%- endif -%}{%- endfor -%}
+        {%- for _pb in _pdf_blocks -%}
+          {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
+            {%- assign _any_pdf = true -%}
+          {%- endif -%}
+        {%- endfor -%}
         {%- if _any_pdf -%}
           <div class="pmc__pdf-buttons">
-            {%- for _p in _url_list -%}
-              {%- assign _pt = _p | strip -%}
-              {%- if _pt != blank -%}
-                {%- if _pt contains 'http' -%}
-                  {%- assign _href = _pt -%}
+            {%- for _pb in _pdf_blocks -%}
+              {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
+                {%- assign _url = _pb.settings.pdf_url | strip -%}
+                {%- if _url contains 'http' -%}
+                  {%- assign _href = _url -%}
                 {%- else -%}
-                  {%- assign _href = _pt | asset_url -%}
+                  {%- assign _href = _url | asset_url -%}
                 {%- endif -%}
-                {%- assign _lbl = _label_list[forloop.index0] | strip -%}
+                {%- assign _lbl = _pb.settings.button_label | strip -%}
                 {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
-                <button class="pmc__pdf-btn" data-pdf="{{ _href }}">{{ _lbl }}</button>
+                <button class="pmc__pdf-btn" data-pdf="{{ _href }}" {{ _pb.shopify_attributes }}>{{ _lbl }}</button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -433,62 +435,6 @@
           "default": "<p>Descripci\u00f3n de la m\u00e1quina o categor\u00eda.</p>"
         },
         {
-          "type": "header",
-          "content": "Botones de descarga (PDF)"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_1_label",
-          "label": "Texto botón 1",
-          "default": "DESCARGA AQUÍ EL MANUAL"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_url",
-          "label": "URL PDF 1",
-          "info": "Pega la URL del PDF (desde Admin > Contenido > Archivos) o nombre de archivo en assets"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_2_label",
-          "label": "Texto botón 2"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_2",
-          "label": "URL PDF 2"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_3_label",
-          "label": "Texto botón 3"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_3",
-          "label": "URL PDF 3"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_4_label",
-          "label": "Texto botón 4"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_4",
-          "label": "URL PDF 4"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_5_label",
-          "label": "Texto botón 5"
-        },
-        {
-          "type": "text",
-          "id": "manual_pdf_5",
-          "label": "URL PDF 5"
-        },
-        {
           "type": "image_picker",
           "id": "machine_image",
           "label": "Imagen de la m\u00e1quina"
@@ -496,6 +442,30 @@
         { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
         { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
         { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" }
+      ]
+    },
+    {
+      "type": "pdf_button",
+      "name": "Bot\u00f3n de descarga PDF",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_slug",
+          "label": "Slug de la categor\u00eda",
+          "info": "Debe coincidir exactamente con el slug de la categor\u00eda. Ej: desbrozadoras"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del bot\u00f3n",
+          "default": "DESCARGA AQU\u00cd EL MANUAL"
+        },
+        {
+          "type": "text",
+          "id": "pdf_url",
+          "label": "URL del PDF",
+          "info": "Pega la URL del PDF subido en Admin > Contenido > Archivos"
+        }
       ]
     }
   ],
