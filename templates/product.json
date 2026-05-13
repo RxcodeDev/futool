@@ -11,18 +11,8 @@
   "sections": {
     "main": {
       "type": "product",
-      "blocks": {
-        "faq_item_bijpqe": {
-          "type": "faq_item",
-          "settings": {
-            "question": "¿Cuál es la garantía?",
-            "answer": "<p>Nuestros productos cuentan con garantía del proveedor.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_bijpqe"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {}
     }
   },

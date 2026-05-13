@@ -172,14 +172,13 @@
 
     <div class="product-tab-panel" id="tab-faq" role="tabpanel" hidden>
       <div class="product-faq">
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'faq_item' -%}
-              <details class="faq-item" {{ block.shopify_attributes }}>
-                <summary class="faq-question">{{ block.settings.question }}</summary>
-                <div class="faq-answer">{{ block.settings.answer }}</div>
-              </details>
-            {%- endif -%}
+        {%- assign faq_items = product.metafields.custom.faq_items.value -%}
+        {%- if faq_items != blank and faq_items.size > 0 -%}
+          {%- for faq in faq_items -%}
+            <details class="faq-item">
+              <summary class="faq-question">{{ faq.question }}</summary>
+              <div class="faq-answer">{{ faq.answer }}</div>
+            </details>
           {%- endfor -%}
         {%- else -%}
           <p class="product-faq-empty">Aún no hay preguntas frecuentes para este producto.</p>
@@ -408,16 +407,7 @@
 {
   "name": "Página de Producto",
   "settings": [],
-  "blocks": [
-    {
-      "type": "faq_item",
-      "name": "Pregunta frecuente",
-      "settings": [
-        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuál es la garantía?" },
-        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Nuestros productos cuentan con garantía del fabricante.</p>" }
-      ]
-    }
-  ],
+  "blocks": [],
   "presets": [{ "name": "Página de Producto" }]
 }
 {% endschema %}
