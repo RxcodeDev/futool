@@ -196,7 +196,7 @@
             "pdf_aspersores_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Aspersor 2 y 4 Tiempos Kawano",
                 "pdf_url": "Manual Aspersor 2 y 4 Tiempos Kawano.pdf"
               },
               "blocks": {}
