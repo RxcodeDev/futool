@@ -234,7 +234,7 @@
             "pdf_generadores_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Generador KWG950 Futool",
                 "pdf_url": "Manual Generador KWG950.pdf"
               },
               "blocks": {}
