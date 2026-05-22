@@ -121,7 +121,7 @@
             "pdf_podadoras_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Podadora Giratoria Futool",
                 "pdf_url": "Manual Podadora Futool.pdf"
               },
               "blocks": {}
