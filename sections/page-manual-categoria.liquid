@@ -1,5 +1,3 @@
-{%- assign cat_blocks = section.blocks | where: 'type', 'category' -%}
-
 <!-- ══ Hero Banner ══ -->
 <div class="pmc__hero">
   <div class="pmc__hero-panel" aria-hidden="true"></div>
@@ -8,92 +6,8 @@
   </div>
 </div>
 
-<!-- ══ Category data blocks (rendered all, JS shows the matching one) ══ -->
-{%- for block in cat_blocks -%}
-  {%- assign block_slug = block.settings.slug | downcase | strip -%}
-  <div
-    class="pmc__category-data"
-    data-slug="{{ block_slug }}"
-    data-name="{{ block.settings.category_name | escape }}"
-    hidden
-    {{ block.shopify_attributes }}
-  >
-    <!-- Description + Image -->
-    <div class="pmc__content">
-      <div class="pmc__description">
-        <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- comment -%} PDF buttons: read directly from this category block's settings {%- endcomment -%}
-        {%- assign _has_pdf = false -%}
-        {%- if block.settings.pdf_1_url != blank or block.settings.pdf_2_url != blank or block.settings.pdf_3_url != blank -%}
-          {%- assign _has_pdf = true -%}
-        {%- endif -%}
-        {%- if _has_pdf -%}
-          <div class="pmc__pdf-buttons">
-            {%- for _i in (1..3) -%}
-              {%- assign _url_key = 'pdf_' | append: _i | append: '_url' -%}
-              {%- assign _lbl_key = 'pdf_' | append: _i | append: '_label' -%}
-              {%- assign _url = block.settings[_url_key] | strip -%}
-              {%- if _url != blank -%}
-                {%- if _url contains 'http' -%}
-                  {%- assign _href = _url -%}
-                {%- else -%}
-                  {%- assign _href = _url | asset_url -%}
-                {%- endif -%}
-                {%- assign _lbl = block.settings[_lbl_key] | strip -%}
-                {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
-                <a class="pmc__pdf-btn" href="{{ _href }}" target="_blank" rel="noopener">{{ _lbl }}</a>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- else -%}
-          <span class="pmc__pdf-btn pmc__pdf-btn--disabled" aria-disabled="true">DESCARGA AQUÍ EL MANUAL</span>
-        {%- endif -%}
-      </div>
-      <div class="pmc__image-col">
-        {%- if block.settings.machine_image != blank -%}
-          <img src="{{ block.settings.machine_image | image_url: width: 700 }}" alt="{{ block.settings.category_name | escape }}" loading="eager" class="pmc__machine-img">
-        {%- else -%}
-          <div class="pmc__image-placeholder" aria-hidden="true"></div>
-        {%- endif -%}
-      </div>
-    </div>
-    <!-- Videos -->
-    <div class="pmc__videos">
-      <h2 class="pmc__videos-title">VIDEOS Y TUTORIALES</h2>
-      <div class="pmc__videos-grid">
-        {%- for i in (1..3) -%}
-          {%- assign vid_key = 'video_' | append: i -%}
-          {%- assign raw_url = block.settings[vid_key] | strip -%}
-          {%- if raw_url != blank -%}
-            {%- assign video_id = '' -%}
-            {%- if raw_url contains 'youtu.be/' -%}
-              {%- assign video_id = raw_url | split: 'youtu.be/' | last | split: '?' | first | strip -%}
-            {%- elsif raw_url contains '?v=' -%}
-              {%- assign video_id = raw_url | split: '?v=' | last | split: '&' | first | strip -%}
-            {%- elsif raw_url contains '&v=' -%}
-              {%- assign video_id = raw_url | split: '&v=' | last | split: '&' | first | strip -%}
-            {%- endif -%}
-            {%- if video_id != blank -%}
-              <div class="pmc__video-item">
-                <div class="pmc__video-wrapper">
-                  <iframe src="https://www.youtube.com/embed/{{ video_id }}" title="{{ block.settings.category_name | escape }} \u2013 Video {{ i }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                </div>
-              </div>
-            {%- else -%}
-              <div class="pmc__video-item pmc__video-item--soon">
-                <div class="pmc__video-soon"><span>PR&Oacute;XIMAMENTE</span></div>
-              </div>
-            {%- endif -%}
-          {%- else -%}
-            <div class="pmc__video-item pmc__video-item--soon">
-              <div class="pmc__video-soon"><span>PR&Oacute;XIMAMENTE</span></div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </div>
-  </div>
-{%- endfor -%}
+<!-- ══ Category theme blocks ══ -->
+{% content_for 'blocks' %}
 
 <!-- ══ Not found ══ -->
 <div class="pmc__not-found" id="pmc-not-found" hidden>
@@ -102,6 +16,7 @@
 
 <script>
 (function () {
+  if (window.Shopify && window.Shopify.designMode) return;
   var params = new URLSearchParams(window.location.search);
   var slug = (params.get('categoria') || '').toLowerCase().trim();
   var blocks = document.querySelectorAll('.pmc__category-data');
@@ -388,83 +303,11 @@
 
 {% schema %}
 {
-  "name": "Manual \u2013 Categor\u00eda",
-  "blocks": [
-    {
-      "type": "category",
-      "name": "Categor\u00eda",
-      "settings": [
-        {
-          "type": "text",
-          "id": "slug",
-          "label": "Slug (par\u00e1metro URL)",
-          "info": "Debe coincidir con el valor de ?categoria= en la URL. Ej: desbrozadoras",
-          "default": "mi-categoria"
-        },
-        {
-          "type": "text",
-          "id": "category_name",
-          "label": "Nombre de la categor\u00eda",
-          "default": "NOMBRE DE CATEGOR\u00cdA"
-        },
-        {
-          "type": "richtext",
-          "id": "machine_description",
-          "label": "Descripci\u00f3n",
-          "default": "<p>Descripci\u00f3n de la m\u00e1quina o categor\u00eda.</p>"
-        },
-        {
-          "type": "image_picker",
-          "id": "machine_image",
-          "label": "Imagen de la m\u00e1quina"
-        },
-        { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
-        { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
-        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" },
-        {
-          "type": "header",
-          "content": "Botones de descarga PDF"
-        },
-        {
-          "type": "text",
-          "id": "pdf_1_url",
-          "label": "PDF 1 – URL",
-          "info": "Nombre del archivo en Admin › Contenido › Archivos, o URL completa"
-        },
-        {
-          "type": "text",
-          "id": "pdf_1_label",
-          "label": "PDF 1 – Texto del bot\u00f3n",
-          "default": "DESCARGA AQU\u00cd EL MANUAL"
-        },
-        {
-          "type": "text",
-          "id": "pdf_2_url",
-          "label": "PDF 2 – URL"
-        },
-        {
-          "type": "text",
-          "id": "pdf_2_label",
-          "label": "PDF 2 – Texto del bot\u00f3n",
-          "default": "DESCARGA AQU\u00cd EL MANUAL"
-        },
-        {
-          "type": "text",
-          "id": "pdf_3_url",
-          "label": "PDF 3 – URL"
-        },
-        {
-          "type": "text",
-          "id": "pdf_3_label",
-          "label": "PDF 3 – Texto del bot\u00f3n",
-          "default": "DESCARGA AQU\u00cd EL MANUAL"
-        }
-      ]
-    },
-  ],
+  "name": "Manual – Categoría",
+  "blocks": [{ "type": "@theme" }],
   "presets": [
     {
-      "name": "Manual \u2013 Categor\u00eda"
+      "name": "Manual – Categoría"
     }
   ]
 }

@@ -1,0 +1,46 @@
+{%- assign _url = block.settings.pdf_url | strip -%}
+{%- if _url != blank -%}
+  {%- if _url contains 'http' -%}
+    {%- assign _href = _url -%}
+  {%- else -%}
+    {%- assign _href = _url | asset_url -%}
+  {%- endif -%}
+  {%- assign _lbl = block.settings.button_label | strip -%}
+  {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
+  <a
+    class="pmc__pdf-btn"
+    href="{{ _href }}"
+    target="_blank"
+    rel="noopener"
+    {{ block.shopify_attributes }}
+  >{{ _lbl }}</a>
+{%- else -%}
+  <span
+    class="pmc__pdf-btn pmc__pdf-btn--disabled"
+    aria-disabled="true"
+    {{ block.shopify_attributes }}
+  >DESCARGA AQUÍ EL MANUAL</span>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Botón de descarga PDF",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "DESCARGA AQUÍ EL MANUAL"
+    },
+    {
+      "type": "text",
+      "id": "pdf_url",
+      "label": "URL del PDF",
+      "info": "Nombre del archivo en Admin › Contenido › Archivos, o URL completa"
+    }
+  ],
+  "presets": [
+    { "name": "Botón de descarga PDF" }
+  ]
+}
+{% endschema %}
