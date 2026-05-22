@@ -174,14 +174,6 @@
             "pdf_3_label": ""
           }
         },
-        "pdf_button_tYjjTk": {
-          "type": "pdf_button",
-          "settings": {
-            "category_slug": "dfasfa",
-            "button_label": "DESCARGA AQUÍ EL MANUAL",
-            "pdf_url": "fas"
-          }
-        },
         "cat_generadores": {
           "type": "category",
           "settings": {
@@ -301,7 +293,6 @@
         "cat_motobombas",
         "cat_aspersores",
         "cat_parihuela",
-        "pdf_button_tYjjTk",
         "cat_generadores",
         "cat_hidrolavadoras",
         "cat_sopladoras",

@@ -22,27 +22,26 @@
     <div class="pmc__content">
       <div class="pmc__description">
         <div class="pmc__richtext">{{ block.settings.machine_description }}</div>
-        {%- assign _cat_slug = block.settings.slug | downcase | strip -%}
-        {%- assign _pdf_blocks = section.blocks | where: 'type', 'pdf_button' -%}
-        {%- assign _any_pdf = false -%}
-        {%- for _pb in _pdf_blocks -%}
-          {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
-            {%- assign _any_pdf = true -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if _any_pdf -%}
+        {%- comment -%} PDF buttons: read directly from this category block's settings {%- endcomment -%}
+        {%- assign _has_pdf = false -%}
+        {%- if block.settings.pdf_1_url != blank or block.settings.pdf_2_url != blank or block.settings.pdf_3_url != blank -%}
+          {%- assign _has_pdf = true -%}
+        {%- endif -%}
+        {%- if _has_pdf -%}
           <div class="pmc__pdf-buttons">
-            {%- for _pb in _pdf_blocks -%}
-              {%- if _pb.settings.category_slug == _cat_slug and _pb.settings.pdf_url != blank -%}
-                {%- assign _url = _pb.settings.pdf_url | strip -%}
+            {%- for _i in (1..3) -%}
+              {%- assign _url_key = 'pdf_' | append: _i | append: '_url' -%}
+              {%- assign _lbl_key = 'pdf_' | append: _i | append: '_label' -%}
+              {%- assign _url = block.settings[_url_key] | strip -%}
+              {%- if _url != blank -%}
                 {%- if _url contains 'http' -%}
                   {%- assign _href = _url -%}
                 {%- else -%}
                   {%- assign _href = _url | asset_url -%}
                 {%- endif -%}
-                {%- assign _lbl = _pb.settings.button_label | strip -%}
+                {%- assign _lbl = block.settings[_lbl_key] | strip -%}
                 {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
-                <button class="pmc__pdf-btn" data-pdf="{{ _href }}" {{ _pb.shopify_attributes }}>{{ _lbl }}</button>
+                <button class="pmc__pdf-btn" data-pdf="{{ _href }}">{{ _lbl }}</button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -441,33 +440,47 @@
         },
         { "type": "text", "id": "video_1", "label": "Video 1 (URL YouTube)" },
         { "type": "text", "id": "video_2", "label": "Video 2 (URL YouTube)" },
-        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" }
-      ]
-    },
-    {
-      "type": "pdf_button",
-      "name": "Bot\u00f3n de descarga PDF",
-      "settings": [
+        { "type": "text", "id": "video_3", "label": "Video 3 (URL YouTube)" },
         {
-          "type": "text",
-          "id": "category_slug",
-          "label": "Slug de la categor\u00eda",
-          "info": "Debe coincidir exactamente con el slug de la categor\u00eda. Ej: desbrozadoras"
+          "type": "header",
+          "content": "Botones de descarga PDF"
         },
         {
           "type": "text",
-          "id": "button_label",
-          "label": "Texto del bot\u00f3n",
+          "id": "pdf_1_url",
+          "label": "PDF 1 – URL",
+          "info": "Nombre del archivo en Admin › Contenido › Archivos, o URL completa"
+        },
+        {
+          "type": "text",
+          "id": "pdf_1_label",
+          "label": "PDF 1 – Texto del bot\u00f3n",
           "default": "DESCARGA AQU\u00cd EL MANUAL"
         },
         {
           "type": "text",
-          "id": "pdf_url",
-          "label": "URL del PDF",
-          "info": "Pega la URL del PDF subido en Admin > Contenido > Archivos"
+          "id": "pdf_2_url",
+          "label": "PDF 2 – URL"
+        },
+        {
+          "type": "text",
+          "id": "pdf_2_label",
+          "label": "PDF 2 – Texto del bot\u00f3n",
+          "default": "DESCARGA AQU\u00cd EL MANUAL"
+        },
+        {
+          "type": "text",
+          "id": "pdf_3_url",
+          "label": "PDF 3 – URL"
+        },
+        {
+          "type": "text",
+          "id": "pdf_3_label",
+          "label": "PDF 3 – Texto del bot\u00f3n",
+          "default": "DESCARGA AQU\u00cd EL MANUAL"
         }
       ]
-    }
+    },
   ],
   "presets": [
     {
