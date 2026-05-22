@@ -52,7 +52,7 @@
             "pdf_desbrozadoras_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Desbrozadora 2 Tiempos Futool",
                 "pdf_url": "Manual Desbrozadora 2 Tiempos Futool.pdf"
               },
               "blocks": {}
@@ -60,7 +60,7 @@
             "pdf_desbrozadoras_2": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Desbrozadora 4 Tiempos Futool",
                 "pdf_url": "Manual Desbrozadora 4 Tiempos.pdf"
               },
               "blocks": {}
@@ -68,7 +68,7 @@
             "pdf_desbrozadoras_3": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Desbrozadora de Carrito FTC430",
                 "pdf_url": "Manual Desbrozadora de Carrito FTC430 Futool.pdf"
               },
               "blocks": {}
