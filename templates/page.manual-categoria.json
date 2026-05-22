@@ -146,7 +146,7 @@
             "pdf_trituradoras_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Manual Trituradora Futool",
                 "pdf_url": "Manual Trituradora.pdf"
               },
               "blocks": {}
