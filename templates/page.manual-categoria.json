@@ -171,7 +171,7 @@
             "pdf_motobombas_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Motobomba KWB300 Futool",
                 "pdf_url": "Manual Motobomba KWB300.pdf"
               },
               "blocks": {}
