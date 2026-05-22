@@ -41,7 +41,7 @@
                 {%- endif -%}
                 {%- assign _lbl = block.settings[_lbl_key] | strip -%}
                 {%- if _lbl == blank -%}{%- assign _lbl = 'DESCARGA AQUÍ EL MANUAL' -%}{%- endif -%}
-                <button class="pmc__pdf-btn" data-pdf="{{ _href }}">{{ _lbl }}</button>
+                <a class="pmc__pdf-btn" href="{{ _href }}" target="_blank" rel="noopener">{{ _lbl }}</a>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -119,26 +119,6 @@
     if (nf) nf.removeAttribute('hidden');
     if (heroTitle) heroTitle.textContent = slug ? slug.toUpperCase() : 'MANUALES';
   }
-
-  document.querySelectorAll('.pmc__pdf-btn[data-pdf]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var url = btn.getAttribute('data-pdf').trim();
-      if (!url) return;
-      var filename = decodeURIComponent(url.split('/').pop().split('?')[0]) || 'manual.pdf';
-      fetch(url)
-        .then(function(res) { return res.blob(); })
-        .then(function(blob) {
-          var blobUrl = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(blobUrl);
-        });
-    });
-  });
 })();
 </script>
 
