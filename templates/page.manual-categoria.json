@@ -311,7 +311,7 @@
             "pdf_inversores_1": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Soldadora IGBT-200K Futool",
                 "pdf_url": "Manual Soldadora IGBT-200K Futool.pdf"
               },
               "blocks": {}
@@ -319,7 +319,7 @@
             "pdf_inversores_2": {
               "type": "pdf-button",
               "settings": {
-                "button_label": "DESCARGA AQUÍ EL MANUAL",
+                "button_label": "Soldadora PZ-130 Palezzi",
                 "pdf_url": "Manual Soldadora PZ-130 Palezzi.pdf"
               },
               "blocks": {}
