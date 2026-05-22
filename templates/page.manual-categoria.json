@@ -24,14 +24,6 @@
             "video_3": ""
           },
           "blocks": {
-            "pdf_motosierras_1": {
-              "type": "pdf-button",
-              "settings": {
-                "button_label": "Prurebas dev",
-                "pdf_url": "https://cdn.shopify.com/s/files/1/0620/4624/0866/files/2026mayo_FUTOOL_Catalogo_Maquinaria.pdf?v=1778695120"
-              },
-              "blocks": {}
-            },
             "pdf_button_JTmDeh": {
               "type": "pdf-button",
               "settings": {
@@ -42,7 +34,6 @@
             }
           },
           "block_order": [
-            "pdf_motosierras_1",
             "pdf_button_JTmDeh"
           ]
         },
