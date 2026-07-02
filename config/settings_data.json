@@ -33,11 +33,12 @@
           "show_oxxo": true,
           "catalog_url": "",
           "manuales_url": "",
-          "catalog_1_image": "shopify://shop_images/1_-_Portada_maquinaria.jpg",
-          "catalog_1_file": "https://cdn.shopify.com/s/files/1/0620/4624/0866/files/2026mayo_FUTOOL_Catalogo_Maquinaria.pdf?v=1778695120",
-          "catalog_1_download_name": "2026mayo FUTOOL Catálogo Maquinaria",
-          "catalog_2_file": "https://cdn.shopify.com/s/files/1/0620/4624/0866/files/refacciones.pdf?v=1778682255",
-          "catalog_2_download_name": "refacciones",
+          "catalog_1_image": "shopify://shop_images/1_-_Portada_maquinaria_d322fa14-8b39-4fd3-8c20-e4793395418f.jpg",
+          "catalog_1_file": "https://cdn.shopify.com/s/files/1/0620/4624/0866/files/2026jun_FUTOOL_Catalogo_Maquinaria.pdf?v=1783031512",
+          "catalog_1_download_name": "2026jun FUTOOL Catálogo Maquinaria",
+          "catalog_2_image": "shopify://shop_images/1_-_Portada_refacciones.jpg",
+          "catalog_2_file": "https://cdn.shopify.com/s/files/1/0620/4624/0866/files/2026jun_FUTOOL_Catalogo_Refacciones_Comprimido.pdf?v=1783032218",
+          "catalog_2_download_name": "2026jun FUTOOL Catálogo Refacciones",
           "copyright_text": "@2026 Futool Internacional. Todos los derechos reservados"
         }
       },
