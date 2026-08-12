@@ -19,12 +19,12 @@
             "label": "Banner"
           }
         },
-        "slide1": {
+        "slide3": {
           "type": "banner_slide",
           "settings": {
-            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_ASPERSORES_webp.jpg",
-            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_ASPERSORES_webp.jpg",
-            "label": "Banner 1"
+            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_PODADORA_webp.jpg",
+            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_PODADORA_webp.jpg",
+            "label": "Banner 3"
           }
         },
         "slide2": {
@@ -35,12 +35,12 @@
             "label": "Banner 2"
           }
         },
-        "slide3": {
+        "slide1": {
           "type": "banner_slide",
           "settings": {
-            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_PODADORA_webp.jpg",
-            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_PODADORA_webp.jpg",
-            "label": "Banner 3"
+            "image": "shopify://shop_images/WEB_futool_Banner_principal_1920_x_984px_ASPERSORES_webp.jpg",
+            "mobile_image": "shopify://shop_images/WEB_futool_Banner_principal_750px_ASPERSORES_webp.jpg",
+            "label": "Banner 1"
           }
         },
         "cat1": {
@@ -181,9 +181,9 @@
       },
       "block_order": [
         "banner_slide_FC7R9M",
-        "slide1",
-        "slide2",
         "slide3",
+        "slide2",
+        "slide1",
         "cat1",
         "cat2",
         "cat3",
